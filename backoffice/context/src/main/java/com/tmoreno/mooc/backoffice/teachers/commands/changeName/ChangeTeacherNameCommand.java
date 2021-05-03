@@ -8,17 +8,17 @@ import com.tmoreno.mooc.shared.command.Command;
 import com.tmoreno.mooc.shared.domain.PersonName;
 import com.tmoreno.mooc.shared.events.EventBus;
 
-public final class ChangeNameTeacherCommand implements Command<ChangeNameTeacherCommandParams> {
+public final class ChangeTeacherNameCommand implements Command<ChangeTeacherNameCommandParams> {
     private final TeacherRepository repository;
     private final EventBus eventBus;
 
-    public ChangeNameTeacherCommand(TeacherRepository repository, EventBus eventBus) {
+    public ChangeTeacherNameCommand(TeacherRepository repository, EventBus eventBus) {
         this.repository = repository;
         this.eventBus = eventBus;
     }
 
     @Override
-    public void execute(ChangeNameTeacherCommandParams params) {
+    public void execute(ChangeTeacherNameCommandParams params) {
         TeacherId id = new TeacherId(params.getId());
         PersonName name = new PersonName(params.getName());
 

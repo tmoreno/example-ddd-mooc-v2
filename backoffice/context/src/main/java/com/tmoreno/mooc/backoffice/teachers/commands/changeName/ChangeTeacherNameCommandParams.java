@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.teachers.commands.changeName;
 
 import com.tmoreno.mooc.shared.command.CommandParams;
 
-public final class ChangeNameTeacherCommandParams extends CommandParams {
+public final class ChangeTeacherNameCommandParams extends CommandParams {
 
     private String id;
     private String name;
