@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.courses.domain.events;
 
 import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
 import com.tmoreno.mooc.backoffice.courses.domain.CourseSummary;
-import com.tmoreno.mooc.backoffice.shared.events.DomainEvent;
+import com.tmoreno.mooc.shared.events.DomainEvent;
 
 public final class CourseSummaryChangedDomainEvent extends DomainEvent {
     private final CourseSummary summary;

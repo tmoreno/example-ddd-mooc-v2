@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.courses.domain.events;
 
 import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
 import com.tmoreno.mooc.backoffice.courses.domain.CourseImageUrl;
-import com.tmoreno.mooc.backoffice.shared.events.DomainEvent;
+import com.tmoreno.mooc.shared.events.DomainEvent;
 
 public final class CourseImageChangedDomainEvent extends DomainEvent {
     private final CourseImageUrl imageUrl;

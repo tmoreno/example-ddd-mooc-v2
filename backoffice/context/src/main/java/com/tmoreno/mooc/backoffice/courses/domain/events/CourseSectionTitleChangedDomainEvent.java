@@ -3,7 +3,7 @@ package com.tmoreno.mooc.backoffice.courses.domain.events;
 import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
 import com.tmoreno.mooc.backoffice.courses.domain.SectionId;
 import com.tmoreno.mooc.backoffice.courses.domain.SectionTitle;
-import com.tmoreno.mooc.backoffice.shared.events.DomainEvent;
+import com.tmoreno.mooc.shared.events.DomainEvent;
 
 public final class CourseSectionTitleChangedDomainEvent extends DomainEvent {
     private final SectionId sectionId;

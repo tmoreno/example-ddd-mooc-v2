@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.students.domain.events;
 
-import com.tmoreno.mooc.backoffice.shared.domain.PersonName;
-import com.tmoreno.mooc.backoffice.shared.events.DomainEvent;
+import com.tmoreno.mooc.shared.domain.PersonName;
+import com.tmoreno.mooc.shared.events.DomainEvent;
 import com.tmoreno.mooc.backoffice.students.domain.StudentId;
 
 public final class StudentNameChangedDomainEvent extends DomainEvent {

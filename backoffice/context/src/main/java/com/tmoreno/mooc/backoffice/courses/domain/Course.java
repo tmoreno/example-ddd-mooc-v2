@@ -29,11 +29,11 @@ import com.tmoreno.mooc.backoffice.courses.domain.exceptions.CourseStudentNotFou
 import com.tmoreno.mooc.backoffice.courses.domain.exceptions.CourseTeacherNotFoundException;
 import com.tmoreno.mooc.backoffice.courses.domain.exceptions.DiscardCourseException;
 import com.tmoreno.mooc.backoffice.courses.domain.exceptions.PublishCourseException;
-import com.tmoreno.mooc.backoffice.shared.domain.AggregateRoot;
-import com.tmoreno.mooc.backoffice.shared.domain.CreatedOn;
-import com.tmoreno.mooc.backoffice.shared.domain.DurationInSeconds;
-import com.tmoreno.mooc.backoffice.shared.domain.Language;
-import com.tmoreno.mooc.backoffice.shared.domain.Price;
+import com.tmoreno.mooc.shared.domain.AggregateRoot;
+import com.tmoreno.mooc.shared.domain.CreatedOn;
+import com.tmoreno.mooc.shared.domain.DurationInSeconds;
+import com.tmoreno.mooc.shared.domain.Language;
+import com.tmoreno.mooc.shared.domain.Price;
 import com.tmoreno.mooc.backoffice.students.domain.StudentId;
 import com.tmoreno.mooc.backoffice.teachers.domain.TeacherId;
 

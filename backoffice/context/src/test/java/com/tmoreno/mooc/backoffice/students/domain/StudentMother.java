@@ -2,8 +2,8 @@ package com.tmoreno.mooc.backoffice.students.domain;
 
 import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
 import com.tmoreno.mooc.backoffice.courses.domain.ReviewId;
-import com.tmoreno.mooc.backoffice.shared.domain.EmailMother;
-import com.tmoreno.mooc.backoffice.shared.domain.PersonNameMother;
+import com.tmoreno.mooc.shared.domain.EmailMother;
+import com.tmoreno.mooc.shared.domain.PersonNameMother;
 
 import java.util.HashSet;
 import java.util.Set;

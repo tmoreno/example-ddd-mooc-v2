@@ -1,8 +1,8 @@
 package com.tmoreno.mooc.backoffice.courses.domain.events;
 
 import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
-import com.tmoreno.mooc.backoffice.shared.domain.Price;
-import com.tmoreno.mooc.backoffice.shared.events.DomainEvent;
+import com.tmoreno.mooc.shared.domain.Price;
+import com.tmoreno.mooc.shared.events.DomainEvent;
 
 public final class CoursePriceChangedDomainEvent extends DomainEvent {
     private final Price price;

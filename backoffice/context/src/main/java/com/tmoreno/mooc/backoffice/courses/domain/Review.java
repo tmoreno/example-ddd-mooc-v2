@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.courses.domain;
 
-import com.tmoreno.mooc.backoffice.shared.domain.CreatedOn;
-import com.tmoreno.mooc.backoffice.shared.domain.Entity;
+import com.tmoreno.mooc.shared.domain.CreatedOn;
+import com.tmoreno.mooc.shared.domain.Entity;
 import com.tmoreno.mooc.backoffice.students.domain.StudentId;
 
 public final class Review extends Entity<ReviewId> {

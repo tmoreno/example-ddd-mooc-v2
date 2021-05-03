@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.courses.domain;
 
-import com.tmoreno.mooc.backoffice.shared.domain.DurationInSeconds;
-import com.tmoreno.mooc.backoffice.shared.domain.Entity;
+import com.tmoreno.mooc.shared.domain.DurationInSeconds;
+import com.tmoreno.mooc.shared.domain.Entity;
 
 public final class SectionClass extends Entity<SectionClassId> {
 

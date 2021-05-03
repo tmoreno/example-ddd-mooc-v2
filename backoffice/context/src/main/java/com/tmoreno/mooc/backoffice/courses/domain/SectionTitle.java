@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.courses.domain;
 
 import com.tmoreno.mooc.backoffice.courses.domain.exceptions.InvalidSectionTitleException;
-import com.tmoreno.mooc.backoffice.shared.domain.StringValueObject;
+import com.tmoreno.mooc.shared.domain.StringValueObject;
 import org.apache.commons.lang3.StringUtils;
 
 public final class SectionTitle extends StringValueObject {

@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.courses.commands.create;
 
-import com.tmoreno.mooc.backoffice.shared.command.CommandParams;
+import com.tmoreno.mooc.shared.command.CommandParams;
 
 public final class CreateCourseCommandParams extends CommandParams {
 

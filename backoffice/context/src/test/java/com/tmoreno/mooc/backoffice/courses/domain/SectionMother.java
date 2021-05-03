@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.courses.domain;
 
-import com.tmoreno.mooc.backoffice.shared.domain.DurationInSeconds;
+import com.tmoreno.mooc.shared.domain.DurationInSeconds;
 
 import java.util.ArrayList;
 import java.util.List;

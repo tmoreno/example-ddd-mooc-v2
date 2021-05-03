@@ -5,8 +5,8 @@ import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
 import com.tmoreno.mooc.backoffice.courses.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.courses.domain.CourseTitle;
 import com.tmoreno.mooc.backoffice.courses.domain.events.CourseCreatedDomainEvent;
-import com.tmoreno.mooc.backoffice.shared.command.Command;
-import com.tmoreno.mooc.backoffice.shared.events.EventBus;
+import com.tmoreno.mooc.shared.command.Command;
+import com.tmoreno.mooc.shared.events.EventBus;
 
 public final class CreateCourseCommand implements Command<CreateCourseCommandParams> {
     private final CourseRepository repository;

@@ -2,9 +2,9 @@ package com.tmoreno.mooc.backoffice.students.domain;
 
 import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
 import com.tmoreno.mooc.backoffice.courses.domain.ReviewId;
-import com.tmoreno.mooc.backoffice.shared.domain.AggregateRoot;
-import com.tmoreno.mooc.backoffice.shared.domain.Email;
-import com.tmoreno.mooc.backoffice.shared.domain.PersonName;
+import com.tmoreno.mooc.shared.domain.AggregateRoot;
+import com.tmoreno.mooc.shared.domain.Email;
+import com.tmoreno.mooc.shared.domain.PersonName;
 import com.tmoreno.mooc.backoffice.students.domain.events.StudentCourseAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.students.domain.events.StudentCourseDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.students.domain.events.StudentCreatedDomainEvent;

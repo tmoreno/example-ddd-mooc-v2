@@ -1,8 +1,8 @@
 package com.tmoreno.mooc.backoffice.courses.domain.events;
 
 import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
-import com.tmoreno.mooc.backoffice.shared.domain.Language;
-import com.tmoreno.mooc.backoffice.shared.events.DomainEvent;
+import com.tmoreno.mooc.shared.domain.Language;
+import com.tmoreno.mooc.shared.events.DomainEvent;
 
 public final class CourseLanguageChangedDomainEvent extends DomainEvent {
     private final Language language;
