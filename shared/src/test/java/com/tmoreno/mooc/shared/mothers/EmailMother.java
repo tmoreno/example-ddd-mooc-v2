@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.shared.utils;
+package com.tmoreno.mooc.shared.mothers;
 
 import com.github.javafaker.Faker;
 import com.tmoreno.mooc.shared.domain.Email;

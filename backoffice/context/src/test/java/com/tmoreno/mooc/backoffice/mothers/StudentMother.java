@@ -3,8 +3,8 @@ package com.tmoreno.mooc.backoffice.mothers;
 import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
 import com.tmoreno.mooc.backoffice.courses.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.students.domain.Student;
-import com.tmoreno.mooc.shared.utils.EmailMother;
-import com.tmoreno.mooc.shared.utils.PersonNameMother;
+import com.tmoreno.mooc.shared.mothers.EmailMother;
+import com.tmoreno.mooc.shared.mothers.PersonNameMother;
 
 import java.util.HashSet;
 import java.util.Set;

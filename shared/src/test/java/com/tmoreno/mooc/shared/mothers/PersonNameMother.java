@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.shared.utils;
+package com.tmoreno.mooc.shared.mothers;
 
 import com.tmoreno.mooc.shared.domain.PersonName;
 import org.apache.commons.lang3.RandomStringUtils;

@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.shared.utils;
+package com.tmoreno.mooc.shared.mothers;
 
 import com.tmoreno.mooc.shared.domain.Price;
 import org.apache.commons.lang3.RandomUtils;
