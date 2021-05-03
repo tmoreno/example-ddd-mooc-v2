@@ -1,7 +1,7 @@
-package com.tmoreno.mooc.backoffice.courses.domain;
+package com.tmoreno.mooc.backoffice.mothers;
 
+import com.tmoreno.mooc.backoffice.courses.domain.Review;
 import com.tmoreno.mooc.shared.utils.CreatedOnMother;
-import com.tmoreno.mooc.backoffice.students.domain.StudentIdMother;
 
 public final class ReviewMother {
     public static Review random() {

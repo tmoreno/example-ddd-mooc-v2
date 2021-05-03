@@ -1,4 +1,6 @@
-package com.tmoreno.mooc.backoffice.students.domain;
+package com.tmoreno.mooc.backoffice.mothers;
+
+import com.tmoreno.mooc.backoffice.students.domain.StudentId;
 
 import java.util.UUID;
 

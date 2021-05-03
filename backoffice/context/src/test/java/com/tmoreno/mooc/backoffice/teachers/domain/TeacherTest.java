@@ -1,7 +1,9 @@
 package com.tmoreno.mooc.backoffice.teachers.domain;
 
 import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
-import com.tmoreno.mooc.backoffice.courses.domain.CourseIdMother;
+import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
+import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
+import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
 import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.utils.EmailMother;
 import com.tmoreno.mooc.shared.domain.PersonName;

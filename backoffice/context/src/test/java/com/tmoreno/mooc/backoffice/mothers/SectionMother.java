@@ -1,5 +1,9 @@
-package com.tmoreno.mooc.backoffice.courses.domain;
+package com.tmoreno.mooc.backoffice.mothers;
 
+import com.tmoreno.mooc.backoffice.courses.domain.Section;
+import com.tmoreno.mooc.backoffice.courses.domain.SectionClass;
+import com.tmoreno.mooc.backoffice.courses.domain.SectionClassId;
+import com.tmoreno.mooc.backoffice.courses.domain.SectionClassTitle;
 import com.tmoreno.mooc.shared.domain.DurationInSeconds;
 
 import java.util.ArrayList;
