@@ -1,5 +1,6 @@
-package com.tmoreno.mooc.shared.domain;
+package com.tmoreno.mooc.shared.utils;
 
+import com.tmoreno.mooc.shared.domain.Price;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.util.Currency;
