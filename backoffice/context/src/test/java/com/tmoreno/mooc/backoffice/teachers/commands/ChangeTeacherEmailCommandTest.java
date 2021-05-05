@@ -5,7 +5,6 @@ import com.tmoreno.mooc.backoffice.teachers.commands.changeEmail.ChangeTeacherEm
 import com.tmoreno.mooc.backoffice.teachers.commands.changeEmail.ChangeTeacherEmailCommandParams;
 import com.tmoreno.mooc.backoffice.teachers.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teachers.domain.TeacherRepository;
-import com.tmoreno.mooc.backoffice.teachers.domain.events.TeacherEmailChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.teachers.domain.exceptions.TeacherNotFoundException;
 import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.fakes.FakeEventBus;
@@ -21,7 +20,6 @@ import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -57,7 +55,6 @@ public class ChangeTeacherEmailCommandTest {
         assertThat(teacher.getEmail(), is(email));
 
         assertThat(eventBus.getEvents().size(), is(1));
-        assertThat(eventBus.getEvents().get(0), is(instanceOf(TeacherEmailChangedDomainEvent.class)));
 
         verify(repository).save(teacher);
     }
