@@ -1,5 +1,7 @@
 package com.tmoreno.mooc.backoffice.teachers.domain;
 
+import com.tmoreno.mooc.shared.domain.Email;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -9,4 +11,6 @@ public interface TeacherRepository {
     List<Teacher> findAll();
 
     Optional<Teacher> find(TeacherId id);
+
+    boolean exists(TeacherId id, Email email);
 }

@@ -3,6 +3,7 @@ package com.tmoreno.mooc.backoffice.teachers.commands.create;
 import com.tmoreno.mooc.backoffice.teachers.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teachers.domain.TeacherId;
 import com.tmoreno.mooc.backoffice.teachers.domain.TeacherRepository;
+import com.tmoreno.mooc.backoffice.teachers.domain.exceptions.TeacherExistsException;
 import com.tmoreno.mooc.shared.command.Command;
 import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.domain.PersonName;
@@ -22,6 +23,10 @@ public final class CreateTeacherCommand implements Command<CreateTeacherCommandP
         TeacherId id = new TeacherId(params.getId());
         PersonName name = new PersonName(params.getName());
         Email email = new Email(params.getEmail());
+
+        if (repository.exists(id, email)) {
+            throw new TeacherExistsException(id, email);
+        }
 
         Teacher teacher = Teacher.create(id, name, email);
 
