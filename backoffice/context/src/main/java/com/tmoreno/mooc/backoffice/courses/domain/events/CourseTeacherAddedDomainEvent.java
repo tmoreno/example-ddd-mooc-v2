@@ -14,7 +14,7 @@ public final class CourseTeacherAddedDomainEvent extends DomainEvent {
 
     @Override
     public String getEventName() {
-        return "course.teacher.deleted";
+        return "course.teacher.added";
     }
 
     @Override
