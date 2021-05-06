@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.teachers.queries.find;
+package com.tmoreno.mooc.backoffice.teachers.queries;
 
 import com.tmoreno.mooc.backoffice.teachers.domain.TeacherRepository;
 import com.tmoreno.mooc.shared.query.Query;
