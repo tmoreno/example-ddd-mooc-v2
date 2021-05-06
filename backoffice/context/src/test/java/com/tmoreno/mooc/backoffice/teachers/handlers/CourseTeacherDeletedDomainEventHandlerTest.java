@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.teachers.handlers;
 
 import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
-import com.tmoreno.mooc.backoffice.courses.domain.events.CourseTeacherAddedDomainEvent;
+import com.tmoreno.mooc.backoffice.courses.domain.events.CourseTeacherDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.teachers.domain.Teacher;
@@ -15,34 +15,34 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CourseTeacherAddedDomainEventHandlerTest {
+public class CourseTeacherDeletedDomainEventHandlerTest {
 
     @Mock
     private TeacherRepository repository;
 
-    private CourseTeacherAddedDomainEventHandler handler;
+    private CourseTeacherDeletedDomainEventHandler handler;
 
     @BeforeEach
     public void setUp() {
-        handler = new CourseTeacherAddedDomainEventHandler(repository);
+        handler = new CourseTeacherDeletedDomainEventHandler(repository);
     }
 
     @Test
-    public void given_that_a_teacher_is_added_to_a_course_when_handle_the_event_then_teacher_has_the_course_added() {
-        Teacher teacher = TeacherMother.random();
+    public void given_that_a_teacher_is_deleted_from_a_course_when_handle_the_event_then_teacher_not_has_the_course() {
         CourseId courseId = CourseIdMother.random();
+        Teacher teacher = TeacherMother.randomWithCourse(courseId);
 
         when(repository.find(teacher.getId())).thenReturn(Optional.of(teacher));
 
-        handler.handle(new CourseTeacherAddedDomainEvent(courseId, teacher.getId()));
+        handler.handle(new CourseTeacherDeletedDomainEvent(courseId, teacher.getId()));
 
-        assertThat(teacher.getCourses().size(), is(1));
-        assertThat(teacher.getCourses().contains(courseId), is(true));
+        assertThat(teacher.getCourses(), is(empty()));
 
         verify(repository).save(teacher);
     }
