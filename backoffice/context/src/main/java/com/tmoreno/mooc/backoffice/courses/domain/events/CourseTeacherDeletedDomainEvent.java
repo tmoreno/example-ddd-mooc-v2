@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.courses.domain.events;
 
 import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
 import com.tmoreno.mooc.shared.events.DomainEvent;
-import com.tmoreno.mooc.backoffice.teachers.domain.TeacherId;
+import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 
 public final class CourseTeacherDeletedDomainEvent extends DomainEvent {
     private final TeacherId teacherId;

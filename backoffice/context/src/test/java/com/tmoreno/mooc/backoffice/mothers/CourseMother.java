@@ -8,8 +8,8 @@ import com.tmoreno.mooc.shared.mothers.LanguageMother;
 import com.tmoreno.mooc.shared.mothers.PriceMother;
 import com.tmoreno.mooc.backoffice.students.domain.Student;
 import com.tmoreno.mooc.backoffice.students.domain.StudentId;
-import com.tmoreno.mooc.backoffice.teachers.domain.Teacher;
-import com.tmoreno.mooc.backoffice.teachers.domain.TeacherId;
+import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
+import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.util.ArrayList;

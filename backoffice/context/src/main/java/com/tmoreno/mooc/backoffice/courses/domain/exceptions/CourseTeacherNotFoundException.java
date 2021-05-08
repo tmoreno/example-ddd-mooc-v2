@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.courses.domain.exceptions;
 
 import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
-import com.tmoreno.mooc.backoffice.teachers.domain.TeacherId;
+import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 
 public final class CourseTeacherNotFoundException extends RuntimeException {
     public CourseTeacherNotFoundException(CourseId courseId, TeacherId teacherId) {
