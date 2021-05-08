@@ -36,7 +36,7 @@ public abstract class AggregateRoot<I extends Identifier> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AggregateRoot that = (AggregateRoot) o;
+        AggregateRoot<?> that = (AggregateRoot<?>) o;
         return Objects.equals(id, that.id);
     }
 
