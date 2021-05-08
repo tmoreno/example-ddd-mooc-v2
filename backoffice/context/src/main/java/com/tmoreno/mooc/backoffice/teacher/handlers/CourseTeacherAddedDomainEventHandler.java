@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.teacher.handlers;
 
-import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
-import com.tmoreno.mooc.backoffice.courses.domain.events.CourseTeacherAddedDomainEvent;
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.backoffice.course.domain.events.CourseTeacherAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;

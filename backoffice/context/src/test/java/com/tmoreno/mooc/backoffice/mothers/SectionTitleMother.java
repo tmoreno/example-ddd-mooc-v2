@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.mothers;
 
-import com.tmoreno.mooc.backoffice.courses.domain.SectionTitle;
+import com.tmoreno.mooc.backoffice.course.domain.SectionTitle;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public final class SectionTitleMother {

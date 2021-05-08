@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.mothers;
 
-import com.tmoreno.mooc.backoffice.courses.domain.CourseDescription;
+import com.tmoreno.mooc.backoffice.course.domain.CourseDescription;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public final class CourseDescriptionMother {

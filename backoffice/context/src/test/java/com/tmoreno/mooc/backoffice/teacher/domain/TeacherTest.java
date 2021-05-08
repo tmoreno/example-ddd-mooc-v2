@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.teacher.domain;
 
-import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;

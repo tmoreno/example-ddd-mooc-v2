@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.mothers;
 
-import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 
 import java.util.UUID;
 

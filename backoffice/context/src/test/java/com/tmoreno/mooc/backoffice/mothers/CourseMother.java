@@ -1,9 +1,9 @@
 package com.tmoreno.mooc.backoffice.mothers;
 
-import com.tmoreno.mooc.backoffice.courses.domain.Course;
-import com.tmoreno.mooc.backoffice.courses.domain.CourseState;
-import com.tmoreno.mooc.backoffice.courses.domain.Review;
-import com.tmoreno.mooc.backoffice.courses.domain.Section;
+import com.tmoreno.mooc.backoffice.course.domain.Course;
+import com.tmoreno.mooc.backoffice.course.domain.CourseState;
+import com.tmoreno.mooc.backoffice.course.domain.Review;
+import com.tmoreno.mooc.backoffice.course.domain.Section;
 import com.tmoreno.mooc.shared.mothers.LanguageMother;
 import com.tmoreno.mooc.shared.mothers.PriceMother;
 import com.tmoreno.mooc.backoffice.student.domain.Student;

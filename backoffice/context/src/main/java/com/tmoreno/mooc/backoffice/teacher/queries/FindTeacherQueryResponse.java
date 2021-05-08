@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.teacher.queries;
 
-import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.shared.query.QueryResponse;
 

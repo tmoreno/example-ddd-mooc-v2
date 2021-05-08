@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.student.handlers;
 
-import com.tmoreno.mooc.backoffice.courses.domain.CourseId;
-import com.tmoreno.mooc.backoffice.courses.domain.events.CourseStudentDeletedDomainEvent;
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.backoffice.course.domain.events.CourseStudentDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentRepository;
