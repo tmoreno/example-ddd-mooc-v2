@@ -34,7 +34,7 @@ import com.tmoreno.mooc.shared.domain.CreatedOn;
 import com.tmoreno.mooc.shared.domain.DurationInSeconds;
 import com.tmoreno.mooc.shared.domain.Language;
 import com.tmoreno.mooc.shared.domain.Price;
-import com.tmoreno.mooc.backoffice.students.domain.StudentId;
+import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 
 import java.util.ArrayList;

@@ -6,7 +6,7 @@ import com.tmoreno.mooc.backoffice.courses.domain.ReviewRating;
 import com.tmoreno.mooc.backoffice.courses.domain.ReviewText;
 import com.tmoreno.mooc.shared.domain.CreatedOn;
 import com.tmoreno.mooc.shared.events.DomainEvent;
-import com.tmoreno.mooc.backoffice.students.domain.StudentId;
+import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 
 public final class CourseReviewAddedDomainEvent extends DomainEvent {
     private final ReviewId reviewId;
