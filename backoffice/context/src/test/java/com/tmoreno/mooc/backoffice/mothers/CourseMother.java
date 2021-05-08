@@ -2,20 +2,22 @@ package com.tmoreno.mooc.backoffice.mothers;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseState;
-import com.tmoreno.mooc.backoffice.review.Review;
 import com.tmoreno.mooc.backoffice.course.domain.Section;
-import com.tmoreno.mooc.shared.mothers.LanguageMother;
-import com.tmoreno.mooc.shared.mothers.PriceMother;
+import com.tmoreno.mooc.backoffice.review.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
+import com.tmoreno.mooc.shared.mothers.LanguageMother;
+import com.tmoreno.mooc.shared.mothers.PriceMother;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -64,7 +66,7 @@ public final class CourseMother {
                 LanguageMother.random(),
                 PriceMother.random(),
                 sections,
-                List.of(),
+                Map.of(),
                 Set.of(),
                 Set.of()
         );
@@ -84,7 +86,7 @@ public final class CourseMother {
                 LanguageMother.random(),
                 PriceMother.random(),
                 List.of(),
-                List.of(),
+                Map.of(),
                 Set.of(),
                 teachers
         );
@@ -120,9 +122,9 @@ public final class CourseMother {
         );
     }
 
-    public static Course randomInPublishStateWithReview(Review review) {
-        List<Review> reviews = new ArrayList<>();
-        reviews.add(review);
+    public static Course randomInPublishStateWithReview(StudentId studentId, ReviewId reviewId) {
+        Map<StudentId, ReviewId> reviews = new HashMap<>();
+        reviews.put(studentId, reviewId);
 
         return new Course(
                 CourseIdMother.random(),
@@ -154,7 +156,7 @@ public final class CourseMother {
                 LanguageMother.random(),
                 PriceMother.random(),
                 List.of(),
-                List.of(),
+                Map.of(),
                 students,
                 Set.of()
         );
@@ -184,7 +186,7 @@ public final class CourseMother {
                 LanguageMother.random(),
                 PriceMother.random(),
                 List.of(SectionMother.random()),
-                List.of(),
+                Map.of(),
                 Set.of(),
                 Set.of(TeacherIdMother.random())
         );
@@ -201,7 +203,7 @@ public final class CourseMother {
                 LanguageMother.random(),
                 PriceMother.random(),
                 List.of(),
-                List.of(),
+                Map.of(),
                 Set.of(),
                 Set.of(TeacherIdMother.random())
         );
@@ -218,7 +220,7 @@ public final class CourseMother {
                 LanguageMother.random(),
                 PriceMother.random(),
                 List.of(SectionMother.random()),
-                List.of(),
+                Map.of(),
                 Set.of(),
                 Set.of()
         );

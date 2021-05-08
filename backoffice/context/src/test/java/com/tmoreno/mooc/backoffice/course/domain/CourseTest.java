@@ -37,7 +37,6 @@ import com.tmoreno.mooc.backoffice.mothers.CourseMother;
 import com.tmoreno.mooc.backoffice.mothers.CourseSummaryMother;
 import com.tmoreno.mooc.backoffice.mothers.CourseTitleMother;
 import com.tmoreno.mooc.backoffice.mothers.ReviewIdMother;
-import com.tmoreno.mooc.backoffice.mothers.ReviewMother;
 import com.tmoreno.mooc.backoffice.mothers.ReviewRatingMother;
 import com.tmoreno.mooc.backoffice.mothers.ReviewTextMother;
 import com.tmoreno.mooc.backoffice.mothers.SectionClassIdMother;
@@ -45,33 +44,33 @@ import com.tmoreno.mooc.backoffice.mothers.SectionClassTitleMother;
 import com.tmoreno.mooc.backoffice.mothers.SectionIdMother;
 import com.tmoreno.mooc.backoffice.mothers.SectionMother;
 import com.tmoreno.mooc.backoffice.mothers.SectionTitleMother;
-import com.tmoreno.mooc.backoffice.review.Review;
+import com.tmoreno.mooc.backoffice.mothers.StudentIdMother;
+import com.tmoreno.mooc.backoffice.mothers.StudentMother;
+import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
+import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.review.ReviewId;
 import com.tmoreno.mooc.backoffice.review.ReviewRating;
 import com.tmoreno.mooc.backoffice.review.ReviewText;
-import com.tmoreno.mooc.shared.domain.CreatedOn;
-import com.tmoreno.mooc.shared.mothers.CreatedOnMother;
-import com.tmoreno.mooc.shared.domain.DurationInSeconds;
-import com.tmoreno.mooc.shared.mothers.DurationInSecondsMother;
-import com.tmoreno.mooc.shared.domain.Language;
-import com.tmoreno.mooc.shared.mothers.LanguageMother;
-import com.tmoreno.mooc.shared.domain.Price;
-import com.tmoreno.mooc.shared.mothers.PriceMother;
-import com.tmoreno.mooc.shared.events.DomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
-import com.tmoreno.mooc.backoffice.mothers.StudentIdMother;
-import com.tmoreno.mooc.backoffice.mothers.StudentMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
-import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
-import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
+import com.tmoreno.mooc.shared.domain.CreatedOn;
+import com.tmoreno.mooc.shared.domain.DurationInSeconds;
+import com.tmoreno.mooc.shared.domain.Language;
+import com.tmoreno.mooc.shared.domain.Price;
+import com.tmoreno.mooc.shared.events.DomainEvent;
+import com.tmoreno.mooc.shared.mothers.CreatedOnMother;
+import com.tmoreno.mooc.shared.mothers.DurationInSecondsMother;
+import com.tmoreno.mooc.shared.mothers.LanguageMother;
+import com.tmoreno.mooc.shared.mothers.PriceMother;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Collections.emptyMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.Is.is;
@@ -96,7 +95,7 @@ public class CourseTest {
         assertThat(course.getLanguage(), is(Optional.empty()));
         assertThat(course.getPrice(), is(Optional.empty()));
         assertThat(course.getSections(), is(empty()));
-        assertThat(course.getReviews(), is(empty()));
+        assertThat(course.getReviews(), is(emptyMap()));
         assertThat(course.getSections(), is(empty()));
         assertThat(course.getTeachers(), is(empty()));
 
@@ -807,11 +806,7 @@ public class CourseTest {
         course.addReview(reviewId, studentId, reviewRating, reviewText, createdOn);
 
         assertThat(course.getReviews().size(), is(1));
-        assertThat(course.getReviews().get(0).getId(), is(reviewId));
-        assertThat(course.getReviews().get(0).getStudentId(), is(studentId));
-        assertThat(course.getReviews().get(0).getRating(), is(reviewRating));
-        assertThat(course.getReviews().get(0).getText(), is(reviewText));
-        assertThat(course.getReviews().get(0).getCreatedOn(), is(createdOn));
+        assertThat(course.getReviews().get(studentId), is(reviewId));
 
         List<DomainEvent> domainEvents = course.pullEvents();
         assertThat(domainEvents.size(), is(1));
@@ -842,28 +837,30 @@ public class CourseTest {
 
     @Test
     public void given_a_course_in_published_state_with_reviews_when_delete_a_review_then_review_is_deleted_and_an_event_is_recorded() {
-        Review review = ReviewMother.random();
-        Course course = CourseMother.randomInPublishStateWithReview(review);
+        StudentId studentId = StudentIdMother.random();
+        ReviewId reviewId = ReviewIdMother.random();
+        Course course = CourseMother.randomInPublishStateWithReview(studentId, reviewId);
 
-        course.deleteReview(review.getId());
+        course.deleteReview(studentId, reviewId);
 
-        assertThat(course.getReviews(), is(empty()));
+        assertThat(course.getReviews(), is(emptyMap()));
 
         List<DomainEvent> domainEvents = course.pullEvents();
         assertThat(domainEvents.size(), is(1));
 
         CourseReviewDeletedDomainEvent event = (CourseReviewDeletedDomainEvent) domainEvents.get(0);
 
-        assertThat(review.getId(), is(event.getReviewId()));
+        assertThat(reviewId, is(event.getReviewId()));
     }
 
     @Test
     public void given_a_course_in_published_state_with_reviews_when_delete_a_not_existing_review_then_throws_an_exception() {
         assertThrows(CourseReviewNotFoundException.class, () -> {
-            Review review = ReviewMother.random();
-            Course course = CourseMother.randomInPublishStateWithReview(review);
+            StudentId studentId = StudentIdMother.random();
+            ReviewId reviewId = ReviewIdMother.random();
+            Course course = CourseMother.randomInPublishStateWithReview(studentId, reviewId);
 
-            course.deleteReview(ReviewIdMother.random());
+            course.deleteReview(StudentIdMother.random(), ReviewIdMother.random());
         });
     }
 
@@ -872,7 +869,7 @@ public class CourseTest {
         assertThrows(ChangeCourseAttributeException.class, () -> {
             Course course = CourseMother.randomInNotPublishState();
 
-            course.deleteReview(ReviewIdMother.random());
+            course.deleteReview(StudentIdMother.random(), ReviewIdMother.random());
         });
     }
 

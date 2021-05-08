@@ -29,21 +29,22 @@ import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseStudentNotFoun
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseTeacherNotFoundException;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.DiscardCourseException;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.PublishCourseException;
-import com.tmoreno.mooc.backoffice.review.Review;
 import com.tmoreno.mooc.backoffice.review.ReviewId;
 import com.tmoreno.mooc.backoffice.review.ReviewRating;
 import com.tmoreno.mooc.backoffice.review.ReviewText;
+import com.tmoreno.mooc.backoffice.student.domain.StudentId;
+import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 import com.tmoreno.mooc.shared.domain.AggregateRoot;
 import com.tmoreno.mooc.shared.domain.CreatedOn;
 import com.tmoreno.mooc.shared.domain.DurationInSeconds;
 import com.tmoreno.mooc.shared.domain.Language;
 import com.tmoreno.mooc.shared.domain.Price;
-import com.tmoreno.mooc.backoffice.student.domain.StudentId;
-import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -56,7 +57,7 @@ public final class Course extends AggregateRoot<CourseId> {
     private Language language;
     private Price price;
     private final List<Section> sections;
-    private final List<Review> reviews;
+    private final Map<StudentId, ReviewId> reviews;
     private final Set<StudentId> students;
     private final Set<TeacherId> teachers;
 
@@ -80,7 +81,7 @@ public final class Course extends AggregateRoot<CourseId> {
         this.language = language;
         this.price = price;
         this.sections = new ArrayList<>();
-        this.reviews = new ArrayList<>();
+        this.reviews = new HashMap<>();
         this.students = new HashSet<>();
         this.teachers = new HashSet<>();
     }
@@ -95,7 +96,7 @@ public final class Course extends AggregateRoot<CourseId> {
             Language language,
             Price price,
             List<Section> sections,
-            List<Review> reviews,
+            Map<StudentId, ReviewId> reviews,
             Set<StudentId> students,
             Set<TeacherId> teachers
     ) {
@@ -423,14 +424,13 @@ public final class Course extends AggregateRoot<CourseId> {
             );
     }
 
-    public List<Review> getReviews() {
-        return List.copyOf(reviews);
+    public Map<StudentId, ReviewId> getReviews() {
+        return Map.copyOf(reviews);
     }
 
     public void addReview(ReviewId reviewId, StudentId studentId, ReviewRating rating, ReviewText text, CreatedOn createdOn) {
         if (state == CourseState.PUBLISHED) {
-            Review review = new Review(reviewId, id, studentId, rating, text, createdOn);
-            reviews.add(review);
+            reviews.put(studentId, reviewId);
 
             recordEvent(new CourseReviewAddedDomainEvent(id, reviewId, studentId, rating, text, createdOn));
         }
@@ -439,9 +439,9 @@ public final class Course extends AggregateRoot<CourseId> {
         }
     }
 
-    public void deleteReview(ReviewId reviewId) {
+    public void deleteReview(StudentId studentId, ReviewId reviewId) {
         if (state == CourseState.PUBLISHED) {
-            boolean removed = reviews.removeIf(r -> r.getId().equals(reviewId));
+            boolean removed = reviews.remove(studentId, reviewId);
 
             if (removed) {
                 recordEvent(new CourseReviewDeletedDomainEvent(id, reviewId));
