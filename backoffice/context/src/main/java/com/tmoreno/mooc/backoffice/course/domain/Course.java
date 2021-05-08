@@ -429,7 +429,7 @@ public final class Course extends AggregateRoot<CourseId> {
 
     public void addReview(ReviewId reviewId, StudentId studentId, ReviewRating rating, ReviewText text, CreatedOn createdOn) {
         if (state == CourseState.PUBLISHED) {
-            Review review = new Review(reviewId, studentId, rating, text, createdOn);
+            Review review = new Review(reviewId, id, studentId, rating, text, createdOn);
             reviews.add(review);
 
             recordEvent(new CourseReviewAddedDomainEvent(id, reviewId, studentId, rating, text, createdOn));
