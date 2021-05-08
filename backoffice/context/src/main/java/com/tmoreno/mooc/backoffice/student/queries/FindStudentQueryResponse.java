@@ -5,6 +5,7 @@ import com.tmoreno.mooc.backoffice.review.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.shared.query.QueryResponse;
 
+import java.util.Map;
 import java.util.Set;
 
 public final class FindStudentQueryResponse extends QueryResponse {
@@ -12,7 +13,7 @@ public final class FindStudentQueryResponse extends QueryResponse {
     private final String name;
     private final String email;
     private final Set<CourseId> courses;
-    private final Set<ReviewId> reviews;
+    private final Map<CourseId, ReviewId> reviews;
 
     public FindStudentQueryResponse(Student student) {
         this.name = student.getName().getValue();
@@ -33,7 +34,7 @@ public final class FindStudentQueryResponse extends QueryResponse {
         return courses;
     }
 
-    public Set<ReviewId> getReviews() {
+    public Map<CourseId, ReviewId> getReviews() {
         return reviews;
     }
 }

@@ -6,7 +6,9 @@ import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.shared.mothers.EmailMother;
 import com.tmoreno.mooc.shared.mothers.PersonNameMother;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public final class StudentMother {
@@ -27,13 +29,13 @@ public final class StudentMother {
             PersonNameMother.random(),
             EmailMother.random(),
             courses,
-            Set.of()
+            Map.of()
         );
     }
 
-    public static Student randomWithReview(ReviewId reviewId) {
-        Set<ReviewId> reviews = new HashSet<>();
-        reviews.add(reviewId);
+    public static Student randomWithReview(CourseId courseId, ReviewId reviewId) {
+        Map<CourseId, ReviewId> reviews = new HashMap<>();
+        reviews.put(courseId, reviewId);
 
         return new Student(
             StudentIdMother.random(),

@@ -2,9 +2,6 @@ package com.tmoreno.mooc.backoffice.student.domain;
 
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.review.ReviewId;
-import com.tmoreno.mooc.shared.domain.AggregateRoot;
-import com.tmoreno.mooc.shared.domain.Email;
-import com.tmoreno.mooc.shared.domain.PersonName;
 import com.tmoreno.mooc.backoffice.student.domain.events.StudentCourseAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.events.StudentCourseDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.events.StudentCreatedDomainEvent;
@@ -14,8 +11,13 @@ import com.tmoreno.mooc.backoffice.student.domain.events.StudentReviewAddedDomai
 import com.tmoreno.mooc.backoffice.student.domain.events.StudentReviewDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentCourseNotFoundException;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentReviewNotFoundException;
+import com.tmoreno.mooc.shared.domain.AggregateRoot;
+import com.tmoreno.mooc.shared.domain.Email;
+import com.tmoreno.mooc.shared.domain.PersonName;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public final class Student extends AggregateRoot<StudentId> {
@@ -23,7 +25,7 @@ public final class Student extends AggregateRoot<StudentId> {
     private PersonName name;
     private Email email;
     private final Set<CourseId> courses;
-    private final Set<ReviewId> reviews;
+    private final Map<CourseId, ReviewId> reviews;
 
     public Student(StudentId id, PersonName name, Email email) {
         super(id);
@@ -31,10 +33,10 @@ public final class Student extends AggregateRoot<StudentId> {
         this.name = name;
         this.email = email;
         this.courses = new HashSet<>();
-        this.reviews = new HashSet<>();
+        this.reviews = new HashMap<>();
     }
 
-    public Student(StudentId id, PersonName name, Email email, Set<CourseId> courses, Set<ReviewId> reviews) {
+    public Student(StudentId id, PersonName name, Email email, Set<CourseId> courses, Map<CourseId, ReviewId> reviews) {
         super(id);
 
         this.name = name;
@@ -92,18 +94,18 @@ public final class Student extends AggregateRoot<StudentId> {
         }
     }
 
-    public Set<ReviewId> getReviews() {
-        return Set.copyOf(reviews);
+    public Map<CourseId, ReviewId> getReviews() {
+        return Map.copyOf(reviews);
     }
 
-    public void addReview(ReviewId reviewId) {
-        reviews.add(reviewId);
+    public void addReview(CourseId courseId, ReviewId reviewId) {
+        reviews.put(courseId, reviewId);
 
         recordEvent(new StudentReviewAddedDomainEvent(id, reviewId));
     }
 
-    public void deleteReview(ReviewId reviewId) {
-        boolean removed = reviews.remove(reviewId);
+    public void deleteReview(CourseId courseId, ReviewId reviewId) {
+        boolean removed = reviews.remove(courseId, reviewId);
 
         if (removed) {
             recordEvent(new StudentReviewDeletedDomainEvent(id, reviewId));

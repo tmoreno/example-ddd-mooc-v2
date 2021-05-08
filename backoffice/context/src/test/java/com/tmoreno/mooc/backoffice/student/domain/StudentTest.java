@@ -135,11 +135,12 @@ public class StudentTest {
     @Test
     public void given_a_student_when_add_a_review_then_review_is_added_and_an_event_is_recorded() {
         Student student = StudentMother.random();
+        CourseId courseId = CourseIdMother.random();
         ReviewId reviewId = ReviewIdMother.random();
 
-        student.addReview(reviewId);
+        student.addReview(courseId, reviewId);
 
-        assertTrue(student.getReviews().contains(reviewId));
+        assertThat(student.getReviews().get(courseId), is(reviewId));
 
         List<DomainEvent> domainEvents = student.pullEvents();
         assertThat(domainEvents.size(), is(1));
@@ -151,10 +152,11 @@ public class StudentTest {
 
     @Test
     public void given_a_student_with_reviews_when_delete_a_review_then_review_is_deleted_and_an_event_is_recorded() {
+        CourseId courseId = CourseIdMother.random();
         ReviewId reviewId = ReviewIdMother.random();
-        Student student = StudentMother.randomWithReview(reviewId);
+        Student student = StudentMother.randomWithReview(courseId, reviewId);
 
-        student.deleteReview(reviewId);
+        student.deleteReview(courseId, reviewId);
 
         assertTrue(student.getReviews().isEmpty());
 
@@ -169,9 +171,9 @@ public class StudentTest {
     @Test
     public void given_a_student_with_reviews_when_delete_a_not_existing_review_then_throws_an_exception() {
         Assertions.assertThrows(StudentReviewNotFoundException.class, () -> {
-            Student student = StudentMother.randomWithReview(ReviewIdMother.random());
+            Student student = StudentMother.randomWithReview(CourseIdMother.random(), ReviewIdMother.random());
 
-            student.deleteReview(ReviewIdMother.random());
+            student.deleteReview(CourseIdMother.random(), ReviewIdMother.random());
         });
     }
 }

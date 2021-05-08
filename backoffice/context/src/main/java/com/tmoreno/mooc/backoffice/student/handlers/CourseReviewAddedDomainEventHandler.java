@@ -25,7 +25,7 @@ public final class CourseReviewAddedDomainEventHandler implements EventHandler<C
 
         Student student = repository.find(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));
 
-        student.addReview(reviewId);
+        student.addReview(courseId, reviewId);
 
         repository.save(student);
     }
