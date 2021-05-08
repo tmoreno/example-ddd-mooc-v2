@@ -1,15 +1,13 @@
 package com.tmoreno.mooc.backoffice.teacher.domain;
 
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
-import com.tmoreno.mooc.shared.domain.AggregateRoot;
-import com.tmoreno.mooc.shared.domain.Email;
-import com.tmoreno.mooc.shared.domain.PersonName;
-import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherCourseAddedDomainEvent;
-import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherCourseDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherCreatedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherEmailChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherNameChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherCourseNotFoundException;
+import com.tmoreno.mooc.shared.domain.AggregateRoot;
+import com.tmoreno.mooc.shared.domain.Email;
+import com.tmoreno.mooc.shared.domain.PersonName;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -70,17 +68,12 @@ public final class Teacher extends AggregateRoot<TeacherId> {
 
     public void addCourse(CourseId courseId) {
         courses.add(courseId);
-
-        recordEvent(new TeacherCourseAddedDomainEvent(id, courseId));
     }
 
     public void deleteCourse(CourseId courseId) {
         boolean removed = courses.remove(courseId);
 
-        if (removed) {
-            recordEvent(new TeacherCourseDeletedDomainEvent(id, courseId));
-        }
-        else {
+        if (!removed) {
             throw new TeacherCourseNotFoundException(id, courseId);
         }
     }

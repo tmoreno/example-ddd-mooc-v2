@@ -4,17 +4,15 @@ import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
-import com.tmoreno.mooc.shared.domain.Email;
-import com.tmoreno.mooc.shared.mothers.EmailMother;
-import com.tmoreno.mooc.shared.domain.PersonName;
-import com.tmoreno.mooc.shared.mothers.PersonNameMother;
-import com.tmoreno.mooc.shared.events.DomainEvent;
-import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherCourseAddedDomainEvent;
-import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherCourseDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherCreatedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherEmailChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherNameChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherCourseNotFoundException;
+import com.tmoreno.mooc.shared.domain.Email;
+import com.tmoreno.mooc.shared.domain.PersonName;
+import com.tmoreno.mooc.shared.events.DomainEvent;
+import com.tmoreno.mooc.shared.mothers.EmailMother;
+import com.tmoreno.mooc.shared.mothers.PersonNameMother;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -84,37 +82,23 @@ public class TeacherTest {
     }
 
     @Test
-    public void given_a_teacher_when_add_a_course_then_course_is_added_and_an_event_is_recorded() {
+    public void given_a_teacher_when_add_a_course_then_course_is_added() {
         Teacher teacher = TeacherMother.random();
         CourseId courseId = CourseIdMother.random();
 
         teacher.addCourse(courseId);
 
         assertTrue(teacher.getCourses().contains(courseId));
-
-        List<DomainEvent> domainEvents = teacher.pullEvents();
-        assertThat(domainEvents.size(), is(1));
-
-        TeacherCourseAddedDomainEvent event = (TeacherCourseAddedDomainEvent) domainEvents.get(0);
-
-        assertThat(courseId, is(event.getCourseId()));
     }
 
     @Test
-    public void given_a_teacher_with_courses_when_delete_a_course_then_course_is_deleted_and_an_event_is_recorded() {
+    public void given_a_teacher_with_courses_when_delete_a_course_then_course_is_deleted() {
         CourseId courseId = CourseIdMother.random();
         Teacher teacher = TeacherMother.randomWithCourse(courseId);
 
         teacher.deleteCourse(courseId);
 
         assertTrue(teacher.getCourses().isEmpty());
-
-        List<DomainEvent> domainEvents = teacher.pullEvents();
-        assertThat(domainEvents.size(), is(1));
-
-        TeacherCourseDeletedDomainEvent event = (TeacherCourseDeletedDomainEvent) domainEvents.get(0);
-
-        assertThat(courseId, is(event.getCourseId()));
     }
 
     @Test
