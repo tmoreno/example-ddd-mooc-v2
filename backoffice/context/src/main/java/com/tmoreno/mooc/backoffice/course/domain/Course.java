@@ -444,7 +444,7 @@ public final class Course extends AggregateRoot<CourseId> {
             boolean removed = reviews.remove(studentId, reviewId);
 
             if (removed) {
-                recordEvent(new CourseReviewDeletedDomainEvent(id, reviewId));
+                recordEvent(new CourseReviewDeletedDomainEvent(id, studentId, reviewId));
             }
             else {
                 throw new CourseReviewNotFoundException(id, reviewId);
