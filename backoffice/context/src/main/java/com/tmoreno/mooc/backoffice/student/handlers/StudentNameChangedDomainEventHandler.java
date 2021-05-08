@@ -8,7 +8,7 @@ import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentNotFoundExce
 import com.tmoreno.mooc.shared.domain.PersonName;
 import com.tmoreno.mooc.shared.events.EventHandler;
 
-public class StudentNameChangedDomainEventHandler implements EventHandler<StudentNameChangedDomainEvent> {
+public final class StudentNameChangedDomainEventHandler implements EventHandler<StudentNameChangedDomainEvent> {
 
     private final StudentRepository repository;
 
