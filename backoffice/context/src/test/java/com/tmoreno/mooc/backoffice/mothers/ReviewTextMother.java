@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.mothers;
 
-import com.tmoreno.mooc.backoffice.course.domain.ReviewText;
+import com.tmoreno.mooc.backoffice.review.ReviewText;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public final class ReviewTextMother {

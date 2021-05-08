@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.mothers;
 
-import com.tmoreno.mooc.backoffice.course.domain.Review;
+import com.tmoreno.mooc.backoffice.review.Review;
 import com.tmoreno.mooc.shared.mothers.CreatedOnMother;
 
 public final class ReviewMother {

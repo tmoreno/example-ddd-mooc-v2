@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.domain;
+package com.tmoreno.mooc.backoffice.review;
 
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.InvalidReviewTextException;
 import com.tmoreno.mooc.shared.domain.StringValueObject;

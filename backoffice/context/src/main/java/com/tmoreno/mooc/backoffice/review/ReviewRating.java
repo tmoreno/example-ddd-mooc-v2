@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.domain;
+package com.tmoreno.mooc.backoffice.review;
 
 public enum ReviewRating {
     ONE(1),

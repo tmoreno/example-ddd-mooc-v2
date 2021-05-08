@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.student.domain.exceptions;
 
-import com.tmoreno.mooc.backoffice.course.domain.ReviewId;
+import com.tmoreno.mooc.backoffice.review.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 
 public final class StudentReviewNotFoundException extends RuntimeException {

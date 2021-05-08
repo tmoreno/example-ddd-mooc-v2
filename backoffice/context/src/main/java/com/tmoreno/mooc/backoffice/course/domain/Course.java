@@ -29,6 +29,10 @@ import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseStudentNotFoun
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseTeacherNotFoundException;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.DiscardCourseException;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.PublishCourseException;
+import com.tmoreno.mooc.backoffice.review.Review;
+import com.tmoreno.mooc.backoffice.review.ReviewId;
+import com.tmoreno.mooc.backoffice.review.ReviewRating;
+import com.tmoreno.mooc.backoffice.review.ReviewText;
 import com.tmoreno.mooc.shared.domain.AggregateRoot;
 import com.tmoreno.mooc.shared.domain.CreatedOn;
 import com.tmoreno.mooc.shared.domain.DurationInSeconds;
