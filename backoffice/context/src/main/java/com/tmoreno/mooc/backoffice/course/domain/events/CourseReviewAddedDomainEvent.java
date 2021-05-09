@@ -9,6 +9,8 @@ import com.tmoreno.mooc.shared.events.DomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 
 public final class CourseReviewAddedDomainEvent extends DomainEvent {
+
+    private final CourseId courseId;
     private final ReviewId reviewId;
     private final StudentId studentId;
     private final ReviewRating rating;
@@ -23,8 +25,7 @@ public final class CourseReviewAddedDomainEvent extends DomainEvent {
             ReviewText text,
             CreatedOn createdOn
     ) {
-        super(courseId);
-
+        this.courseId = courseId;
         this.reviewId = reviewId;
         this.studentId = studentId;
         this.rating = rating;
@@ -40,6 +41,10 @@ public final class CourseReviewAddedDomainEvent extends DomainEvent {
     @Override
     public int getVersion() {
         return 1;
+    }
+
+    public CourseId getCourseId() {
+        return courseId;
     }
 
     public ReviewId getReviewId() {

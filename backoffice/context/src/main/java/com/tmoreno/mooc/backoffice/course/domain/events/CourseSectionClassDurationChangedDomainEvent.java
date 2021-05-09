@@ -7,18 +7,19 @@ import com.tmoreno.mooc.shared.domain.DurationInSeconds;
 import com.tmoreno.mooc.shared.events.DomainEvent;
 
 public final class CourseSectionClassDurationChangedDomainEvent extends DomainEvent {
+
+    private final CourseId courseId;
     private final SectionId sectionId;
     private final SectionClassId sectionClassId;
     private final DurationInSeconds duration;
 
     public CourseSectionClassDurationChangedDomainEvent(
-            CourseId id,
+            CourseId courseId,
             SectionId sectionId,
             SectionClassId sectionClassId,
             DurationInSeconds duration
     ) {
-        super(id);
-
+        this.courseId = courseId;
         this.sectionId = sectionId;
         this.sectionClassId = sectionClassId;
         this.duration = duration;
@@ -32,6 +33,10 @@ public final class CourseSectionClassDurationChangedDomainEvent extends DomainEv
     @Override
     public int getVersion() {
         return 1;
+    }
+
+    public CourseId getCourseId() {
+        return courseId;
     }
 
     public SectionId getSectionId() {

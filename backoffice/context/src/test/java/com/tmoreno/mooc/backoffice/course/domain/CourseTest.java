@@ -81,12 +81,12 @@ public class CourseTest {
 
     @Test
     public void should_create_a_course_in_draft_state_and_record_an_event() {
-        CourseId id = CourseIdMother.random();
+        CourseId courseId = CourseIdMother.random();
         CourseTitle title = CourseTitleMother.random();
 
-        Course course = Course.create(id, title);
+        Course course = Course.create(courseId, title);
 
-        assertThat(course.getId(), is(id));
+        assertThat(course.getId(), is(courseId));
         assertThat(course.getTitle(), is(title));
         assertThat(course.getImageUrl(), is(Optional.empty()));
         assertThat(course.getSummary(), is(Optional.empty()));
@@ -104,7 +104,7 @@ public class CourseTest {
 
         CourseCreatedDomainEvent event = (CourseCreatedDomainEvent) domainEvents.get(0);
 
-        assertThat(id.getValue(), is(event.getAggregateId()));
+        assertThat(courseId, is(event.getCourseId()));
         assertThat(title, is(event.getTitle()));
     }
 
@@ -121,7 +121,7 @@ public class CourseTest {
 
         CoursePublishedDomainEvent event = (CoursePublishedDomainEvent) domainEvents.get(0);
 
-        assertThat(course.getId().getValue(), is(event.getAggregateId()));
+        assertThat(course.getId(), is(event.getCourseId()));
     }
 
     @Test
@@ -230,7 +230,7 @@ public class CourseTest {
 
         CourseDiscardedDomainEvent event = (CourseDiscardedDomainEvent) domainEvents.get(0);
 
-        assertThat(course.getId().getValue(), is(event.getAggregateId()));
+        assertThat(course.getId(), is(event.getCourseId()));
     }
 
     @Test
@@ -246,7 +246,7 @@ public class CourseTest {
 
         CourseDiscardedDomainEvent event = (CourseDiscardedDomainEvent) domainEvents.get(0);
 
-        assertThat(course.getId().getValue(), is(event.getAggregateId()));
+        assertThat(course.getId(), is(event.getCourseId()));
     }
 
     @Test

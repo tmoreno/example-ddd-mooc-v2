@@ -26,13 +26,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TeacherTest {
     @Test
     public void should_create_a_teacher_and_record_an_event() {
-        TeacherId id = TeacherIdMother.random();
+        TeacherId teacherId = TeacherIdMother.random();
         PersonName name = PersonNameMother.random();
         Email email = EmailMother.random();
 
-        Teacher teacher = Teacher.create(id, name, email);
+        Teacher teacher = Teacher.create(teacherId, name, email);
 
-        assertThat(teacher.getId(), is(id));
+        assertThat(teacher.getId(), is(teacherId));
         assertThat(teacher.getName(), is(name));
         assertThat(teacher.getEmail(), is(email));
         assertThat(teacher.getCourses(), is(emptySet()));
@@ -42,7 +42,7 @@ public class TeacherTest {
 
         TeacherCreatedDomainEvent event = (TeacherCreatedDomainEvent) domainEvents.get(0);
 
-        assertThat(id.getValue(), is(event.getAggregateId()));
+        assertThat(teacherId, is(event.getTeacherId()));
         assertThat(name, is(event.getName()));
         assertThat(email, is(event.getEmail()));
     }

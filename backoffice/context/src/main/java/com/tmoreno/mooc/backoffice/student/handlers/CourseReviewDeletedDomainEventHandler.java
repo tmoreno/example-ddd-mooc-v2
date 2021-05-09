@@ -19,7 +19,7 @@ public final class CourseReviewDeletedDomainEventHandler implements EventHandler
 
     @Override
     public void handle(CourseReviewDeletedDomainEvent event) {
-        CourseId courseId = new CourseId(event.getAggregateId());
+        CourseId courseId = event.getCourseId();
         ReviewId reviewId = event.getReviewId();
         StudentId studentId = event.getStudentId();
 

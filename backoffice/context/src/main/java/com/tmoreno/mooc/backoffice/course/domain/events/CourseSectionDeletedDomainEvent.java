@@ -5,14 +5,14 @@ import com.tmoreno.mooc.backoffice.course.domain.SectionId;
 import com.tmoreno.mooc.shared.events.DomainEvent;
 
 public final class CourseSectionDeletedDomainEvent extends DomainEvent {
+
+    private final CourseId courseId;
     private final SectionId sectionId;
 
     public CourseSectionDeletedDomainEvent(CourseId courseId, SectionId sectionId) {
-        super(courseId);
-
+        this.courseId = courseId;
         this.sectionId = sectionId;
     }
-
 
     @Override
     public String getEventName() {
@@ -22,6 +22,10 @@ public final class CourseSectionDeletedDomainEvent extends DomainEvent {
     @Override
     public int getVersion() {
         return 1;
+    }
+
+    public CourseId getCourseId() {
+        return courseId;
     }
 
     public SectionId getSectionId() {

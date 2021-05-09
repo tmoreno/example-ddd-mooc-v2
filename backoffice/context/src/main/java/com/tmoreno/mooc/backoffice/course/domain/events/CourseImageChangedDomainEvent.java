@@ -5,10 +5,12 @@ import com.tmoreno.mooc.backoffice.course.domain.CourseImageUrl;
 import com.tmoreno.mooc.shared.events.DomainEvent;
 
 public final class CourseImageChangedDomainEvent extends DomainEvent {
+
+    private final CourseId courseId;
     private final CourseImageUrl imageUrl;
 
     public CourseImageChangedDomainEvent(CourseId courseId, CourseImageUrl imageUrl) {
-        super(courseId);
+        this.courseId = courseId;
         this.imageUrl = imageUrl;
     }
 
@@ -20,6 +22,10 @@ public final class CourseImageChangedDomainEvent extends DomainEvent {
     @Override
     public int getVersion() {
         return 1;
+    }
+
+    public CourseId getCourseId() {
+        return courseId;
     }
 
     public CourseImageUrl getImageUrl() {

@@ -5,11 +5,12 @@ import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.shared.events.DomainEvent;
 
 public final class CourseDescriptionChangedDomainEvent extends DomainEvent {
+
+    private final CourseId courseId;
     private final CourseDescription description;
 
     public CourseDescriptionChangedDomainEvent(CourseId courseId, CourseDescription description) {
-        super(courseId);
-
+        this.courseId = courseId;
         this.description = description;
     }
 
@@ -21,6 +22,10 @@ public final class CourseDescriptionChangedDomainEvent extends DomainEvent {
     @Override
     public int getVersion() {
         return 1;
+    }
+
+    public CourseId getCourseId() {
+        return courseId;
     }
 
     public CourseDescription getDescription() {

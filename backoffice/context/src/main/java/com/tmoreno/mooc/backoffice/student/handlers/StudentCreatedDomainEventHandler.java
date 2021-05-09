@@ -18,7 +18,7 @@ public final class StudentCreatedDomainEventHandler implements EventHandler<Stud
 
     @Override
     public void handle(StudentCreatedDomainEvent event) {
-        StudentId studentId = new StudentId(event.getAggregateId());
+        StudentId studentId = event.getStudentId();
         PersonName name = event.getName();
         Email email = event.getEmail();
 

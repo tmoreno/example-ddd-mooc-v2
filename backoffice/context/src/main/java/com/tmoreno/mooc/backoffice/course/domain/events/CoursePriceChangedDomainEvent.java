@@ -5,11 +5,12 @@ import com.tmoreno.mooc.shared.domain.Price;
 import com.tmoreno.mooc.shared.events.DomainEvent;
 
 public final class CoursePriceChangedDomainEvent extends DomainEvent {
+
+    private final CourseId courseId;
     private final Price price;
 
     public CoursePriceChangedDomainEvent(CourseId courseId, Price price) {
-        super(courseId);
-
+        this.courseId = courseId;
         this.price = price;
     }
 
@@ -21,6 +22,10 @@ public final class CoursePriceChangedDomainEvent extends DomainEvent {
     @Override
     public int getVersion() {
         return 1;
+    }
+
+    public CourseId getCourseId() {
+        return courseId;
     }
 
     public Price getPrice() {

@@ -5,11 +5,12 @@ import com.tmoreno.mooc.shared.domain.Language;
 import com.tmoreno.mooc.shared.events.DomainEvent;
 
 public final class CourseLanguageChangedDomainEvent extends DomainEvent {
+
+    private final CourseId courseId;
     private final Language language;
 
     public CourseLanguageChangedDomainEvent(CourseId courseId, Language language) {
-        super(courseId);
-
+        this.courseId = courseId;
         this.language = language;
     }
 
@@ -21,6 +22,10 @@ public final class CourseLanguageChangedDomainEvent extends DomainEvent {
     @Override
     public int getVersion() {
         return 1;
+    }
+
+    public CourseId getCourseId() {
+        return courseId;
     }
 
     public Language getLanguage() {

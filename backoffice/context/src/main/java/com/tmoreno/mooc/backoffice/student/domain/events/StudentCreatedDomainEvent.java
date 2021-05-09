@@ -6,12 +6,13 @@ import com.tmoreno.mooc.shared.events.DomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 
 public final class StudentCreatedDomainEvent extends DomainEvent {
+
+    private final StudentId studentId;
     private final PersonName name;
     private final Email email;
 
     public StudentCreatedDomainEvent(StudentId studentId, PersonName name, Email email) {
-        super(studentId);
-
+        this.studentId = studentId;
         this.name = name;
         this.email = email;
     }
@@ -24,6 +25,10 @@ public final class StudentCreatedDomainEvent extends DomainEvent {
     @Override
     public int getVersion() {
         return 1;
+    }
+
+    public StudentId getStudentId() {
+        return studentId;
     }
 
     public PersonName getName() {

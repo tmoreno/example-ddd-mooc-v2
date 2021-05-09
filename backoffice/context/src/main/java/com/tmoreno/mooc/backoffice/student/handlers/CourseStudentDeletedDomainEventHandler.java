@@ -18,7 +18,7 @@ public final class CourseStudentDeletedDomainEventHandler implements EventHandle
 
     @Override
     public void handle(CourseStudentDeletedDomainEvent event) {
-        CourseId courseId = new CourseId(event.getAggregateId());
+        CourseId courseId = event.getCourseId();
         StudentId studentId = event.getStudentId();
 
         Student student = repository.find(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));

@@ -19,7 +19,7 @@ public final class CourseReviewAddedDomainEventHandler implements EventHandler<C
 
     @Override
     public void handle(CourseReviewAddedDomainEvent event) {
-        CourseId courseId = new CourseId(event.getAggregateId());
+        CourseId courseId = event.getCourseId();
         ReviewId reviewId = event.getReviewId();
         StudentId studentId = event.getStudentId();
 
