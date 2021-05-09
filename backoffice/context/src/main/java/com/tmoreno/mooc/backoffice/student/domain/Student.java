@@ -2,13 +2,6 @@ package com.tmoreno.mooc.backoffice.student.domain;
 
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.review.ReviewId;
-import com.tmoreno.mooc.backoffice.student.domain.events.StudentCourseAddedDomainEvent;
-import com.tmoreno.mooc.backoffice.student.domain.events.StudentCourseDeletedDomainEvent;
-import com.tmoreno.mooc.backoffice.student.domain.events.StudentCreatedDomainEvent;
-import com.tmoreno.mooc.backoffice.student.domain.events.StudentEmailChangedDomainEvent;
-import com.tmoreno.mooc.backoffice.student.domain.events.StudentNameChangedDomainEvent;
-import com.tmoreno.mooc.backoffice.student.domain.events.StudentReviewAddedDomainEvent;
-import com.tmoreno.mooc.backoffice.student.domain.events.StudentReviewDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentCourseNotFoundException;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentReviewNotFoundException;
 import com.tmoreno.mooc.shared.domain.AggregateRoot;
@@ -46,11 +39,7 @@ public final class Student extends AggregateRoot<StudentId> {
     }
 
     public static Student create(StudentId id, PersonName name, Email email) {
-        Student student = new Student(id, name, email);
-
-        student.recordEvent(new StudentCreatedDomainEvent(id, name, email));
-
-        return student;
+        return new Student(id, name, email);
     }
 
     public PersonName getName() {
@@ -59,8 +48,6 @@ public final class Student extends AggregateRoot<StudentId> {
 
     public void changeName(PersonName name) {
         this.name = name;
-
-        recordEvent(new StudentNameChangedDomainEvent(id, name));
     }
 
     public Email getEmail() {
@@ -69,8 +56,6 @@ public final class Student extends AggregateRoot<StudentId> {
 
     public void changeEmail(Email email) {
         this.email = email;
-
-        recordEvent(new StudentEmailChangedDomainEvent(id, email));
     }
 
     public Set<CourseId> getCourses() {
@@ -79,17 +64,12 @@ public final class Student extends AggregateRoot<StudentId> {
 
     public void addCourse(CourseId courseId) {
         courses.add(courseId);
-
-        recordEvent(new StudentCourseAddedDomainEvent(id, courseId));
     }
 
     public void deleteCourse(CourseId courseId) {
         boolean removed = courses.remove(courseId);
 
-        if (removed) {
-            recordEvent(new StudentCourseDeletedDomainEvent(id, courseId));
-        }
-        else {
+        if (!removed) {
             throw new StudentCourseNotFoundException(id, courseId);
         }
     }
@@ -100,17 +80,12 @@ public final class Student extends AggregateRoot<StudentId> {
 
     public void addReview(CourseId courseId, ReviewId reviewId) {
         reviews.put(courseId, reviewId);
-
-        recordEvent(new StudentReviewAddedDomainEvent(id, reviewId));
     }
 
     public void deleteReview(CourseId courseId, ReviewId reviewId) {
         boolean removed = reviews.remove(courseId, reviewId);
 
-        if (removed) {
-            recordEvent(new StudentReviewDeletedDomainEvent(id, reviewId));
-        }
-        else {
+        if (!removed) {
             throw new StudentReviewNotFoundException(id, reviewId);
         }
     }
