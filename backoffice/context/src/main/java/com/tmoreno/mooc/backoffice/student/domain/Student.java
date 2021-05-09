@@ -4,8 +4,8 @@ import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.review.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentCourseNotFoundException;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentReviewNotFoundException;
-import com.tmoreno.mooc.shared.domain.AggregateRoot;
 import com.tmoreno.mooc.shared.domain.Email;
+import com.tmoreno.mooc.shared.domain.Entity;
 import com.tmoreno.mooc.shared.domain.PersonName;
 
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public final class Student extends AggregateRoot<StudentId> {
+public final class Student extends Entity<StudentId> {
 
     private PersonName name;
     private Email email;
