@@ -1,9 +1,9 @@
 package com.tmoreno.mooc.backoffice.course.domain.events;
 
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
-import com.tmoreno.mooc.backoffice.review.ReviewId;
-import com.tmoreno.mooc.backoffice.review.ReviewRating;
-import com.tmoreno.mooc.backoffice.review.ReviewText;
+import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
+import com.tmoreno.mooc.backoffice.review.domain.ReviewRating;
+import com.tmoreno.mooc.backoffice.review.domain.ReviewText;
 import com.tmoreno.mooc.shared.domain.CreatedOn;
 import com.tmoreno.mooc.shared.events.DomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;

@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.student.domain;
 
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
-import com.tmoreno.mooc.backoffice.review.ReviewId;
+import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentCourseNotFoundException;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentReviewNotFoundException;
 import com.tmoreno.mooc.shared.domain.Email;

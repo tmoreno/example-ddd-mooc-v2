@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.domain;
 
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.InvalidReviewTextException;
-import com.tmoreno.mooc.backoffice.review.ReviewText;
+import com.tmoreno.mooc.backoffice.review.domain.ReviewText;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 

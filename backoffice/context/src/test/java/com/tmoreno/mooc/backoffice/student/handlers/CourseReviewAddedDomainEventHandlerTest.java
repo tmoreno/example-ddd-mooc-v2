@@ -7,7 +7,7 @@ import com.tmoreno.mooc.backoffice.mothers.ReviewIdMother;
 import com.tmoreno.mooc.backoffice.mothers.ReviewRatingMother;
 import com.tmoreno.mooc.backoffice.mothers.ReviewTextMother;
 import com.tmoreno.mooc.backoffice.mothers.StudentMother;
-import com.tmoreno.mooc.backoffice.review.ReviewId;
+import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentRepository;
 import com.tmoreno.mooc.shared.mothers.CreatedOnMother;

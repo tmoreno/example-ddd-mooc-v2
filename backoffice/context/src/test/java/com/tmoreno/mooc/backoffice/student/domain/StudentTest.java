@@ -5,7 +5,7 @@ import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.ReviewIdMother;
 import com.tmoreno.mooc.backoffice.mothers.StudentIdMother;
 import com.tmoreno.mooc.backoffice.mothers.StudentMother;
-import com.tmoreno.mooc.backoffice.review.ReviewId;
+import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentCourseNotFoundException;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentReviewNotFoundException;
 import com.tmoreno.mooc.shared.domain.Email;

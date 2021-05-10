@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.review;
+package com.tmoreno.mooc.backoffice.review.domain;
 
 import com.tmoreno.mooc.shared.domain.Identifier;
 
