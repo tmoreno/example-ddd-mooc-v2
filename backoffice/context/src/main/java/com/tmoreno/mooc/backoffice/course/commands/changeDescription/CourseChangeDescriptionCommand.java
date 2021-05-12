@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.commands.changeDescription.changeSummary;
+package com.tmoreno.mooc.backoffice.course.commands.changeDescription;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseDescription;

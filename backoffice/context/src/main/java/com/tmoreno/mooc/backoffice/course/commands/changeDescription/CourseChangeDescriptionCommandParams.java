@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.commands.changeDescription.changeSummary;
+package com.tmoreno.mooc.backoffice.course.commands.changeDescription;
 
 import com.tmoreno.mooc.shared.command.CommandParams;
 

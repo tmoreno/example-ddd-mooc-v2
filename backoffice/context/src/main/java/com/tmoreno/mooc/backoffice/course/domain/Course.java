@@ -237,7 +237,7 @@ public final class Course extends AggregateRoot<CourseId> {
         if (state != CourseState.DRAFT) {
             throw new ChangeCourseAttributeException("Change course description is not allowed because is not in DRAFT state");
         }
-        
+
         this.description = description;
 
         recordEvent(new CourseDescriptionChangedDomainEvent(id, description));
