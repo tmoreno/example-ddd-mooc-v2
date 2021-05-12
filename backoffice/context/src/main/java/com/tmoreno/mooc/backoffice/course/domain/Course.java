@@ -486,25 +486,24 @@ public final class Course extends AggregateRoot<CourseId> {
         if (state != CourseState.DRAFT) {
             throw new ChangeCourseAttributeException("Add a teacher is not allowed because is not in DRAFT state");
         }
-        
+
         teachers.add(teacherId);
 
         recordEvent(new CourseTeacherAddedDomainEvent(id, teacherId));
     }
 
     public void deleteTeacher(TeacherId teacherId) {
-        if (state == CourseState.DRAFT) {
-            boolean removed = teachers.remove(teacherId);
+        if (state != CourseState.DRAFT) {
+            throw new ChangeCourseAttributeException("Delete a teacher is not allowed because is not in DRAFT state");
+        }
 
-            if (removed) {
-                recordEvent(new CourseTeacherDeletedDomainEvent(id, teacherId));
-            }
-            else {
-                throw new CourseTeacherNotFoundException(id, teacherId);
-            }
+        boolean removed = teachers.remove(teacherId);
+
+        if (removed) {
+            recordEvent(new CourseTeacherDeletedDomainEvent(id, teacherId));
         }
         else {
-            throw new ChangeCourseAttributeException("Delete a teacher is not allowed because is not in DRAFT state");
+            throw new CourseTeacherNotFoundException(id, teacherId);
         }
     }
 }
