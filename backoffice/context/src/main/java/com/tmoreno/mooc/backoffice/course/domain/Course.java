@@ -483,14 +483,13 @@ public final class Course extends AggregateRoot<CourseId> {
     }
 
     public void addTeacher(TeacherId teacherId) {
-        if (state == CourseState.DRAFT) {
-            teachers.add(teacherId);
-
-            recordEvent(new CourseTeacherAddedDomainEvent(id, teacherId));
-        }
-        else {
+        if (state != CourseState.DRAFT) {
             throw new ChangeCourseAttributeException("Add a teacher is not allowed because is not in DRAFT state");
         }
+        
+        teachers.add(teacherId);
+
+        recordEvent(new CourseTeacherAddedDomainEvent(id, teacherId));
     }
 
     public void deleteTeacher(TeacherId teacherId) {
