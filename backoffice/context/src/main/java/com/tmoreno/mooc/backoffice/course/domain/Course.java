@@ -192,14 +192,13 @@ public final class Course extends AggregateRoot<CourseId> {
     }
 
     public void changeTitle(CourseTitle title) {
-        if (state == CourseState.DRAFT) {
-            this.title = title;
-
-            recordEvent(new CourseTitleChangedDomainEvent(id, title));
-        }
-        else {
+        if (state != CourseState.DRAFT) {
             throw new ChangeCourseAttributeException("Change course title is not allowed because is not in DRAFT state");
         }
+        
+        this.title = title;
+
+        recordEvent(new CourseTitleChangedDomainEvent(id, title));
     }
 
     public Optional<CourseImageUrl> getImageUrl() {
