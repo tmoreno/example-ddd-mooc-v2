@@ -291,18 +291,17 @@ public final class Course extends AggregateRoot<CourseId> {
     }
 
     public void deleteSection(SectionId sectionId) {
-        if (state == CourseState.DRAFT) {
-            boolean removed = sections.removeIf(s -> s.getId().equals(sectionId));
+        if (state != CourseState.DRAFT) {
+            throw new ChangeCourseAttributeException("Delete a section is not allowed because is not in DRAFT state");
+        }
+        
+        boolean removed = sections.removeIf(s -> s.getId().equals(sectionId));
 
-            if (removed) {
-                recordEvent(new CourseSectionDeletedDomainEvent(id, sectionId));
-            }
-            else {
-                throw new CourseSectionNotFoundException(sectionId);
-            }
+        if (removed) {
+            recordEvent(new CourseSectionDeletedDomainEvent(id, sectionId));
         }
         else {
-            throw new ChangeCourseAttributeException("Delete a section is not allowed because is not in DRAFT state");
+            throw new CourseSectionNotFoundException(sectionId);
         }
     }
 
