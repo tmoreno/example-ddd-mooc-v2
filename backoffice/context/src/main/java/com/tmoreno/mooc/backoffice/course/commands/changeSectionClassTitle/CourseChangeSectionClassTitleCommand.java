@@ -10,7 +10,7 @@ import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseNotFoundExcept
 import com.tmoreno.mooc.shared.command.Command;
 import com.tmoreno.mooc.shared.events.EventBus;
 
-public final class CourseChangeSectionClassTitleCommand implements Command<CourseChangeSectionCLassTitleCommandParams> {
+public final class CourseChangeSectionClassTitleCommand implements Command<CourseChangeSectionClassTitleCommandParams> {
 
     private final CourseRepository repository;
     private final EventBus eventBus;
@@ -21,7 +21,7 @@ public final class CourseChangeSectionClassTitleCommand implements Command<Cours
     }
 
     @Override
-    public void execute(CourseChangeSectionCLassTitleCommandParams params) {
+    public void execute(CourseChangeSectionClassTitleCommandParams params) {
         CourseId courseId = new CourseId(params.getCourseId());
         SectionId sectionId = new SectionId(params.getSectionId());
         SectionClassId sectionClassId = new SectionClassId(params.getSectionClassId());
