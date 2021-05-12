@@ -255,7 +255,7 @@ public final class Course extends AggregateRoot<CourseId> {
         if (state != CourseState.DRAFT) {
             throw new ChangeCourseAttributeException("Change course language is not allowed because is not in DRAFT state");
         }
-        
+
         this.language = language;
 
         recordEvent(new CourseLanguageChangedDomainEvent(id, language));
@@ -266,14 +266,13 @@ public final class Course extends AggregateRoot<CourseId> {
     }
 
     public void changePrice(Price price) {
-        if (state == CourseState.DRAFT) {
-            this.price = price;
-
-            recordEvent(new CoursePriceChangedDomainEvent(id, price));
-        }
-        else {
+        if (state != CourseState.DRAFT) {
             throw new ChangeCourseAttributeException("Change course price is not allowed because is not in DRAFT state");
         }
+
+        this.price = price;
+
+        recordEvent(new CoursePriceChangedDomainEvent(id, price));
     }
 
     public List<Section> getSections() {
