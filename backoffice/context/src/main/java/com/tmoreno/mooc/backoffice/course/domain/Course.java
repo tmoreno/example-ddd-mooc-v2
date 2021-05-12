@@ -294,7 +294,7 @@ public final class Course extends AggregateRoot<CourseId> {
         if (state != CourseState.DRAFT) {
             throw new ChangeCourseAttributeException("Delete a section is not allowed because is not in DRAFT state");
         }
-        
+
         boolean removed = sections.removeIf(s -> s.getId().equals(sectionId));
 
         if (removed) {
