@@ -4,7 +4,6 @@ import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.CourseTitle;
-import com.tmoreno.mooc.backoffice.course.domain.events.CourseCreatedDomainEvent;
 import com.tmoreno.mooc.shared.command.Command;
 import com.tmoreno.mooc.shared.events.EventBus;
 
@@ -26,6 +25,6 @@ public final class CreateCourseCommand implements Command<CreateCourseCommandPar
 
         repository.save(course);
 
-        eventBus.publish(new CourseCreatedDomainEvent(id, title));
+        eventBus.publish(course.pullEvents());
     }
 }
