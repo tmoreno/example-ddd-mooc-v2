@@ -252,14 +252,13 @@ public final class Course extends AggregateRoot<CourseId> {
     }
 
     public void changeLanguage(Language language) {
-        if (state == CourseState.DRAFT) {
-            this.language = language;
-
-            recordEvent(new CourseLanguageChangedDomainEvent(id, language));
-        }
-        else {
+        if (state != CourseState.DRAFT) {
             throw new ChangeCourseAttributeException("Change course language is not allowed because is not in DRAFT state");
         }
+        
+        this.language = language;
+
+        recordEvent(new CourseLanguageChangedDomainEvent(id, language));
     }
 
     public Optional<Price> getPrice() {
