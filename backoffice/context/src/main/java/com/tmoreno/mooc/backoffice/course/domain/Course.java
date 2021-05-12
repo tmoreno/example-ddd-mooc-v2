@@ -280,15 +280,14 @@ public final class Course extends AggregateRoot<CourseId> {
     }
 
     public void addSection(SectionId sectionId, SectionTitle title) {
-        if (state == CourseState.DRAFT) {
-            Section section = new Section(sectionId, title);
-            sections.add(section);
-
-            recordEvent(new CourseSectionAddedDomainEvent(id, sectionId, title));
-        }
-        else {
+        if (state != CourseState.DRAFT) {
             throw new ChangeCourseAttributeException("Add a section is not allowed because is not in DRAFT state");
         }
+
+        Section section = new Section(sectionId, title);
+        sections.add(section);
+
+        recordEvent(new CourseSectionAddedDomainEvent(id, sectionId, title));
     }
 
     public void deleteSection(SectionId sectionId) {
