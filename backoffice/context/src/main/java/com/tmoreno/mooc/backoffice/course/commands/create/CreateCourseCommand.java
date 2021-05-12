@@ -4,6 +4,7 @@ import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.CourseTitle;
+import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseExistsException;
 import com.tmoreno.mooc.shared.command.Command;
 import com.tmoreno.mooc.shared.events.EventBus;
 
@@ -20,6 +21,10 @@ public final class CreateCourseCommand implements Command<CreateCourseCommandPar
     public void execute(CreateCourseCommandParams params) {
         CourseId id = new CourseId(params.getId());
         CourseTitle title = new CourseTitle(params.getTitle());
+
+        if (repository.exists(id, title)) {
+            throw new CourseExistsException(id, title);
+        }
 
         Course course = Course.create(id, title);
 

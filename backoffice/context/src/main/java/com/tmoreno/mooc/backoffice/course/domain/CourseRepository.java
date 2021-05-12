@@ -9,4 +9,6 @@ public interface CourseRepository {
     List<Course> findAll();
 
     Optional<Course> find(CourseId id);
+
+    boolean exists(CourseId id, CourseTitle title);
 }
