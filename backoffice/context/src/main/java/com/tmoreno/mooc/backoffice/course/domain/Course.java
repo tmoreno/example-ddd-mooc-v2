@@ -7,8 +7,6 @@ import com.tmoreno.mooc.backoffice.course.domain.events.CourseImageChangedDomain
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseLanguageChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CoursePriceChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CoursePublishedDomainEvent;
-import com.tmoreno.mooc.backoffice.course.domain.events.CourseReviewAddedDomainEvent;
-import com.tmoreno.mooc.backoffice.course.domain.events.CourseReviewDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionClassAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionClassDeletedDomainEvent;
@@ -28,12 +26,9 @@ import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseTeacherNotFoun
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.DiscardCourseException;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.PublishCourseException;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
-import com.tmoreno.mooc.backoffice.review.domain.ReviewRating;
-import com.tmoreno.mooc.backoffice.review.domain.ReviewText;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 import com.tmoreno.mooc.shared.domain.AggregateRoot;
-import com.tmoreno.mooc.shared.domain.CreatedOn;
 import com.tmoreno.mooc.shared.domain.DurationInSeconds;
 import com.tmoreno.mooc.shared.domain.Language;
 import com.tmoreno.mooc.shared.domain.Price;
@@ -418,30 +413,23 @@ public final class Course extends AggregateRoot<CourseId> {
         return Map.copyOf(reviews);
     }
 
-    public void addReview(ReviewId reviewId, StudentId studentId, ReviewRating rating, ReviewText text, CreatedOn createdOn) {
-        if (state == CourseState.PUBLISHED) {
-            reviews.put(studentId, reviewId);
-
-            recordEvent(new CourseReviewAddedDomainEvent(id, reviewId, studentId, rating, text, createdOn));
-        }
-        else {
+    public void addReview(ReviewId reviewId, StudentId studentId) {
+        if (state != CourseState.PUBLISHED) {
             throw new ChangeCourseAttributeException("Add a review is not allowed because is not in PUBLISH state");
         }
+
+        reviews.put(studentId, reviewId);
     }
 
     public void deleteReview(StudentId studentId, ReviewId reviewId) {
-        if (state == CourseState.PUBLISHED) {
-            boolean removed = reviews.remove(studentId, reviewId);
-
-            if (removed) {
-                recordEvent(new CourseReviewDeletedDomainEvent(id, studentId, reviewId));
-            }
-            else {
-                throw new CourseReviewNotFoundException(id, reviewId);
-            }
-        }
-        else {
+        if (state != CourseState.PUBLISHED) {
             throw new ChangeCourseAttributeException("Delete a review is not allowed because is not in PUBLISH state");
+        }
+
+        boolean removed = reviews.remove(studentId, reviewId);
+
+        if (!removed) {
+            throw new CourseReviewNotFoundException(id, reviewId);
         }
     }
 

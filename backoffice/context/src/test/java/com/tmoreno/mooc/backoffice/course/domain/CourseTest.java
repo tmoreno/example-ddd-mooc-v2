@@ -7,8 +7,6 @@ import com.tmoreno.mooc.backoffice.course.domain.events.CourseImageChangedDomain
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseLanguageChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CoursePriceChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CoursePublishedDomainEvent;
-import com.tmoreno.mooc.backoffice.course.domain.events.CourseReviewAddedDomainEvent;
-import com.tmoreno.mooc.backoffice.course.domain.events.CourseReviewDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionClassAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionClassDeletedDomainEvent;
@@ -35,8 +33,6 @@ import com.tmoreno.mooc.backoffice.mothers.CourseMother;
 import com.tmoreno.mooc.backoffice.mothers.CourseSummaryMother;
 import com.tmoreno.mooc.backoffice.mothers.CourseTitleMother;
 import com.tmoreno.mooc.backoffice.mothers.ReviewIdMother;
-import com.tmoreno.mooc.backoffice.mothers.ReviewRatingMother;
-import com.tmoreno.mooc.backoffice.mothers.ReviewTextMother;
 import com.tmoreno.mooc.backoffice.mothers.SectionClassIdMother;
 import com.tmoreno.mooc.backoffice.mothers.SectionClassTitleMother;
 import com.tmoreno.mooc.backoffice.mothers.SectionIdMother;
@@ -47,18 +43,14 @@ import com.tmoreno.mooc.backoffice.mothers.StudentMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
-import com.tmoreno.mooc.backoffice.review.domain.ReviewRating;
-import com.tmoreno.mooc.backoffice.review.domain.ReviewText;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
-import com.tmoreno.mooc.shared.domain.CreatedOn;
 import com.tmoreno.mooc.shared.domain.DurationInSeconds;
 import com.tmoreno.mooc.shared.domain.Language;
 import com.tmoreno.mooc.shared.domain.Price;
 import com.tmoreno.mooc.shared.events.DomainEvent;
-import com.tmoreno.mooc.shared.mothers.CreatedOnMother;
 import com.tmoreno.mooc.shared.mothers.DurationInSecondsMother;
 import com.tmoreno.mooc.shared.mothers.LanguageMother;
 import com.tmoreno.mooc.shared.mothers.PriceMother;
@@ -792,30 +784,16 @@ public class CourseTest {
     }
 
     @Test
-    public void given_a_course_in_published_state_when_add_a_review_then_review_is_added_and_an_event_is_recorded() {
+    public void given_a_course_in_published_state_when_add_a_review_then_review_is_added() {
         ReviewId reviewId = ReviewIdMother.random();
         StudentId studentId = StudentIdMother.random();
-        ReviewRating reviewRating = ReviewRatingMother.random();
-        ReviewText reviewText = ReviewTextMother.random();
-        CreatedOn createdOn = CreatedOnMother.random();
 
         Course course = CourseMother.randomInPublishState();
 
-        course.addReview(reviewId, studentId, reviewRating, reviewText, createdOn);
+        course.addReview(reviewId, studentId);
 
         assertThat(course.getReviews().size(), is(1));
         assertThat(course.getReviews().get(studentId), is(reviewId));
-
-        List<DomainEvent> domainEvents = course.pullEvents();
-        assertThat(domainEvents.size(), is(1));
-
-        CourseReviewAddedDomainEvent event = (CourseReviewAddedDomainEvent) domainEvents.get(0);
-
-        assertThat(reviewId, is(event.getReviewId()));
-        assertThat(studentId, is(event.getStudentId()));
-        assertThat(reviewRating, is(event.getRating()));
-        assertThat(reviewText, is(event.getText()));
-        assertThat(createdOn, is(event.getCreatedOn()));
     }
 
     @Test
@@ -823,18 +801,12 @@ public class CourseTest {
         assertThrows(ChangeCourseAttributeException.class, () -> {
             Course course = CourseMother.randomInNotPublishState();
 
-            course.addReview(
-                    ReviewIdMother.random(),
-                    StudentIdMother.random(),
-                    ReviewRatingMother.random(),
-                    ReviewTextMother.random(),
-                    CreatedOnMother.random()
-            );
+            course.addReview(ReviewIdMother.random(), StudentIdMother.random());
         });
     }
 
     @Test
-    public void given_a_course_in_published_state_with_reviews_when_delete_a_review_then_review_is_deleted_and_an_event_is_recorded() {
+    public void given_a_course_in_published_state_with_reviews_when_delete_a_review_then_review_is_deleted() {
         StudentId studentId = StudentIdMother.random();
         ReviewId reviewId = ReviewIdMother.random();
         Course course = CourseMother.randomInPublishStateWithReview(studentId, reviewId);
@@ -842,13 +814,6 @@ public class CourseTest {
         course.deleteReview(studentId, reviewId);
 
         assertThat(course.getReviews(), is(emptyMap()));
-
-        List<DomainEvent> domainEvents = course.pullEvents();
-        assertThat(domainEvents.size(), is(1));
-
-        CourseReviewDeletedDomainEvent event = (CourseReviewDeletedDomainEvent) domainEvents.get(0);
-
-        assertThat(reviewId, is(event.getReviewId()));
     }
 
     @Test
