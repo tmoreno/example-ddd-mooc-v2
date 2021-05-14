@@ -16,8 +16,6 @@ import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionClassDurati
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionClassTitleChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionTitleChangedDomainEvent;
-import com.tmoreno.mooc.backoffice.course.domain.events.CourseStudentAddedDomainEvent;
-import com.tmoreno.mooc.backoffice.course.domain.events.CourseStudentDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSummaryChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseTeacherAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseTeacherDeletedDomainEvent;
@@ -874,7 +872,7 @@ public class CourseTest {
     }
 
     @Test
-    public void given_a_course_in_published_state_when_add_a_student_then_student_is_added_and_an_event_is_recorded() {
+    public void given_a_course_in_published_state_when_add_a_student_then_student_is_added() {
         StudentId studentId = StudentIdMother.random();
 
         Course course = CourseMother.randomInPublishState();
@@ -883,13 +881,6 @@ public class CourseTest {
 
         assertThat(course.getStudents().size(), is(1));
         assertThat(course.getStudents().contains(studentId), is(true));
-
-        List<DomainEvent> domainEvents = course.pullEvents();
-        assertThat(domainEvents.size(), is(1));
-
-        CourseStudentAddedDomainEvent event = (CourseStudentAddedDomainEvent) domainEvents.get(0);
-
-        assertThat(studentId, is(event.getStudentId()));
     }
 
     @Test
@@ -902,20 +893,13 @@ public class CourseTest {
     }
 
     @Test
-    public void given_a_course_in_published_state_with_students_when_delete_a_student_then_student_is_deleted_and_an_event_is_recorded() {
+    public void given_a_course_in_published_state_with_students_when_delete_a_student_then_student_is_deleted() {
         Student student = StudentMother.random();
         Course course = CourseMother.randomInPublishStateWithStudent(student);
 
         course.deleteStudent(student.getId());
 
         assertThat(course.getStudents(), is(empty()));
-
-        List<DomainEvent> domainEvents = course.pullEvents();
-        assertThat(domainEvents.size(), is(1));
-
-        CourseStudentDeletedDomainEvent event = (CourseStudentDeletedDomainEvent) domainEvents.get(0);
-
-        assertThat(student.getId(), is(event.getStudentId()));
     }
 
     @Test

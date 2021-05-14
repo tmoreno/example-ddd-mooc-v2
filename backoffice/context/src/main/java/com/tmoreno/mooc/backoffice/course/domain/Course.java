@@ -16,8 +16,6 @@ import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionClassDurati
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionClassTitleChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSectionTitleChangedDomainEvent;
-import com.tmoreno.mooc.backoffice.course.domain.events.CourseStudentAddedDomainEvent;
-import com.tmoreno.mooc.backoffice.course.domain.events.CourseStudentDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseSummaryChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseTeacherAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseTeacherDeletedDomainEvent;
@@ -452,29 +450,22 @@ public final class Course extends AggregateRoot<CourseId> {
     }
 
     public void addStudent(StudentId studentId) {
-        if (state == CourseState.PUBLISHED) {
-            students.add(studentId);
-
-            recordEvent(new CourseStudentAddedDomainEvent(id, studentId));
-        }
-        else {
+        if (state != CourseState.PUBLISHED) {
             throw new ChangeCourseAttributeException("Add a student is not allowed because is not in PUBLISH state");
         }
+
+        students.add(studentId);
     }
 
     public void deleteStudent(StudentId studentId) {
-        if (state == CourseState.PUBLISHED) {
-            boolean removed = students.remove(studentId);
-
-            if (removed) {
-                recordEvent(new CourseStudentDeletedDomainEvent(id, studentId));
-            }
-            else {
-                throw new CourseStudentNotFoundException(id, studentId);
-            }
-        }
-        else {
+        if (state != CourseState.PUBLISHED) {
             throw new ChangeCourseAttributeException("Delete a student is not allowed because is not in PUBLISH state");
+        }
+
+        boolean removed = students.remove(studentId);
+
+        if (!removed) {
+            throw new CourseStudentNotFoundException(id, studentId);
         }
     }
 
