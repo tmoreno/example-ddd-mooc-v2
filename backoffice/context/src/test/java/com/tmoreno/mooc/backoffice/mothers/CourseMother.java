@@ -22,6 +22,26 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class CourseMother {
+
+    public static Course random() {
+        StudentId studentId = StudentIdMother.random();
+
+        return new Course(
+            CourseIdMother.random(),
+            CourseTitleMother.random(),
+            CourseImageUrlMother.random(),
+            CourseSummaryMother.random(),
+            CourseDescriptionMother.random(),
+            CourseStateMother.random(),
+            LanguageMother.random(),
+            PriceMother.random(),
+            List.of(SectionMother.random()),
+            Map.of(studentId, ReviewIdMother.random()),
+            Set.of(studentId),
+            Set.of(TeacherIdMother.random())
+        );
+    }
+
     public static Course randomInDraftState() {
         return new Course(
             CourseIdMother.random(),
