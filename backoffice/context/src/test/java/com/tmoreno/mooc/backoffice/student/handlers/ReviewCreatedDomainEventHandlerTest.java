@@ -1,13 +1,13 @@
 package com.tmoreno.mooc.backoffice.student.handlers;
 
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
-import com.tmoreno.mooc.backoffice.course.domain.events.CourseReviewAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.ReviewIdMother;
 import com.tmoreno.mooc.backoffice.mothers.ReviewRatingMother;
 import com.tmoreno.mooc.backoffice.mothers.ReviewTextMother;
 import com.tmoreno.mooc.backoffice.mothers.StudentMother;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
+import com.tmoreno.mooc.backoffice.review.domain.events.ReviewCreatedDomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentRepository;
 import com.tmoreno.mooc.shared.mothers.CreatedOnMother;
@@ -25,16 +25,16 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CourseReviewAddedDomainEventHandlerTest {
+public class ReviewCreatedDomainEventHandlerTest {
 
     @Mock
     private StudentRepository repository;
 
-    private CourseReviewAddedDomainEventHandler handler;
+    private ReviewCreatedDomainEventHandler handler;
 
     @BeforeEach
     public void setUp() {
-        handler = new CourseReviewAddedDomainEventHandler(repository);
+        handler = new ReviewCreatedDomainEventHandler(repository);
     }
 
     @Test
@@ -45,9 +45,9 @@ public class CourseReviewAddedDomainEventHandlerTest {
 
         when(repository.find(student.getId())).thenReturn(Optional.of(student));
 
-        handler.handle(new CourseReviewAddedDomainEvent(
-                courseId,
+        handler.handle(new ReviewCreatedDomainEvent(
                 reviewId,
+                courseId,
                 student.getId(),
                 ReviewRatingMother.random(),
                 ReviewTextMother.random(),
