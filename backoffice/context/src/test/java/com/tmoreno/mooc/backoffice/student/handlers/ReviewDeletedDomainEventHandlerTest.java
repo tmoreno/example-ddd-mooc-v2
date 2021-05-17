@@ -1,11 +1,11 @@
 package com.tmoreno.mooc.backoffice.student.handlers;
 
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
-import com.tmoreno.mooc.backoffice.course.domain.events.CourseReviewDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.ReviewIdMother;
 import com.tmoreno.mooc.backoffice.mothers.StudentMother;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
+import com.tmoreno.mooc.backoffice.review.domain.events.ReviewDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,16 +23,16 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CourseReviewDeletedDomainEventHandlerTest {
+public class ReviewDeletedDomainEventHandlerTest {
 
     @Mock
     private StudentRepository repository;
 
-    private CourseReviewDeletedDomainEventHandler handler;
+    private ReviewDeletedDomainEventHandler handler;
 
     @BeforeEach
     public void setUp() {
-        handler = new CourseReviewDeletedDomainEventHandler(repository);
+        handler = new ReviewDeletedDomainEventHandler(repository);
     }
 
     @Test
@@ -43,10 +43,10 @@ public class CourseReviewDeletedDomainEventHandlerTest {
 
         when(repository.find(student.getId())).thenReturn(Optional.of(student));
 
-        handler.handle(new CourseReviewDeletedDomainEvent(
+        handler.handle(new ReviewDeletedDomainEvent(
+                reviewId,
                 courseId,
-                student.getId(),
-                reviewId
+                student.getId()
         ));
 
         assertThat(student.getReviews(), is(Collections.emptyMap()));
