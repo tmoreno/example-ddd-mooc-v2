@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public final class MongoTeacherRepository implements TeacherRepository {
+public class MongoTeacherRepository implements TeacherRepository {
     @Override
     public void save(Teacher teacher) {
 
