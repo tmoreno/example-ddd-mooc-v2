@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+
+  backoffice-db:
+    image: mongo:4.4.6
+    container_name: backoffice-db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
