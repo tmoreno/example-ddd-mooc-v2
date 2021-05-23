@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.teacher.commands.create;
+package com.tmoreno.mooc.backoffice.teacher.commands;
 
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;

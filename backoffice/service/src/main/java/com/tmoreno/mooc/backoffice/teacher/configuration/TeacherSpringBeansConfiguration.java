@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.teacher.configuration;
 
 import com.tmoreno.mooc.backoffice.teacher.commands.UpdateTeacherCommand;
 import com.tmoreno.mooc.backoffice.teacher.commands.changeEmail.ChangeTeacherEmailCommand;
-import com.tmoreno.mooc.backoffice.teacher.commands.create.CreateTeacherCommand;
+import com.tmoreno.mooc.backoffice.teacher.commands.CreateTeacherCommand;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.shared.events.EventBus;
 import org.springframework.context.annotation.Bean;

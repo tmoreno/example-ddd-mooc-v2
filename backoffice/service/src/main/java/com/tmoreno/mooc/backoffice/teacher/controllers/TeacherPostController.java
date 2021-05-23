@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.teacher.controllers;
 
-import com.tmoreno.mooc.backoffice.teacher.commands.create.CreateTeacherCommand;
-import com.tmoreno.mooc.backoffice.teacher.commands.create.CreateTeacherCommandParams;
+import com.tmoreno.mooc.backoffice.teacher.commands.CreateTeacherCommand;
+import com.tmoreno.mooc.backoffice.teacher.commands.CreateTeacherCommandParams;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

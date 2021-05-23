@@ -1,8 +1,6 @@
 package com.tmoreno.mooc.backoffice.teacher.commands;
 
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
-import com.tmoreno.mooc.backoffice.teacher.commands.create.CreateTeacherCommand;
-import com.tmoreno.mooc.backoffice.teacher.commands.create.CreateTeacherCommandParams;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherExistsException;
