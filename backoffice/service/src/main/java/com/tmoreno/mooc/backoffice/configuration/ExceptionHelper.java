@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.teacher.configuration;
+package com.tmoreno.mooc.backoffice.configuration;
 
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherCourseNotFoundException;
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherExistsException;

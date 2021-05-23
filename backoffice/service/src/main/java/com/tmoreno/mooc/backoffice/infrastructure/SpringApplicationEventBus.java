@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.teacher.infrastructure;
+package com.tmoreno.mooc.backoffice.infrastructure;
 
 import com.tmoreno.mooc.shared.events.DomainEvent;
 import com.tmoreno.mooc.shared.events.EventBus;
