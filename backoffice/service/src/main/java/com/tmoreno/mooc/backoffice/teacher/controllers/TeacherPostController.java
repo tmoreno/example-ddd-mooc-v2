@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public final class CreateTeacherPostController {
+public final class TeacherPostController {
 
     private final CreateTeacherCommand createTeacherCommand;
 
-    public CreateTeacherPostController(CreateTeacherCommand createTeacherCommand) {
+    public TeacherPostController(CreateTeacherCommand createTeacherCommand) {
         this.createTeacherCommand = createTeacherCommand;
     }
 
