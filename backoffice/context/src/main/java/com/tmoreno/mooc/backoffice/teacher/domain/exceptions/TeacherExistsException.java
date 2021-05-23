@@ -5,6 +5,6 @@ import com.tmoreno.mooc.shared.domain.Email;
 
 public final class TeacherExistsException extends RuntimeException {
     public TeacherExistsException(TeacherId teacherId, Email email) {
-        super("A teacher with this id: " + teacherId + " or with this email: "+ email + " already exists");
+        super("A teacher with this id: " + teacherId.getValue() + " or with this email: "+ email.getValue() + " already exists");
     }
 }
