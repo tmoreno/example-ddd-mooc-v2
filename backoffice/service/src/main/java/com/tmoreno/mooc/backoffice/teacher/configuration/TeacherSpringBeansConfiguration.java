@@ -1,5 +1,6 @@
 package com.tmoreno.mooc.backoffice.teacher.configuration;
 
+import com.tmoreno.mooc.backoffice.teacher.commands.UpdateTeacherCommand;
 import com.tmoreno.mooc.backoffice.teacher.commands.changeEmail.ChangeTeacherEmailCommand;
 import com.tmoreno.mooc.backoffice.teacher.commands.create.CreateTeacherCommand;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
@@ -13,6 +14,11 @@ public class TeacherSpringBeansConfiguration {
     @Bean
     public CreateTeacherCommand createTeacherCommand(TeacherRepository repository, EventBus eventBus) {
         return new CreateTeacherCommand(repository, eventBus);
+    }
+
+    @Bean
+    public UpdateTeacherCommand updateTeacherCommand(TeacherRepository repository, EventBus eventBus) {
+        return new UpdateTeacherCommand(repository, eventBus);
     }
 
     @Bean
