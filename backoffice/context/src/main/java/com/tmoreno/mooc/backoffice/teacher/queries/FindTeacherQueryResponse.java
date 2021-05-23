@@ -8,14 +8,20 @@ import java.util.Set;
 
 public final class FindTeacherQueryResponse extends QueryResponse {
 
+    private final String id;
     private final String name;
     private final String email;
     private final Set<CourseId> courses;
 
     public FindTeacherQueryResponse(Teacher teacher) {
+        this.id = teacher.getId().getValue();
         this.name = teacher.getName().getValue();
         this.email = teacher.getEmail().getValue();
         this.courses = teacher.getCourses();
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {
