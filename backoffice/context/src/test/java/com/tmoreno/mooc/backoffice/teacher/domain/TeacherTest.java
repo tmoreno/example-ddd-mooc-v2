@@ -42,9 +42,9 @@ public class TeacherTest {
 
         TeacherCreatedDomainEvent event = (TeacherCreatedDomainEvent) domainEvents.get(0);
 
-        assertThat(teacherId, is(event.getTeacherId()));
-        assertThat(name, is(event.getName()));
-        assertThat(email, is(event.getEmail()));
+        assertThat(teacherId.getValue(), is(event.getTeacherId()));
+        assertThat(name.getValue(), is(event.getName()));
+        assertThat(email.getValue(), is(event.getEmail()));
     }
 
     @Test
