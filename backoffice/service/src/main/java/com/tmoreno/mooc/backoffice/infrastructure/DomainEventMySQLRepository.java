@@ -33,7 +33,7 @@ public class DomainEventMySQLRepository implements DomainEventRepository {
                 Timestamp.from(Instant.parse(event.getOccurredOn()))
             );
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unexpected error", e);
         }
     }
 }
