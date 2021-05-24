@@ -3,6 +3,8 @@ package com.tmoreno.mooc.backoffice.teacher.configuration;
 import com.tmoreno.mooc.backoffice.teacher.commands.CreateTeacherCommand;
 import com.tmoreno.mooc.backoffice.teacher.commands.UpdateTeacherCommand;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
+import com.tmoreno.mooc.backoffice.teacher.handlers.CourseTeacherAddedDomainEventHandler;
+import com.tmoreno.mooc.backoffice.teacher.handlers.CourseTeacherDeletedDomainEventHandler;
 import com.tmoreno.mooc.backoffice.teacher.queries.FindTeacherQuery;
 import com.tmoreno.mooc.backoffice.teacher.queries.FindTeachersQuery;
 import com.tmoreno.mooc.shared.events.EventBus;
@@ -30,5 +32,15 @@ public class TeacherSpringBeansConfiguration {
     @Bean
     public FindTeachersQuery findTeachersQuery(TeacherRepository repository) {
         return new FindTeachersQuery(repository);
+    }
+
+    @Bean
+    public CourseTeacherAddedDomainEventHandler courseTeacherAddedDomainEventHandler(TeacherRepository repository) {
+        return new CourseTeacherAddedDomainEventHandler(repository);
+    }
+
+    @Bean
+    public CourseTeacherDeletedDomainEventHandler courseTeacherDeletedDomainEventHandler(TeacherRepository repository) {
+        return new CourseTeacherDeletedDomainEventHandler(repository);
     }
 }
