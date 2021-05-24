@@ -10,3 +10,17 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     ports:
       - 27017:27017
+
+  backoffice-event-store:
+    image: mysql:8.0.25
+    container_name: backoffice-event-store
+    environment:
+      MYSQL_ROOT_PASSWORD: event_store
+      MYSQL_DATABASE: event_store
+      MYSQL_USER: event_store
+      MYSQL_PASSWORD: event_store
+    ports:
+      - 3306:3306
+    volumes:
+      - "./backoffice/service/src/main/resources/database/:/docker-entrypoint-initdb.d/"
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
