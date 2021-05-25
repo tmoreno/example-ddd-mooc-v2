@@ -1,10 +1,13 @@
 package com.tmoreno.mooc.backoffice.teacher.controllers;
 
 import com.tmoreno.mooc.backoffice.BaseControllerIT;
+import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherCreatedDomainEvent;
+import com.tmoreno.mooc.shared.mothers.EmailMother;
+import com.tmoreno.mooc.shared.mothers.PersonNameMother;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +55,47 @@ public class TeacherPostControllerIT extends BaseControllerIT {
         assertThat(teacherPersisted.getEmail(), is(teacher.getEmail()));
 
         verifyDomainEventStored(TeacherCreatedDomainEvent.class);
+    }
+
+    @Test
+    public void given_existing_id_teacher_when_send_post_request_then_receive_precondition_failed_response_and_teacher_is_not_persisted_and_event_is_not_stored() {
+        Teacher teacher = TeacherMother.random();
+
+        teacherRepository.save(teacher);
+
+        Map<String, Object> request = Map.of(
+            "id", teacher.getId().getValue(),
+            "name", PersonNameMother.random().getValue(),
+            "email", EmailMother.random().getValue()
+        );
+
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+
+        assertThat(response.getStatusCode(), is(HttpStatus.PRECONDITION_FAILED));
+
+        assertThat(teacherRepository.findAll().size(), is(1));
+
+        verifyDomainEventNotStored(TeacherCreatedDomainEvent.class);
+    }
+
+    @Test
+    public void given_existing_email_teacher_when_send_post_request_then_receive_precondition_failed_response_and_teacher_is_not_persisted_and_event_is_not_stored() {
+        Teacher teacher = TeacherMother.random();
+
+        teacherRepository.save(teacher);
+
+        Map<String, Object> request = Map.of(
+            "id", TeacherIdMother.random().getValue(),
+            "name", PersonNameMother.random().getValue(),
+            "email", teacher.getEmail().getValue()
+        );
+
+        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+
+        assertThat(response.getStatusCode(), is(HttpStatus.PRECONDITION_FAILED));
+
+        assertThat(teacherRepository.findAll().size(), is(1));
+
+        verifyDomainEventNotStored(TeacherCreatedDomainEvent.class);
     }
 }

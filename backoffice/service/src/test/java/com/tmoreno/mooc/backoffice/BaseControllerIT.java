@@ -11,6 +11,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -36,5 +37,9 @@ public class BaseControllerIT {
 
     protected <E extends DomainEvent> void verifyDomainEventStored(Class<E> event) {
         verify(domainEventRepository).store(any(event));
+    }
+
+    protected <E extends DomainEvent> void verifyDomainEventNotStored(Class<E> event) {
+        verify(domainEventRepository, never()).store(any(event));
     }
 }
