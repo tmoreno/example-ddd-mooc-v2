@@ -43,7 +43,7 @@ public class TeacherPostControllerIT extends BaseControllerIT {
             "email", teacher.getEmail().getValue()
         );
 
-        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+        ResponseEntity<String> response = post(request);
 
         assertThat(response.getStatusCode(), is(HttpStatus.CREATED));
         assertThat(response.hasBody(), is(false));
@@ -68,7 +68,7 @@ public class TeacherPostControllerIT extends BaseControllerIT {
             "email", EmailMother.random().getValue()
         );
 
-        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+        ResponseEntity<String> response = post(request);
 
         assertThat(response.getStatusCode(), is(HttpStatus.PRECONDITION_FAILED));
 
@@ -89,7 +89,7 @@ public class TeacherPostControllerIT extends BaseControllerIT {
             "email", teacher.getEmail().getValue()
         );
 
-        ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
+        ResponseEntity<String> response = post(request);
 
         assertThat(response.getStatusCode(), is(HttpStatus.PRECONDITION_FAILED));
 

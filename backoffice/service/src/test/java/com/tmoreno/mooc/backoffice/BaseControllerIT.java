@@ -22,14 +22,14 @@ public class BaseControllerIT {
 
     protected String url;
 
-    @Autowired
-    protected TestRestTemplate restTemplate;
-
     @SpyBean
     protected DomainEventRepository domainEventRepository;
 
     @LocalServerPort
     private int serverPort;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -43,6 +43,10 @@ public class BaseControllerIT {
 
         mongoTemplate.getDb().drop();
         jdbcTemplate.update("delete from domain_events");
+    }
+
+    public final ResponseEntity<String> post(Map<String, Object> request) {
+        return restTemplate.postForEntity(url, request, String.class);
     }
 
     public final ResponseEntity<String> put(String id, Map<String, Object> request) {
