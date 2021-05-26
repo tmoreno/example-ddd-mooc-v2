@@ -10,7 +10,7 @@ import com.tmoreno.mooc.shared.mothers.EmailMother;
 import com.tmoreno.mooc.shared.mothers.PersonNameMother;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -18,20 +18,19 @@ import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class TeacherPostControllerIT extends BaseControllerIT {
 
-    @Autowired
+    @SpyBean
     private TeacherRepository teacherRepository;
 
-    private String url;
-
-    @Override
     @BeforeEach
     public void setUp() {
-        super.setUp();
-
-        url = "http://localhost:" + serverPort + "/teachers";
+        url += "/teachers";
     }
 
     @Test
@@ -54,7 +53,7 @@ public class TeacherPostControllerIT extends BaseControllerIT {
         assertThat(teacherPersisted.getName(), is(teacher.getName()));
         assertThat(teacherPersisted.getEmail(), is(teacher.getEmail()));
 
-        verifyDomainEventStored(TeacherCreatedDomainEvent.class);
+        verify(domainEventRepository).store(any(TeacherCreatedDomainEvent.class));
     }
 
     @Test
@@ -73,9 +72,9 @@ public class TeacherPostControllerIT extends BaseControllerIT {
 
         assertThat(response.getStatusCode(), is(HttpStatus.PRECONDITION_FAILED));
 
-        assertThat(teacherRepository.findAll().size(), is(1));
+        verify(teacherRepository, times(1)).save(any());
 
-        verifyDomainEventNotStored(TeacherCreatedDomainEvent.class);
+        verify(domainEventRepository, never()).store(any());
     }
 
     @Test
@@ -94,8 +93,8 @@ public class TeacherPostControllerIT extends BaseControllerIT {
 
         assertThat(response.getStatusCode(), is(HttpStatus.PRECONDITION_FAILED));
 
-        assertThat(teacherRepository.findAll().size(), is(1));
+        verify(teacherRepository, times(1)).save(any());
 
-        verifyDomainEventNotStored(TeacherCreatedDomainEvent.class);
+        verify(domainEventRepository, never()).store(any());
     }
 }

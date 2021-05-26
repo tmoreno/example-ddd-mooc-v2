@@ -1,45 +1,42 @@
 package com.tmoreno.mooc.backoffice;
 
 import com.tmoreno.mooc.shared.domain.DomainEventRepository;
-import com.tmoreno.mooc.shared.events.DomainEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.jdbc.core.JdbcTemplate;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 public class BaseControllerIT {
 
-    @LocalServerPort
-    protected int serverPort;
+    protected String url;
 
     @Autowired
     protected TestRestTemplate restTemplate;
 
-    @MockBean
-    private DomainEventRepository domainEventRepository;
+    @SpyBean
+    protected DomainEventRepository domainEventRepository;
+
+    @LocalServerPort
+    private int serverPort;
 
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @BeforeEach
-    public void setUp() {
+    public final void setUpBaseTest() {
+        url = "http://localhost:" + serverPort;
+
         mongoTemplate.getDb().drop();
-    }
-
-    protected <E extends DomainEvent> void verifyDomainEventStored(Class<E> event) {
-        verify(domainEventRepository).store(any(event));
-    }
-
-    protected <E extends DomainEvent> void verifyDomainEventNotStored(Class<E> event) {
-        verify(domainEventRepository, never()).store(any(event));
+        jdbcTemplate.update("delete from domain_events");
     }
 }
