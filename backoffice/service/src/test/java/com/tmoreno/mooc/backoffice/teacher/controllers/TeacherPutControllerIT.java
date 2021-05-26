@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.teacher.controllers;
 
-import com.tmoreno.mooc.backoffice.BaseControllerIT;
+import com.tmoreno.mooc.backoffice.utils.BaseControllerIT;
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;

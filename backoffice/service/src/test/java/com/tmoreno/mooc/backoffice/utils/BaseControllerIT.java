@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice;
+package com.tmoreno.mooc.backoffice.utils;
 
 import com.tmoreno.mooc.shared.domain.DomainEventRepository;
 import org.junit.jupiter.api.BeforeEach;
