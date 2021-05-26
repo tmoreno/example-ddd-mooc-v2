@@ -12,8 +12,6 @@ import com.tmoreno.mooc.shared.mothers.PersonNameMother;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -71,8 +69,7 @@ public class TeacherPutControllerIT extends BaseControllerIT {
             "email", EmailMother.random().getValue()
         );
 
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(request);
-        ResponseEntity<String> response = restTemplate.exchange(url + "/" + teacherId, HttpMethod.PUT, entity, String.class);
+        ResponseEntity<String> response = put(teacherId, request);
 
         assertThat(response.getStatusCode(), is(HttpStatus.NOT_FOUND));
 
