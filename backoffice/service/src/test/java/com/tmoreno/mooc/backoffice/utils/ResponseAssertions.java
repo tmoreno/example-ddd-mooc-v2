@@ -18,8 +18,11 @@ public final class ResponseAssertions {
         assertThat(response.hasBody(), is(false));
     }
 
+    public static void assertNotFound(ResponseEntity<String> response) {
+        assertThat(response.getStatusCode(), is(HttpStatus.NOT_FOUND));
+    }
+
     public static void assertPreconditionFailed(ResponseEntity<String> response) {
         assertThat(response.getStatusCode(), is(HttpStatus.PRECONDITION_FAILED));
     }
-
 }

@@ -12,11 +12,11 @@ import com.tmoreno.mooc.shared.mothers.PersonNameMother;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
 
+import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertNotFound;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -72,7 +72,7 @@ public class TeacherPutControllerIT extends BaseControllerIT {
 
         ResponseEntity<String> response = put(teacherId, request);
 
-        assertThat(response.getStatusCode(), is(HttpStatus.NOT_FOUND));
+        assertNotFound(response);
 
         verify(teacherRepository, never()).save(any());
 
