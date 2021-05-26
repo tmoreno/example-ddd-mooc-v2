@@ -50,8 +50,7 @@ public class TeacherPutControllerIT extends BaseControllerIT {
             "email", email.getValue()
         );
 
-        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(request);
-        ResponseEntity<String> response = restTemplate.exchange(url + "/" + teacher.getId().getValue(), HttpMethod.PUT, entity, String.class);
+        ResponseEntity<String> response = put(teacher.getId().getValue(), request);
 
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
 

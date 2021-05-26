@@ -8,7 +8,12 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.Map;
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -38,5 +43,11 @@ public class BaseControllerIT {
 
         mongoTemplate.getDb().drop();
         jdbcTemplate.update("delete from domain_events");
+    }
+
+    public final ResponseEntity<String> put(String id, Map<String, Object> request) {
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(request);
+
+        return restTemplate.exchange(url + "/" + id, HttpMethod.PUT, entity, String.class);
     }
 }
