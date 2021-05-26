@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
 
+import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertCreated;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;
@@ -45,8 +46,7 @@ public class TeacherPostControllerIT extends BaseControllerIT {
 
         ResponseEntity<String> response = post(request);
 
-        assertThat(response.getStatusCode(), is(HttpStatus.CREATED));
-        assertThat(response.hasBody(), is(false));
+        assertCreated(response);
 
         Teacher teacherPersisted = teacherRepository.find(teacher.getId()).orElseThrow();
         assertThat(teacherPersisted.getId(), is(teacher.getId()));
