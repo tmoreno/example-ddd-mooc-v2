@@ -13,4 +13,8 @@ public final class ResponseAssertions {
         assertThat(response.hasBody(), is(false));
     }
 
+    public static void assertPreconditionFailed(ResponseEntity<String> response) {
+        assertThat(response.getStatusCode(), is(HttpStatus.PRECONDITION_FAILED));
+    }
+
 }
