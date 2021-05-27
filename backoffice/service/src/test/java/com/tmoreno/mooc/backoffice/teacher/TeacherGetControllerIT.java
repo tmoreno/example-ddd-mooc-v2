@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.teacher.controllers;
+package com.tmoreno.mooc.backoffice.teacher;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

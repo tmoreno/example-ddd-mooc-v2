@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.teacher.controllers;
+package com.tmoreno.mooc.backoffice.teacher;
 
 import com.tmoreno.mooc.backoffice.utils.BaseControllerIT;
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
