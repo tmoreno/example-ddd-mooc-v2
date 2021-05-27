@@ -1,8 +1,10 @@
 package com.tmoreno.mooc.backoffice.teacher.queries;
 
+import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
+import com.tmoreno.mooc.shared.domain.Identifier;
 import com.tmoreno.mooc.shared.query.VoidQueryParams;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
@@ -40,7 +43,7 @@ public class FindTeachersQueryTest {
     @Test
     public void given_there_are_three_teachers_when_find_then_return_three_teachers() {
         Teacher teacher1 = TeacherMother.random();
-        Teacher teacher2 = TeacherMother.random();
+        Teacher teacher2 = TeacherMother.randomWithCourse(CourseIdMother.random());
         Teacher teacher3 = TeacherMother.random();
 
         when(repository.findAll()).thenReturn(List.of(teacher1, teacher2, teacher3));
@@ -57,6 +60,6 @@ public class FindTeachersQueryTest {
         assertThat(response.getId(), is(teacher.getId().getValue()));
         assertThat(response.getName(), is(teacher.getName().getValue()));
         assertThat(response.getEmail(), is(teacher.getEmail().getValue()));
-        assertThat(response.getCourses(), is(teacher.getCourses()));
+        assertThat(response.getCourses(), is(teacher.getCourses().stream().map(Identifier::getValue).collect(Collectors.toSet())));
     }
 }

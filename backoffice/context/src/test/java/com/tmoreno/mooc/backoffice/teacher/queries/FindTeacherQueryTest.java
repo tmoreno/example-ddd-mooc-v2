@@ -1,11 +1,14 @@
 package com.tmoreno.mooc.backoffice.teacher.queries;
 
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherNotFoundException;
+import com.tmoreno.mooc.shared.domain.Identifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -34,20 +38,20 @@ public class FindTeacherQueryTest {
 
     @Test
     public void given_a_existing_teacher_id_when_find_then_return_the_teacher() {
-        TeacherId teacherId = TeacherIdMother.random();
-        Teacher teacher = TeacherMother.random();
+        CourseId courseId = CourseIdMother.random();
+        Teacher teacher = TeacherMother.randomWithCourse(courseId);
 
-        when(repository.find(teacherId)).thenReturn(Optional.of(teacher));
+        when(repository.find(teacher.getId())).thenReturn(Optional.of(teacher));
 
         FindTeacherQueryParams params = new FindTeacherQueryParams();
-        params.setTeacherId(teacherId.getValue());
+        params.setTeacherId(teacher.getId().getValue());
 
         FindTeacherQueryResponse response = query.execute(params);
 
         assertThat(response.getId(), is(teacher.getId().getValue()));
         assertThat(response.getName(), is(teacher.getName().getValue()));
         assertThat(response.getEmail(), is(teacher.getEmail().getValue()));
-        assertThat(response.getCourses(), is(teacher.getCourses()));
+        assertThat(response.getCourses(), is(teacher.getCourses().stream().map(Identifier::getValue).collect(Collectors.toSet())));
     }
 
     @Test
