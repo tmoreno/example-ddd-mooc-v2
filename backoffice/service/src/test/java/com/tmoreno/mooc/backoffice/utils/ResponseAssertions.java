@@ -10,7 +10,6 @@ public final class ResponseAssertions {
 
     public static void assertOk(ResponseEntity<String> response) {
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.hasBody(), is(false));
     }
 
     public static void assertCreated(ResponseEntity<String> response) {

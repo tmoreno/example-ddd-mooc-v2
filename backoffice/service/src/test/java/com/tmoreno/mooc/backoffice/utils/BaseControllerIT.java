@@ -1,5 +1,8 @@
 package com.tmoreno.mooc.backoffice.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tmoreno.mooc.shared.domain.DomainEventRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +40,23 @@ public class BaseControllerIT {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @BeforeEach
     public final void setUpBaseTest() {
         url = "http://localhost:" + serverPort;
 
         mongoTemplate.getDb().drop();
         jdbcTemplate.update("delete from domain_events");
+    }
+
+    public final ResponseEntity<String> get() {
+        return restTemplate.getForEntity(url, String.class);
+    }
+
+    public final ResponseEntity<String> get(String id) {
+        return restTemplate.getForEntity(url + "/" + id, String.class);
     }
 
     public final ResponseEntity<String> post(Map<String, Object> request) {
@@ -53,5 +67,9 @@ public class BaseControllerIT {
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(request);
 
         return restTemplate.exchange(url + "/" + id, HttpMethod.PUT, entity, String.class);
+    }
+
+    public final JsonNode toJson(String content) throws JsonProcessingException {
+        return objectMapper.readTree(content);
     }
 }
