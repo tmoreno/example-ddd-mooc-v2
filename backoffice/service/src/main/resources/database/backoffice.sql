@@ -40,3 +40,13 @@ CREATE TABLE IF NOT EXISTS student_reviews (
     review_id CHAR(36) NOT NULL,
     PRIMARY KEY (student_id, course_id, review_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS reviews (
+    id CHAR(36) NOT NULL,
+    student_id CHAR(36) NOT NULL,
+    course_id CHAR(36) NOT NULL,
+    rating VARCHAR(30) NOT NULL,
+    text VARCHAR(5000) NOT NULL,
+    created_on TIMESTAMP NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
