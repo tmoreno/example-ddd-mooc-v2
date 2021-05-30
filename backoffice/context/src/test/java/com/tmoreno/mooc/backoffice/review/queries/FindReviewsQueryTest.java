@@ -3,7 +3,6 @@ package com.tmoreno.mooc.backoffice.review.queries;
 import com.tmoreno.mooc.backoffice.mothers.ReviewMother;
 import com.tmoreno.mooc.backoffice.review.domain.Review;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewRepository;
-import com.tmoreno.mooc.shared.query.VoidQueryParams;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +32,7 @@ public class FindReviewsQueryTest {
 
     @Test
     public void given_no_reviews_when_find_then_return_empty_response() {
-        FindReviewsQueryResponse response = query.execute(new VoidQueryParams());
+        FindReviewsQueryResponse response = query.execute(new FindReviewsQueryParams());
 
         assertThat(response.getReviews(), Matchers.is(empty()));
     }
@@ -46,12 +45,46 @@ public class FindReviewsQueryTest {
 
         when(repository.findAll()).thenReturn(List.of(review1, review2, review3));
 
-        FindReviewsQueryResponse response = query.execute(new VoidQueryParams());
+        FindReviewsQueryResponse response = query.execute(new FindReviewsQueryParams());
 
         assertThat(response.getReviews().size(), is(3));
         assertReview(response.getReviews().get(0), review1);
         assertReview(response.getReviews().get(1), review2);
         assertReview(response.getReviews().get(2), review3);
+    }
+
+    @Test
+    public void given_there_are_three_reviews_when_find_by_course_then_return_the_review_of_the_course() {
+        Review review1 = ReviewMother.random();
+        Review review2 = ReviewMother.random();
+        Review review3 = ReviewMother.random();
+
+        when(repository.findAll()).thenReturn(List.of(review1, review2, review3));
+
+        FindReviewsQueryParams params = new FindReviewsQueryParams();
+        params.setCourseId(review2.getCourseId().getValue());
+
+        FindReviewsQueryResponse response = query.execute(params);
+
+        assertThat(response.getReviews().size(), is(1));
+        assertReview(response.getReviews().get(0), review2);
+    }
+
+    @Test
+    public void given_there_are_three_reviews_when_find_by_student_then_return_the_review_of_the_student() {
+        Review review1 = ReviewMother.random();
+        Review review2 = ReviewMother.random();
+        Review review3 = ReviewMother.random();
+
+        when(repository.findAll()).thenReturn(List.of(review1, review2, review3));
+
+        FindReviewsQueryParams params = new FindReviewsQueryParams();
+        params.setStudentId(review3.getStudentId().getValue());
+
+        FindReviewsQueryResponse response = query.execute(params);
+
+        assertThat(response.getReviews().size(), is(1));
+        assertReview(response.getReviews().get(0), review3);
     }
 
     private void assertReview(FindReviewQueryResponse response, Review review) {
