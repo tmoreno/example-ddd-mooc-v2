@@ -45,4 +45,20 @@ public final class StudentMother {
             reviews
         );
     }
+
+    public static Student randomWithCourseAndReview(CourseId courseId, ReviewId reviewId) {
+        Set<CourseId> courses = new HashSet<>();
+        courses.add(courseId);
+
+        Map<CourseId, ReviewId> reviews = new HashMap<>();
+        reviews.put(courseId, reviewId);
+
+        return new Student(
+                StudentIdMother.random(),
+                PersonNameMother.random(),
+                EmailMother.random(),
+                courses,
+                reviews
+        );
+    }
 }
