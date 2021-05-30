@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS domain_events (
     name VARCHAR(255) NOT NULL,
     version INT(10) NOT NULL,
     body JSON NOT NULL,
-    occurred_on TIMESTAMP NOT NULL,
+    occurred_on DATETIME NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -47,6 +47,6 @@ CREATE TABLE IF NOT EXISTS reviews (
     course_id CHAR(36) NOT NULL,
     rating VARCHAR(30) NOT NULL,
     text VARCHAR(5000) NOT NULL,
-    created_on TIMESTAMP NOT NULL,
+    created_on DATETIME NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
