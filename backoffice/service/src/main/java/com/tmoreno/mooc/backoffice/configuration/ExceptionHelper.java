@@ -1,5 +1,6 @@
 package com.tmoreno.mooc.backoffice.configuration;
 
+import com.tmoreno.mooc.backoffice.review.domain.exceptions.ReviewNotFoundException;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentCourseNotFoundException;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentNotFoundException;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentReviewNotFoundException;
@@ -45,7 +46,8 @@ public final class ExceptionHelper {
         TeacherCourseNotFoundException.class,
         StudentNotFoundException.class,
         StudentCourseNotFoundException.class,
-        StudentReviewNotFoundException.class
+        StudentReviewNotFoundException.class,
+        ReviewNotFoundException.class
     })
     public ResponseEntity<Object> notFoundHandler(RuntimeException e) {
         logger.error("Not found", e);
