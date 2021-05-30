@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -87,9 +88,15 @@ public class TeacherGetControllerIT extends BaseControllerIT {
 
         assertThat(responseBody.size(), is(3));
 
-        assertTeacher(responseBody.get(0), teacher1);
-        assertTeacher(responseBody.get(1), teacher2);
-        assertTeacher(responseBody.get(2), teacher3);
+        for (JsonNode jsonTeacher : responseBody) {
+            Teacher teacher = List.of(teacher1, teacher2, teacher3)
+                    .stream()
+                    .filter(t -> t.getId().getValue().equals(jsonTeacher.get("id").asText()))
+                    .findFirst()
+                    .orElseThrow();
+
+            assertTeacher(jsonTeacher, teacher);
+        }
     }
 
     private void assertTeacher(JsonNode jsonTeacher, Teacher teacher) {

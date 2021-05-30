@@ -3,22 +3,13 @@ version: "3.8"
 services:
 
   backoffice-db:
-    image: mongo:4.4.6
+    image: mysql:8.0.25
     container_name: backoffice-db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    ports:
-      - 27017:27017
-
-  backoffice-event-store:
-    image: mysql:8.0.25
-    container_name: backoffice-event-store
-    environment:
-      MYSQL_ROOT_PASSWORD: event_store
-      MYSQL_DATABASE: event_store
-      MYSQL_USER: event_store
-      MYSQL_PASSWORD: event_store
+      MYSQL_ROOT_PASSWORD: backoffice
+      MYSQL_DATABASE: backoffice
+      MYSQL_USER: backoffice
+      MYSQL_PASSWORD: backoffice
     ports:
       - 3306:3306
     volumes:

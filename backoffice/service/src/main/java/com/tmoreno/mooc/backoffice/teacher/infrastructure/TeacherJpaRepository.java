@@ -11,19 +11,19 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-public class TeacherMongoRepository implements TeacherRepository {
+public class TeacherJpaRepository implements TeacherRepository {
 
-    private final TeacherDaoMongoRepository daoRepository;
+    private final TeacherDaoJpaRepository daoRepository;
 
-    public TeacherMongoRepository(TeacherDaoMongoRepository daoRepository) {
+    public TeacherJpaRepository(TeacherDaoJpaRepository daoRepository) {
         this.daoRepository = daoRepository;
     }
 
     @Override
     public void save(Teacher teacher) {
-        TeacherMongoDto teacherMongo = TeacherMongoDto.fromTeacher(teacher);
+        TeacherJpaDto teacherJpaDto = TeacherJpaDto.fromTeacher(teacher);
 
-        daoRepository.save(teacherMongo);
+        daoRepository.save(teacherJpaDto);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class TeacherMongoRepository implements TeacherRepository {
         return daoRepository
                 .findAll()
                 .stream()
-                .map(TeacherMongoDto::toTeacher)
+                .map(TeacherJpaDto::toTeacher)
                 .collect(Collectors.toList());
     }
 
@@ -39,7 +39,7 @@ public class TeacherMongoRepository implements TeacherRepository {
     public Optional<Teacher> find(TeacherId id) {
         return daoRepository
                 .findById(id.getValue())
-                .map(TeacherMongoDto::toTeacher);
+                .map(TeacherJpaDto::toTeacher);
     }
 
     @Override

@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -35,9 +34,6 @@ public class BaseControllerIT {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private MongoTemplate mongoTemplate;
-
-    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -47,8 +43,10 @@ public class BaseControllerIT {
     public final void setUpBaseTest() {
         url = "http://localhost:" + serverPort;
 
-        mongoTemplate.getDb().drop();
-        jdbcTemplate.update("delete from domain_events");
+        jdbcTemplate.queryForList(
+                "select table_name from information_schema.tables where table_schema = \"backoffice\"",
+                String.class
+        ).forEach(tableName -> jdbcTemplate.execute("delete from " + tableName));
     }
 
     public final ResponseEntity<String> get() {
