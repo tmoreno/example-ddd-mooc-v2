@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
+
 @RestController
-public final class TeacherPostController {
+public class TeacherPostController {
 
     private final CreateTeacherCommand createTeacherCommand;
 
@@ -17,6 +19,7 @@ public final class TeacherPostController {
         this.createTeacherCommand = createTeacherCommand;
     }
 
+    @Transactional
     @PostMapping(value = "/teachers")
     public ResponseEntity<String> handle(@RequestBody CreateTeacherCommandParams params) {
         createTeacherCommand.execute(params);

@@ -21,6 +21,7 @@ import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -77,5 +78,27 @@ public class TeacherPutControllerIT extends BaseControllerIT {
         verify(teacherRepository, never()).save(any());
 
         verify(domainEventRepository, never()).store(any());
+    }
+
+    @Test
+    public void should_rollback_all_database_changes_when_an_exception_happen() {
+        Teacher teacher = TeacherMother.random();
+
+        teacherRepository.save(teacher);
+
+        doThrow(RuntimeException.class).when(domainEventRepository).store(any());
+
+        put(
+            teacher.getId().getValue(),
+            Map.of(
+                "name", PersonNameMother.random().getValue(),
+                "email", EmailMother.random().getValue()
+            )
+        );
+
+        Teacher persistedTeacher = teacherRepository.find(teacher.getId()).orElseThrow();
+        assertThat(persistedTeacher.getId(), is(teacher.getId()));
+        assertThat(persistedTeacher.getName(), is(teacher.getName()));
+        assertThat(persistedTeacher.getEmail(), is(teacher.getEmail()));
     }
 }

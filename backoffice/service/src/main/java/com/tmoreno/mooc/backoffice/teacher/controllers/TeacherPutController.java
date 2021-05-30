@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
+
 @RestController
-public final class TeacherPutController {
+public class TeacherPutController {
 
     private final UpdateTeacherCommand updateTeacherCommand;
 
@@ -18,6 +20,7 @@ public final class TeacherPutController {
         this.updateTeacherCommand = updateTeacherCommand;
     }
 
+    @Transactional
     @PutMapping(value = "/teachers/{id}")
     public ResponseEntity<String> handle(@PathVariable String id, @RequestBody UpdateTeacherCommandParams params) {
         params.setId(id);

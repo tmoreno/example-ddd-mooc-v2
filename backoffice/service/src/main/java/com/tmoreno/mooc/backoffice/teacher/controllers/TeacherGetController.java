@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public final class TeacherGetController {
+public class TeacherGetController {
 
     private final FindTeacherQuery findTeacherQuery;
     private final FindTeachersQuery findTeachersQuery;

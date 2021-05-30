@@ -1,11 +1,11 @@
 package com.tmoreno.mooc.backoffice.teacher;
 
-import com.tmoreno.mooc.backoffice.utils.BaseControllerIT;
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherCreatedDomainEvent;
+import com.tmoreno.mooc.backoffice.utils.BaseControllerIT;
 import com.tmoreno.mooc.shared.mothers.EmailMother;
 import com.tmoreno.mooc.shared.mothers.PersonNameMother;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +20,7 @@ import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertPrecond
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -96,5 +97,20 @@ public class TeacherPostControllerIT extends BaseControllerIT {
         verify(teacherRepository, times(1)).save(any());
 
         verify(domainEventRepository, never()).store(any());
+    }
+
+    @Test
+    public void should_rollback_all_database_changes_when_an_exception_happen() {
+        doThrow(RuntimeException.class).when(domainEventRepository).store(any());
+
+        Teacher teacher = TeacherMother.random();
+
+        post(Map.of(
+            "id", teacher.getId().getValue(),
+            "name", teacher.getName().getValue(),
+            "email", teacher.getEmail().getValue()
+        ));
+
+        assertThat(teacherRepository.find(teacher.getId()).isEmpty(), is(true));
     }
 }
