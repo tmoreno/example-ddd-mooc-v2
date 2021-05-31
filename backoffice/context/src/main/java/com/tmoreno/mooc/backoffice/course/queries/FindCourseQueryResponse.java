@@ -2,16 +2,17 @@ package com.tmoreno.mooc.backoffice.course.queries;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.Section;
+import com.tmoreno.mooc.backoffice.course.domain.SectionClass;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
-import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
+import com.tmoreno.mooc.shared.domain.Identifier;
 import com.tmoreno.mooc.shared.domain.Price;
 import com.tmoreno.mooc.shared.domain.StringValueObject;
 import com.tmoreno.mooc.shared.query.QueryResponse;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public final class FindCourseQueryResponse extends QueryResponse {
 
@@ -24,10 +25,10 @@ public final class FindCourseQueryResponse extends QueryResponse {
     private final String language;
     private final Double priceValue;
     private final String priceCurrency;
-    private final List<Section> sections;
-    private final Map<StudentId, ReviewId> reviews;
-    private final Set<StudentId> students;
-    private final Set<TeacherId> teachers;
+    private final List<SectionResponse> sections;
+    private final List<StudentReviewResponse> reviews;
+    private final Set<String> students;
+    private final Set<String> teachers;
 
     public FindCourseQueryResponse(Course course) {
         this.id = course.getId().getValue();
@@ -39,10 +40,14 @@ public final class FindCourseQueryResponse extends QueryResponse {
         this.language = course.getLanguage().map(Enum::name).orElse(null);
         this.priceValue = course.getPrice().map(Price::getValue).orElse(null);
         this.priceCurrency = course.getPrice().map(p->p.getCurrency().getCurrencyCode()).orElse(null);
-        this.sections = course.getSections();
-        this.reviews = course.getReviews();
-        this.students = course.getStudents();
-        this.teachers = course.getTeachers();
+        this.sections = course.getSections().stream().map(SectionResponse::new).collect(Collectors.toList());
+        this.students = course.getStudents().stream().map(Identifier::getValue).collect(Collectors.toSet());
+        this.teachers = course.getTeachers().stream().map(Identifier::getValue).collect(Collectors.toSet());
+        this.reviews = course.getReviews()
+                .entrySet()
+                .stream()
+                .map(entry -> new StudentReviewResponse(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
     }
 
     public String getId() {
@@ -81,19 +86,85 @@ public final class FindCourseQueryResponse extends QueryResponse {
         return priceCurrency;
     }
 
-    public List<Section> getSections() {
+    public List<SectionResponse> getSections() {
         return sections;
     }
 
-    public Map<StudentId, ReviewId> getReviews() {
+    public List<StudentReviewResponse> getReviews() {
         return reviews;
     }
 
-    public Set<StudentId> getStudents() {
+    public Set<String> getStudents() {
         return students;
     }
 
-    public Set<TeacherId> getTeachers() {
+    public Set<String> getTeachers() {
         return teachers;
+    }
+
+    public static class SectionResponse {
+        private final String id;
+        private final String title;
+        private final List<SectionClassResponse> classes;
+
+        public SectionResponse(Section section) {
+            id = section.getId().getValue();
+            title = section.getTitle().getValue();
+            classes = section.getClasses().stream().map(SectionClassResponse::new).collect(Collectors.toList());
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public List<SectionClassResponse> getClasses() {
+            return classes;
+        }
+    }
+
+    public static class SectionClassResponse {
+        private final String id;
+        private final String title;
+        private final int duration;
+
+        public SectionClassResponse(SectionClass sectionClass) {
+            id = sectionClass.getId().getValue();
+            title = sectionClass.getTitle().getValue();
+            duration = sectionClass.getDuration().getValue();
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public int getDuration() {
+            return duration;
+        }
+    }
+
+    public static class StudentReviewResponse {
+        private final String studentId;
+        private final String reviewId;
+
+        public StudentReviewResponse(StudentId studentId, ReviewId reviewId) {
+            this.studentId = studentId.getValue();
+            this.reviewId = reviewId.getValue();
+        }
+
+        public String getStudentId() {
+            return studentId;
+        }
+
+        public String getReviewId() {
+            return reviewId;
+        }
     }
 }
