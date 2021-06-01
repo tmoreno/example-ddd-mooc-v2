@@ -8,6 +8,10 @@ import java.util.Locale;
 
 public final class PriceMother {
     public static Price random() {
-        return new Price(RandomUtils.nextDouble(1, 50), Currency.getInstance(Locale.US));
+        double priceValue = RandomUtils.nextDouble(1, 50);
+
+        priceValue = Math.round(priceValue * 100.0) / 100.0;
+
+        return new Price(priceValue, Currency.getInstance(Locale.US));
     }
 }
