@@ -46,6 +46,7 @@ public final class CourseJpaDto {
     private String priceCurrency;
 
     @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id")
     private List<SectionJpaDto> sections;
 
     @ElementCollection(fetch = FetchType.EAGER)

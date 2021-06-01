@@ -7,6 +7,7 @@ import com.tmoreno.mooc.backoffice.course.domain.SectionTitle;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public final class SectionJpaDto {
     private String title;
 
     @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id")
     private List<SectionClassJpaDto> classes;
 
     public static SectionJpaDto fromSection(Section section) {
