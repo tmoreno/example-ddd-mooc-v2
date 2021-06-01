@@ -15,6 +15,7 @@ import com.tmoreno.mooc.shared.domain.Language;
 import com.tmoreno.mooc.shared.domain.Price;
 import com.tmoreno.mooc.shared.domain.StringValueObject;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -45,7 +46,7 @@ public final class CourseJpaDto {
     private Double priceValue;
     private String priceCurrency;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
     private List<SectionJpaDto> sections;
 

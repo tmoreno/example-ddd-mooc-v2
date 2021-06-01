@@ -4,6 +4,7 @@ import com.tmoreno.mooc.backoffice.course.domain.Section;
 import com.tmoreno.mooc.backoffice.course.domain.SectionId;
 import com.tmoreno.mooc.backoffice.course.domain.SectionTitle;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public final class SectionJpaDto {
 
     private String title;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
     private List<SectionClassJpaDto> classes;
 
