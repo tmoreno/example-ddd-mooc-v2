@@ -8,6 +8,7 @@ import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
+import com.tmoreno.mooc.shared.mothers.DurationInSecondsMother;
 import com.tmoreno.mooc.shared.mothers.LanguageMother;
 import com.tmoreno.mooc.shared.mothers.PriceMother;
 import org.apache.commons.lang3.RandomUtils;
@@ -35,7 +36,13 @@ public final class CourseMother {
             CourseStateMother.random(),
             LanguageMother.random(),
             PriceMother.random(),
-            List.of(SectionMother.random()),
+            List.of(
+                SectionMother.randomWithClass(
+                    SectionClassIdMother.random(),
+                    SectionClassTitleMother.random(),
+                    DurationInSecondsMother.random()
+                )
+            ),
             Map.of(studentId, ReviewIdMother.random()),
             Set.of(studentId),
             Set.of(TeacherIdMother.random())
