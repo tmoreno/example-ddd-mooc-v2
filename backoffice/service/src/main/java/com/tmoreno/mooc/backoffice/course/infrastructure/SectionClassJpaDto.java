@@ -6,7 +6,9 @@ import com.tmoreno.mooc.backoffice.course.domain.SectionClassTitle;
 import com.tmoreno.mooc.shared.domain.DurationInSeconds;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity(name = "course_section_classes")
 public final class SectionClassJpaDto {
@@ -17,12 +19,16 @@ public final class SectionClassJpaDto {
     private String title;
     private int durationInSeconds;
 
-    public static SectionClassJpaDto fromSectionClass(SectionClass sectionClass) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    private SectionJpaDto section;
+
+    public static SectionClassJpaDto fromSectionClass(SectionJpaDto section, SectionClass sectionClass) {
         SectionClassJpaDto sectionClassJpaDto = new SectionClassJpaDto();
 
         sectionClassJpaDto.setId(sectionClass.getId().getValue());
         sectionClassJpaDto.setTitle(sectionClass.getTitle().getValue());
         sectionClassJpaDto.setDurationInSeconds(sectionClass.getDuration().getValue());
+        sectionClassJpaDto.setSection(section);
 
         return sectionClassJpaDto;
     }
@@ -57,5 +63,13 @@ public final class SectionClassJpaDto {
 
     public void setDurationInSeconds(int durationInSeconds) {
         this.durationInSeconds = durationInSeconds;
+    }
+
+    public SectionJpaDto getSection() {
+        return section;
+    }
+
+    public void setSection(SectionJpaDto section) {
+        this.section = section;
     }
 }

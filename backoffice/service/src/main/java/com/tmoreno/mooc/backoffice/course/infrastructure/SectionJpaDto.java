@@ -8,7 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,16 +21,25 @@ public final class SectionJpaDto {
 
     private String title;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @OneToMany(mappedBy = "section", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<SectionClassJpaDto> classes;
 
-    public static SectionJpaDto fromSection(Section section) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    private CourseJpaDto course;
+
+    public static SectionJpaDto fromSection(CourseJpaDto course, Section section) {
         SectionJpaDto sectionJpaDto = new SectionJpaDto();
+
+        List<SectionClassJpaDto> sectionClasses = section
+                .getClasses()
+                .stream()
+                .map(sectionClass -> SectionClassJpaDto.fromSectionClass(sectionJpaDto, sectionClass))
+                .collect(Collectors.toList());
 
         sectionJpaDto.setId(section.getId().getValue());
         sectionJpaDto.setTitle(section.getTitle().getValue());
-        sectionJpaDto.setClasses(section.getClasses().stream().map(SectionClassJpaDto::fromSectionClass).collect(Collectors.toList()));
+        sectionJpaDto.setCourse(course);
+        sectionJpaDto.setClasses(sectionClasses);
 
         return sectionJpaDto;
     }
@@ -65,5 +74,13 @@ public final class SectionJpaDto {
 
     public void setClasses(List<SectionClassJpaDto> classes) {
         this.classes = classes;
+    }
+
+    public CourseJpaDto getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseJpaDto course) {
+        this.course = course;
     }
 }

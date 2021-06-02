@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS courses (
 CREATE TABLE IF NOT EXISTS course_sections (
     id CHAR(36) NOT NULL,
     title VARCHAR(100) NOT NULL,
+    course_id CHAR(36) NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -74,6 +75,7 @@ CREATE TABLE IF NOT EXISTS course_section_classes (
     id CHAR(36) NOT NULL,
     title VARCHAR(100) NOT NULL,
     duration_in_seconds INT(4) NOT NULL,
+    section_id CHAR(36) NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

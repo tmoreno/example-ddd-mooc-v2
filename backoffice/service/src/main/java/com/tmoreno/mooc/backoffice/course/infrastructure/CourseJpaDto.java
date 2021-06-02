@@ -46,8 +46,7 @@ public final class CourseJpaDto {
     private Double priceValue;
     private String priceCurrency;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<SectionJpaDto> sections;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -69,6 +68,12 @@ public final class CourseJpaDto {
     public static CourseJpaDto fromCourse(Course course) {
         CourseJpaDto courseJpaDto = new CourseJpaDto();
 
+        List<SectionJpaDto> sections = course
+                .getSections()
+                .stream()
+                .map(section -> SectionJpaDto.fromSection(courseJpaDto, section))
+                .collect(Collectors.toList());
+
         courseJpaDto.setId(course.getId().getValue());
         courseJpaDto.setTitle(course.getTitle().getValue());
         courseJpaDto.setImageUrl(course.getImageUrl().map(StringValueObject::getValue).orElse(null));
@@ -78,7 +83,7 @@ public final class CourseJpaDto {
         courseJpaDto.setLanguage(course.getLanguage().map(Enum::name).orElse(null));
         courseJpaDto.setPriceValue(course.getPrice().map(Price::getValue).orElse(null));
         courseJpaDto.setPriceCurrency(course.getPrice().map(p -> p.getCurrency().getCurrencyCode()).orElse(null));
-        courseJpaDto.setSections(course.getSections().stream().map(SectionJpaDto::fromSection).collect(Collectors.toList()));
+        courseJpaDto.setSections(sections);
         courseJpaDto.setReviews(course.getReviews().entrySet().stream().collect(Collectors.toMap(e -> e.getKey().getValue(), e -> e.getValue().getValue())));
         courseJpaDto.setStudents(course.getStudents().stream().map(Identifier::getValue).collect(Collectors.toSet()));
         courseJpaDto.setTeachers(course.getTeachers().stream().map(Identifier::getValue).collect(Collectors.toSet()));
