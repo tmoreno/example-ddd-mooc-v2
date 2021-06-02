@@ -1,5 +1,6 @@
 package com.tmoreno.mooc.backoffice.course.configuration;
 
+import com.tmoreno.mooc.backoffice.course.commands.addSection.CourseAddSectionCommand;
 import com.tmoreno.mooc.backoffice.course.commands.create.CreateCourseCommand;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.queries.FindCourseQuery;
@@ -14,6 +15,11 @@ public class CourseSpringBeansConfiguration {
     @Bean
     public CreateCourseCommand createCourseCommand(CourseRepository repository, EventBus eventBus) {
         return new CreateCourseCommand(repository, eventBus);
+    }
+
+    @Bean
+    public CourseAddSectionCommand courseAddSectionCommand(CourseRepository repository, EventBus eventBus) {
+        return new CourseAddSectionCommand(repository, eventBus);
     }
 
     @Bean
