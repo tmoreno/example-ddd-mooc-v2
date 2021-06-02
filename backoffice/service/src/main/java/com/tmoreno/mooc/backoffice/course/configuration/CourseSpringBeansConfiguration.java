@@ -1,13 +1,20 @@
 package com.tmoreno.mooc.backoffice.course.configuration;
 
+import com.tmoreno.mooc.backoffice.course.commands.create.CreateCourseCommand;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.queries.FindCourseQuery;
 import com.tmoreno.mooc.backoffice.course.queries.FindCoursesQuery;
+import com.tmoreno.mooc.shared.events.EventBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class CourseSpringBeansConfiguration {
+
+    @Bean
+    public CreateCourseCommand createCourseCommand(CourseRepository repository, EventBus eventBus) {
+        return new CreateCourseCommand(repository, eventBus);
+    }
 
     @Bean
     public FindCourseQuery findCourseQuery(CourseRepository repository) {
