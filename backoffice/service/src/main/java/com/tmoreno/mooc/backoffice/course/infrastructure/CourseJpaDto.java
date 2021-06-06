@@ -46,7 +46,7 @@ public final class CourseJpaDto {
     private Double priceValue;
     private String priceCurrency;
 
-    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SectionJpaDto> sections;
 
     @ElementCollection(fetch = FetchType.EAGER)

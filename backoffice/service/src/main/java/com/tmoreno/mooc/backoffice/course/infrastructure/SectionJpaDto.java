@@ -21,7 +21,7 @@ public final class SectionJpaDto {
 
     private String title;
 
-    @OneToMany(mappedBy = "section", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "section", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SectionClassJpaDto> classes;
 
     @ManyToOne(fetch = FetchType.LAZY)

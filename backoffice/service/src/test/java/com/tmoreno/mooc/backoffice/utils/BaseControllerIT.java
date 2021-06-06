@@ -67,6 +67,10 @@ public class BaseControllerIT {
         return restTemplate.exchange(url + "/" + id, HttpMethod.PUT, entity, String.class);
     }
 
+    public final ResponseEntity<String> delete() {
+        return restTemplate.exchange(url, HttpMethod.DELETE, HttpEntity.EMPTY, String.class);
+    }
+
     public final JsonNode toJson(String content) throws JsonProcessingException {
         return objectMapper.readTree(content);
     }
