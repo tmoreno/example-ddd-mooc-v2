@@ -6,6 +6,7 @@ import com.tmoreno.mooc.backoffice.course.commands.addTeacher.CourseAddTeacherCo
 import com.tmoreno.mooc.backoffice.course.commands.create.CreateCourseCommand;
 import com.tmoreno.mooc.backoffice.course.commands.deleteSection.CourseDeleteSectionCommand;
 import com.tmoreno.mooc.backoffice.course.commands.deleteSectionClass.CourseDeleteSectionClassCommand;
+import com.tmoreno.mooc.backoffice.course.commands.deleteTeacher.CourseDeleteTeacherCommand;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.queries.FindCourseQuery;
 import com.tmoreno.mooc.backoffice.course.queries.FindCoursesQuery;
@@ -44,6 +45,11 @@ public class CourseSpringBeansConfiguration {
     @Bean
     public CourseAddTeacherCommand courseAddTeacherCommand(CourseRepository repository, EventBus eventBus) {
         return new CourseAddTeacherCommand(repository, eventBus);
+    }
+
+    @Bean
+    public CourseDeleteTeacherCommand courseDeleteTeacherCommand(CourseRepository repository, EventBus eventBus) {
+        return new CourseDeleteTeacherCommand(repository, eventBus);
     }
 
     @Bean
