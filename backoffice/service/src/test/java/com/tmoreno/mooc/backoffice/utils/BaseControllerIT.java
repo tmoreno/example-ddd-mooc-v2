@@ -57,6 +57,10 @@ public class BaseControllerIT {
         return restTemplate.getForEntity(url + "/" + id, String.class);
     }
 
+    public final ResponseEntity<String> post() {
+        return restTemplate.postForEntity(url, null, String.class);
+    }
+
     public final ResponseEntity<String> post(Map<String, Object> request) {
         return restTemplate.postForEntity(url, request, String.class);
     }
