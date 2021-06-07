@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.commands;
 
-import com.tmoreno.mooc.backoffice.course.commands.changeSectionTitle.CourseChangeSectionTitleCommand;
-import com.tmoreno.mooc.backoffice.course.commands.changeSectionTitle.CourseChangeSectionTitleCommandParams;
+import com.tmoreno.mooc.backoffice.course.commands.changeSection.ChangeCourseSectionCommand;
+import com.tmoreno.mooc.backoffice.course.commands.changeSection.ChangeCourseSectionCommandParams;
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.Section;
@@ -35,12 +35,12 @@ public class CourseChangeSectionTitleCommandTest {
 
     private FakeEventBus eventBus;
 
-    private CourseChangeSectionTitleCommand command;
+    private ChangeCourseSectionCommand command;
 
     @BeforeEach
     public void setUp() {
         eventBus = new FakeEventBus();
-        command = new CourseChangeSectionTitleCommand(repository, eventBus);
+        command = new ChangeCourseSectionCommand(repository, eventBus);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class CourseChangeSectionTitleCommandTest {
 
         when(repository.find(course.getId())).thenReturn(Optional.of(course));
 
-        CourseChangeSectionTitleCommandParams params = new CourseChangeSectionTitleCommandParams();
+        ChangeCourseSectionCommandParams params = new ChangeCourseSectionCommandParams();
         params.setCourseId(course.getId().getValue());
         params.setSectionId(section.getId().getValue());
         params.setTitle(title.getValue());
@@ -66,9 +66,30 @@ public class CourseChangeSectionTitleCommandTest {
     }
 
     @Test
+    public void given_a_course_when_change_section_title_with_same_value_then_section_title_is_not_changed_and_an_event_is_not_published() {
+        Section section = SectionMother.random();
+        Course course = CourseMother.randomInDraftStateWithSection(section);
+
+        when(repository.find(course.getId())).thenReturn(Optional.of(course));
+
+        ChangeCourseSectionCommandParams params = new ChangeCourseSectionCommandParams();
+        params.setCourseId(course.getId().getValue());
+        params.setSectionId(section.getId().getValue());
+        params.setTitle(section.getTitle().getValue());
+
+        command.execute(params);
+
+        assertThat(course.getSections().get(0).getTitle(), is(section.getTitle()));
+
+        verify(repository).save(course);
+
+        assertThat(eventBus.getEvents().isEmpty(), is(true));
+    }
+
+    @Test
     public void given_a_not_existing_course_when_change_section_title_then_throws_exception() {
         assertThrows(CourseNotFoundException.class, () -> {
-            CourseChangeSectionTitleCommandParams params = new CourseChangeSectionTitleCommandParams();
+            ChangeCourseSectionCommandParams params = new ChangeCourseSectionCommandParams();
             params.setCourseId(CourseIdMother.random().getValue());
             params.setSectionId(SectionIdMother.random().getValue());
             params.setTitle(SectionTitleMother.random().getValue());
