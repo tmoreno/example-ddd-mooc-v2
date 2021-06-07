@@ -49,8 +49,8 @@ public class CourseDiscardPostControllerIT extends BaseControllerIT {
     }
 
     @Test
-    public void given_a_not_published_course_when_send_discard_request_then_receive_precondition_failed_response() {
-        Course course = CourseMother.randomInNotPublishState();
+    public void given_a_discarded_course_when_send_discard_request_then_receive_precondition_failed_response() {
+        Course course = CourseMother.randomInDiscardedState();
         courseRepository.save(course);
 
         url = String.format(url, course.getId().getValue());
