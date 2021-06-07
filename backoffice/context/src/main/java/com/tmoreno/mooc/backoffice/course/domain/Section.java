@@ -50,30 +50,4 @@ public final class Section extends Entity<SectionId> {
             throw new CourseSectionClassNotFoundException(sectionClassId);
         }
     }
-
-    public void changeSectionClassTitle(SectionClassId sectionClassId, SectionClassTitle title) {
-        classes
-            .stream()
-            .filter(sectionClass -> sectionClass.getId().equals(sectionClassId))
-            .findFirst()
-            .ifPresentOrElse(
-                sectionClass -> sectionClass.changeTitle(title),
-                () -> {
-                    throw new CourseSectionClassNotFoundException(sectionClassId);
-                }
-            );
-    }
-
-    public void changeSectionClassDuration(SectionClassId sectionClassId, DurationInSeconds duration) {
-        classes
-            .stream()
-            .filter(sectionClass -> sectionClass.getId().equals(sectionClassId))
-            .findFirst()
-            .ifPresentOrElse(
-                sectionClass -> sectionClass.changeDuration(duration),
-                () -> {
-                    throw new CourseSectionClassNotFoundException(sectionClassId);
-                }
-            );
-    }
 }

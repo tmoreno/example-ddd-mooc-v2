@@ -20,6 +20,7 @@ import com.tmoreno.mooc.backoffice.course.domain.events.CourseTeacherDeletedDoma
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseTitleChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.ChangeCourseAttributeException;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseReviewNotFoundException;
+import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseSectionClassNotFoundException;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseSectionNotFoundException;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseStudentNotFoundException;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseTeacherNotFoundException;
@@ -395,8 +396,16 @@ public final class Course extends AggregateRoot<CourseId> {
             .findFirst()
             .ifPresentOrElse(
                 section -> {
-                    section.changeSectionClassTitle(sectionClassId, title);
-                    recordEvent(new CourseSectionClassTitleChangedDomainEvent(id, sectionId, sectionClassId, title));
+                    SectionClass sectionClass = section.getClasses()
+                            .stream()
+                            .filter(c -> c.getId().equals(sectionClassId))
+                            .findFirst()
+                            .orElseThrow(() -> new CourseSectionClassNotFoundException(sectionClassId));
+
+                    if (title != null && !Objects.equals(title, sectionClass.getTitle())) {
+                        sectionClass.changeTitle(title);
+                        recordEvent(new CourseSectionClassTitleChangedDomainEvent(id, sectionId, sectionClassId, title));
+                    }
                 },
                 ()-> {
                     throw new CourseSectionNotFoundException(sectionId);
@@ -415,8 +424,16 @@ public final class Course extends AggregateRoot<CourseId> {
             .findFirst()
             .ifPresentOrElse(
                 section -> {
-                    section.changeSectionClassDuration(sectionClassId, duration);
-                    recordEvent(new CourseSectionClassDurationChangedDomainEvent(id, sectionId, sectionClassId, duration));
+                    SectionClass sectionClass = section.getClasses()
+                            .stream()
+                            .filter(c -> c.getId().equals(sectionClassId))
+                            .findFirst()
+                            .orElseThrow(() -> new CourseSectionClassNotFoundException(sectionClassId));
+
+                    if (duration != null && !Objects.equals(duration, sectionClass.getDuration())) {
+                        sectionClass.changeDuration(duration);
+                        recordEvent(new CourseSectionClassDurationChangedDomainEvent(id, sectionId, sectionClassId, duration));
+                    }
                 },
                 ()-> {
                     throw new CourseSectionNotFoundException(sectionId);
