@@ -124,17 +124,6 @@ public class CourseTest {
     }
 
     @Test
-    public void given_a_course_without_title_when_publish_then_throws_an_exception() {
-        assertThrows(PublishCourseException.class, () -> {
-            Course course = CourseMother.randomReadyToPublish();
-
-            course.changeTitle(null);
-
-            course.publish();
-        });
-    }
-
-    @Test
     public void given_a_course_without_image_when_publish_then_throws_an_exception() {
         assertThrows(PublishCourseException.class, () -> {
             Course course = CourseMother.randomReadyToPublish();
@@ -266,6 +255,19 @@ public class CourseTest {
     }
 
     @Test
+    public void given_a_course_in_draft_state_when_change_the_title_with_same_value_then_title_is_not_changed_and_an_event_is_not_recorded() {
+        Course course = CourseMother.randomInDraftState();
+        CourseTitle title = course.getTitle();
+
+        course.changeTitle(title);
+
+        assertThat(course.getTitle(), is(title));
+
+        List<DomainEvent> domainEvents = course.pullEvents();
+        assertThat(domainEvents.isEmpty(), is(true));
+    }
+
+    @Test
     public void given_a_course_in_not_draft_state_when_change_the_title_then_throws_an_exception() {
         Assertions.assertThrows(ChangeCourseAttributeException.class, () -> {
             Course course = CourseMother.randomInNotDraftState();
@@ -289,6 +291,19 @@ public class CourseTest {
         CourseImageChangedDomainEvent event = (CourseImageChangedDomainEvent) domainEvents.get(0);
 
         assertThat(imageUrl, is(event.getImageUrl()));
+    }
+
+    @Test
+    public void given_a_course_in_draft_state_when_change_the_image_url_with_same_value_then_image_url_is_not_changed_and_event_is_not_recorded() {
+        Course course = CourseMother.randomInDraftState();
+        CourseImageUrl imageUrl = course.getImageUrl().get();
+
+        course.changeImageUrl(imageUrl);
+
+        assertThat(course.getImageUrl().get(), is(imageUrl));
+
+        List<DomainEvent> domainEvents = course.pullEvents();
+        assertThat(domainEvents.isEmpty(), is(true));
     }
 
     @Test
@@ -318,6 +333,19 @@ public class CourseTest {
     }
 
     @Test
+    public void given_a_course_in_draft_state_when_change_the_summary_with_same_value_then_summary_is_not_changed_and_an_event_is_not_recorded() {
+        Course course = CourseMother.randomInDraftState();
+        CourseSummary summary = course.getSummary().get();
+
+        course.changeSummary(summary);
+
+        assertThat(course.getSummary().get(), is(summary));
+
+        List<DomainEvent> domainEvents = course.pullEvents();
+        assertThat(domainEvents.isEmpty(), is(true));
+    }
+
+    @Test
     public void given_a_course_in_not_draft_state_when_change_the_summary_then_throws_an_exception() {
         Assertions.assertThrows(ChangeCourseAttributeException.class, () -> {
             Course course = CourseMother.randomInNotDraftState();
@@ -344,6 +372,19 @@ public class CourseTest {
     }
 
     @Test
+    public void given_a_course_in_draft_state_when_change_the_description_with_same_value_then_description_is_not_changed_and_an_event_is_not_recorded() {
+        Course course = CourseMother.randomInDraftState();
+        CourseDescription description = course.getDescription().get();
+
+        course.changeDescription(description);
+
+        assertThat(course.getDescription().get(), is(description));
+
+        List<DomainEvent> domainEvents = course.pullEvents();
+        assertThat(domainEvents.isEmpty(), is(true));
+    }
+
+    @Test
     public void given_a_course_in_not_draft_state_when_change_the_description_then_throws_an_exception() {
         Assertions.assertThrows(ChangeCourseAttributeException.class, () -> {
             Course course = CourseMother.randomInNotDraftState();
@@ -355,7 +396,7 @@ public class CourseTest {
     @Test
     public void given_a_course_in_draft_state_when_change_the_language_then_language_is_changed_and_an_event_is_recorded() {
         Course course = CourseMother.randomInDraftState();
-        Language language = LanguageMother.random();
+        Language language = course.getLanguage().get() == Language.ENGLISH ? Language.SPANISH : Language.ENGLISH;
 
         course.changeLanguage(language);
 
@@ -367,6 +408,19 @@ public class CourseTest {
         CourseLanguageChangedDomainEvent event = (CourseLanguageChangedDomainEvent) domainEvents.get(0);
 
         assertThat(language, is(event.getLanguage()));
+    }
+
+    @Test
+    public void given_a_course_in_draft_state_when_change_the_language_with_same_value_then_language_is_not_changed_and_an_event_is_not_recorded() {
+        Course course = CourseMother.randomInDraftState();
+        Language language = course.getLanguage().get();
+
+        course.changeLanguage(language);
+
+        assertThat(course.getLanguage().get(), is(language));
+
+        List<DomainEvent> domainEvents = course.pullEvents();
+        assertThat(domainEvents.isEmpty(), is(true));
     }
 
     @Test
@@ -393,6 +447,19 @@ public class CourseTest {
         CoursePriceChangedDomainEvent event = (CoursePriceChangedDomainEvent) domainEvents.get(0);
 
         assertThat(price, is(event.getPrice()));
+    }
+
+    @Test
+    public void given_a_course_in_draft_state_when_change_the_price_with_same_value_then_price_is_not_changed_and_an_event_not_is_recorded() {
+        Course course = CourseMother.randomInDraftState();
+        Price price = course.getPrice().get();
+
+        course.changePrice(price);
+
+        assertThat(course.getPrice().get(), is(price));
+
+        List<DomainEvent> domainEvents = course.pullEvents();
+        assertThat(domainEvents.isEmpty(), is(true));
     }
 
     @Test

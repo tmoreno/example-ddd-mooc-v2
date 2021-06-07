@@ -14,7 +14,6 @@ import com.tmoreno.mooc.shared.domain.Price;
 import com.tmoreno.mooc.shared.events.EventBus;
 
 import java.util.Currency;
-import java.util.Objects;
 
 public final class ChangeCourseCommand implements Command<ChangeCourseCommandParams> {
 
@@ -38,29 +37,12 @@ public final class ChangeCourseCommand implements Command<ChangeCourseCommandPar
 
         Course course = repository.find(courseId).orElseThrow(() -> new CourseNotFoundException(courseId));
 
-        if (title != null && !Objects.equals(title, course.getTitle())) {
-            course.changeTitle(title);
-        }
-
-        if (!Objects.equals(imageUrl, course.getImageUrl().orElse(null))) {
-            course.changeImageUrl(imageUrl);
-        }
-
-        if (!Objects.equals(summary, course.getSummary().orElse(null))) {
-            course.changeSummary(summary);
-        }
-
-        if (!Objects.equals(description, course.getDescription().orElse(null))) {
-            course.changeDescription(description);
-        }
-
-        if (!Objects.equals(language, course.getLanguage().orElse(null))) {
-            course.changeLanguage(language);
-        }
-
-        if (!Objects.equals(price, course.getPrice().orElse(null))) {
-            course.changePrice(price);
-        }
+        course.changeTitle(title);
+        course.changeImageUrl(imageUrl);
+        course.changeSummary(summary);
+        course.changeDescription(description);
+        course.changeLanguage(language);
+        course.changePrice(price);
 
         repository.save(course);
 

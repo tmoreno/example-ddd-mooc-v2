@@ -38,6 +38,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -189,9 +190,11 @@ public final class Course extends AggregateRoot<CourseId> {
             throw new ChangeCourseAttributeException("Change course title is not allowed because is not in DRAFT state");
         }
 
-        this.title = title;
+        if (title != null && !Objects.equals(title, this.title)) {
+            this.title = title;
 
-        recordEvent(new CourseTitleChangedDomainEvent(id, title));
+            recordEvent(new CourseTitleChangedDomainEvent(id, title));
+        }
     }
 
     public Optional<CourseImageUrl> getImageUrl() {
@@ -203,9 +206,11 @@ public final class Course extends AggregateRoot<CourseId> {
             throw new ChangeCourseAttributeException("Change course image url is not allowed because is not in DRAFT state");
         }
 
-        this.imageUrl = imageUrl;
+        if (!Objects.equals(imageUrl, this.imageUrl)) {
+            this.imageUrl = imageUrl;
 
-        recordEvent(new CourseImageChangedDomainEvent(id, imageUrl));
+            recordEvent(new CourseImageChangedDomainEvent(id, imageUrl));
+        }
     }
 
     public Optional<CourseSummary> getSummary() {
@@ -217,9 +222,11 @@ public final class Course extends AggregateRoot<CourseId> {
             throw new ChangeCourseAttributeException("Change course summary is not allowed because is not in DRAFT state");
         }
 
-        this.summary = summary;
+        if (!Objects.equals(summary, this.summary)) {
+            this.summary = summary;
 
-        recordEvent(new CourseSummaryChangedDomainEvent(id, summary));
+            recordEvent(new CourseSummaryChangedDomainEvent(id, summary));
+        }
     }
 
     public Optional<CourseDescription> getDescription() {
@@ -231,9 +238,11 @@ public final class Course extends AggregateRoot<CourseId> {
             throw new ChangeCourseAttributeException("Change course description is not allowed because is not in DRAFT state");
         }
 
-        this.description = description;
+        if (!Objects.equals(description, this.description)) {
+            this.description = description;
 
-        recordEvent(new CourseDescriptionChangedDomainEvent(id, description));
+            recordEvent(new CourseDescriptionChangedDomainEvent(id, description));
+        }
     }
 
     public CourseState getState() {
@@ -249,9 +258,11 @@ public final class Course extends AggregateRoot<CourseId> {
             throw new ChangeCourseAttributeException("Change course language is not allowed because is not in DRAFT state");
         }
 
-        this.language = language;
+        if (!Objects.equals(language, this.language)) {
+            this.language = language;
 
-        recordEvent(new CourseLanguageChangedDomainEvent(id, language));
+            recordEvent(new CourseLanguageChangedDomainEvent(id, language));
+        }
     }
 
     public Optional<Price> getPrice() {
@@ -263,9 +274,11 @@ public final class Course extends AggregateRoot<CourseId> {
             throw new ChangeCourseAttributeException("Change course price is not allowed because is not in DRAFT state");
         }
 
-        this.price = price;
+        if (!Objects.equals(price, this.price)) {
+            this.price = price;
 
-        recordEvent(new CoursePriceChangedDomainEvent(id, price));
+            recordEvent(new CoursePriceChangedDomainEvent(id, price));
+        }
     }
 
     public List<Section> getSections() {
