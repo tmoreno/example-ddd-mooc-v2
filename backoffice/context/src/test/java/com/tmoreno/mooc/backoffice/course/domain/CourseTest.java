@@ -558,6 +558,20 @@ public class CourseTest {
     }
 
     @Test
+    public void given_a_course_in_draft_state_with_sections_when_change_section_title_with_same_value_then_section_title_is_not_changed_and_event_is_not_recorded() {
+        Section section = SectionMother.random();
+        SectionTitle sectionTitle = section.getTitle();
+        Course course = CourseMother.randomInDraftStateWithSection(section);
+
+        course.changeSectionTitle(section.getId(), sectionTitle);
+
+        assertThat(getSection(course, section.getId()).getTitle(), is(sectionTitle));
+
+        List<DomainEvent> domainEvents = course.pullEvents();
+        assertThat(domainEvents.isEmpty(), is(true));
+    }
+
+    @Test
     public void given_a_course_in_draft_state_with_sections_when_change_section_title_for_a_not_existing_state_then_throws_an_exception() {
         assertThrows(CourseSectionNotFoundException.class, () -> {
             Section section = SectionMother.random();

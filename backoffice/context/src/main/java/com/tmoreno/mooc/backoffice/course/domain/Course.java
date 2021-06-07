@@ -322,8 +322,10 @@ public final class Course extends AggregateRoot<CourseId> {
             .findFirst()
             .ifPresentOrElse(
                 section -> {
-                    section.changeTitle(title);
-                    recordEvent(new CourseSectionTitleChangedDomainEvent(id, sectionId, title));
+                    if (title != null && !Objects.equals(title, section.getTitle())) {
+                        section.changeTitle(title);
+                        recordEvent(new CourseSectionTitleChangedDomainEvent(id, sectionId, title));
+                    }
                 },
                 ()-> {
                     throw new CourseSectionNotFoundException(sectionId);

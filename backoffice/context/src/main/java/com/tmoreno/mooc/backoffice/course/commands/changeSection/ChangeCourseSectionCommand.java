@@ -3,15 +3,11 @@ package com.tmoreno.mooc.backoffice.course.commands.changeSection;
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
-import com.tmoreno.mooc.backoffice.course.domain.Section;
 import com.tmoreno.mooc.backoffice.course.domain.SectionId;
 import com.tmoreno.mooc.backoffice.course.domain.SectionTitle;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseNotFoundException;
-import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseSectionNotFoundException;
 import com.tmoreno.mooc.shared.command.Command;
 import com.tmoreno.mooc.shared.events.EventBus;
-
-import java.util.Objects;
 
 public final class ChangeCourseSectionCommand implements Command<ChangeCourseSectionCommandParams> {
 
@@ -31,15 +27,7 @@ public final class ChangeCourseSectionCommand implements Command<ChangeCourseSec
 
         Course course = repository.find(courseId).orElseThrow(() -> new CourseNotFoundException(courseId));
 
-        Section section = course.getSections()
-                .stream()
-                .filter(s -> s.getId().equals(sectionId))
-                .findFirst()
-                .orElseThrow(() -> new CourseSectionNotFoundException(sectionId));
-
-        if (title != null && !Objects.equals(title, section.getTitle())) {
-            course.changeSectionTitle(sectionId, title);
-        }
+        course.changeSectionTitle(sectionId, title);
 
         repository.save(course);
 
