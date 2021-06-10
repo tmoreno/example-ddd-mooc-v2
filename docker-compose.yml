@@ -15,3 +15,14 @@ services:
     volumes:
       - "./backoffice/service/src/main/resources/database/:/docker-entrypoint-initdb.d/"
     command: [ "--default-authentication-plugin=mysql_native_password" ]
+
+  rabbitmq:
+    image: rabbitmq:3.8.17-management
+    container_name: mooc-rabbitmq
+    ports:
+      - 5672:5672
+      - 8090:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=mooc
+      - RABBITMQ_DEFAULT_PASS=mooc
+
