@@ -10,7 +10,7 @@ import com.tmoreno.mooc.shared.domain.CreatedOn;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
+import java.time.Instant;
 
 @Entity(name = "reviews")
 public final class ReviewJpaDto {
@@ -22,7 +22,7 @@ public final class ReviewJpaDto {
     private String studentId;
     private String rating;
     private String text;
-    private Date createdOn;
+    private Instant createdOn;
 
     public static ReviewJpaDto fromReview(Review review) {
         ReviewJpaDto reviewJpaDto = new ReviewJpaDto();
@@ -32,7 +32,7 @@ public final class ReviewJpaDto {
         reviewJpaDto.setStudentId(review.getStudentId().getValue());
         reviewJpaDto.setRating(review.getRating().name());
         reviewJpaDto.setText(review.getText().getValue());
-        reviewJpaDto.setCreatedOn(new Date(review.getCreatedOn().getValue()));
+        reviewJpaDto.setCreatedOn(Instant.ofEpochMilli(review.getCreatedOn().getValue()));
 
         return reviewJpaDto;
     }
@@ -44,7 +44,7 @@ public final class ReviewJpaDto {
             new StudentId(reviewJpaDto.getStudentId()),
             ReviewRating.valueOf(reviewJpaDto.getRating()),
             new ReviewText(reviewJpaDto.getText()),
-            new CreatedOn(reviewJpaDto.getCreatedOn().getTime())
+            new CreatedOn(reviewJpaDto.getCreatedOn().toEpochMilli())
         );
     }
 
@@ -88,11 +88,11 @@ public final class ReviewJpaDto {
         this.text = text;
     }
 
-    public Date getCreatedOn() {
+    public Instant getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Date createdOn) {
+    public void setCreatedOn(Instant createdOn) {
         this.createdOn = createdOn;
     }
 }
