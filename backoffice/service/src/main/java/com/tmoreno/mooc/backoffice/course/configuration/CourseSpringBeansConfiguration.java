@@ -4,6 +4,8 @@ import com.tmoreno.mooc.backoffice.course.commands.addSection.CourseAddSectionCo
 import com.tmoreno.mooc.backoffice.course.commands.addSectionClass.CourseAddSectionClassCommand;
 import com.tmoreno.mooc.backoffice.course.commands.addTeacher.CourseAddTeacherCommand;
 import com.tmoreno.mooc.backoffice.course.commands.changeCourse.ChangeCourseCommand;
+import com.tmoreno.mooc.backoffice.course.commands.changeSection.ChangeCourseSectionCommand;
+import com.tmoreno.mooc.backoffice.course.commands.changeSectionClass.ChangeCourseSectionClassCommand;
 import com.tmoreno.mooc.backoffice.course.commands.create.CreateCourseCommand;
 import com.tmoreno.mooc.backoffice.course.commands.deleteSection.CourseDeleteSectionCommand;
 import com.tmoreno.mooc.backoffice.course.commands.deleteSectionClass.CourseDeleteSectionClassCommand;
@@ -46,6 +48,11 @@ public class CourseSpringBeansConfiguration {
     }
 
     @Bean
+    public ChangeCourseSectionCommand changeCourseSectionCommand(CourseRepository repository, EventBus eventBus) {
+        return new ChangeCourseSectionCommand(repository, eventBus);
+    }
+
+    @Bean
     public CourseDeleteSectionCommand courseDeleteSectionCommand(CourseRepository repository, EventBus eventBus) {
         return new CourseDeleteSectionCommand(repository, eventBus);
     }
@@ -53,6 +60,11 @@ public class CourseSpringBeansConfiguration {
     @Bean
     public CourseAddSectionClassCommand courseAddSectionClassCommand(CourseRepository repository, EventBus eventBus) {
         return new CourseAddSectionClassCommand(repository, eventBus);
+    }
+
+    @Bean
+    public ChangeCourseSectionClassCommand changeCourseSectionClassCommand(CourseRepository repository, EventBus eventBus) {
+        return new ChangeCourseSectionClassCommand(repository, eventBus);
     }
 
     @Bean
