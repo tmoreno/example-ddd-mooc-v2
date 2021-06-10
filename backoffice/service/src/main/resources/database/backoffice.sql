@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS domain_events (
     version INT(10) NOT NULL,
     body JSON NOT NULL,
     occurred_on DATETIME(3) NOT NULL,
+    published_on DATETIME(3) NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
