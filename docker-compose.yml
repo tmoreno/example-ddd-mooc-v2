@@ -16,6 +16,20 @@ services:
       - "./backoffice/service/src/main/resources/database/:/docker-entrypoint-initdb.d/"
     command: [ "--default-authentication-plugin=mysql_native_password" ]
 
+  frontoffice-db:
+    image: mysql:8.0.25
+    container_name: frontoffice-db
+    environment:
+      MYSQL_ROOT_PASSWORD: frontoffice
+      MYSQL_DATABASE: frontoffice
+      MYSQL_USER: frontoffice
+      MYSQL_PASSWORD: frontoffice
+    ports:
+      - 3316:3306
+    volumes:
+      - "./frontoffice/service/src/main/resources/database/:/docker-entrypoint-initdb.d/"
+    command: [ "--default-authentication-plugin=mysql_native_password" ]
+
   rabbitmq:
     image: rabbitmq:3.8.17-management
     container_name: mooc-rabbitmq
