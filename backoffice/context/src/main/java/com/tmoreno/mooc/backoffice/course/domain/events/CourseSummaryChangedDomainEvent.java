@@ -24,11 +24,11 @@ public final class CourseSummaryChangedDomainEvent extends DomainEvent {
         return 1;
     }
 
-    public CourseId getCourseId() {
-        return courseId;
+    public String getCourseId() {
+        return courseId.getValue();
     }
 
-    public CourseSummary getSummary() {
-        return summary;
+    public String getSummary() {
+        return summary.getValue();
     }
 }

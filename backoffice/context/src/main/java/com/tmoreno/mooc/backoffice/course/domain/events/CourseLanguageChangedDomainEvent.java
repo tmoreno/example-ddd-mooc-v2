@@ -24,11 +24,11 @@ public final class CourseLanguageChangedDomainEvent extends DomainEvent {
         return 1;
     }
 
-    public CourseId getCourseId() {
-        return courseId;
+    public String getCourseId() {
+        return courseId.getValue();
     }
 
-    public Language getLanguage() {
-        return language;
+    public String getLanguage() {
+        return language.name();
     }
 }

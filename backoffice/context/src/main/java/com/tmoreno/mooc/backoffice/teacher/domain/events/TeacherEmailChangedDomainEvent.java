@@ -24,11 +24,11 @@ public final class TeacherEmailChangedDomainEvent extends DomainEvent {
         return 1;
     }
 
-    public TeacherId getTeacherId() {
-        return teacherId;
+    public String getTeacherId() {
+        return teacherId.getValue();
     }
 
-    public Email getEmail() {
-        return email;
+    public String getEmail() {
+        return email.getValue();
     }
 }

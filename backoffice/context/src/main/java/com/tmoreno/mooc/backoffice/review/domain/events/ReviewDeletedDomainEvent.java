@@ -27,15 +27,15 @@ public final class ReviewDeletedDomainEvent extends DomainEvent {
         return 1;
     }
 
-    public ReviewId getReviewId() {
-        return reviewId;
+    public String getReviewId() {
+        return reviewId.getValue();
     }
 
-    public CourseId getCourseId() {
-        return courseId;
+    public String getCourseId() {
+        return courseId.getValue();
     }
 
-    public StudentId getStudentId() {
-        return studentId;
+    public String getStudentId() {
+        return studentId.getValue();
     }
 }

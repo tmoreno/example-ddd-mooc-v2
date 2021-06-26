@@ -24,11 +24,11 @@ public final class CourseTeacherDeletedDomainEvent extends DomainEvent {
         return 1;
     }
 
-    public CourseId getCourseId() {
-        return courseId;
+    public String getCourseId() {
+        return courseId.getValue();
     }
 
-    public TeacherId getTeacherId() {
-        return teacherId;
+    public String getTeacherId() {
+        return teacherId.getValue();
     }
 }

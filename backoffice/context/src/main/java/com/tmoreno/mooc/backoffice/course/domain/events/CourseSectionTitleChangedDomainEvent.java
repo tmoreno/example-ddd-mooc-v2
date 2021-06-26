@@ -27,15 +27,15 @@ public final class CourseSectionTitleChangedDomainEvent extends DomainEvent {
         return 1;
     }
 
-    public CourseId getCourseId() {
-        return courseId;
+    public String getCourseId() {
+        return courseId.getValue();
     }
 
-    public SectionId getSectionId() {
-        return sectionId;
+    public String getSectionId() {
+        return sectionId.getValue();
     }
 
-    public SectionTitle getTitle() {
-        return title;
+    public String getTitle() {
+        return title.getValue();
     }
 }

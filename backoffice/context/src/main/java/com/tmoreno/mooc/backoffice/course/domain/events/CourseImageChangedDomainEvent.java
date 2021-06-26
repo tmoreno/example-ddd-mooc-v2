@@ -24,11 +24,11 @@ public final class CourseImageChangedDomainEvent extends DomainEvent {
         return 1;
     }
 
-    public CourseId getCourseId() {
-        return courseId;
+    public String getCourseId() {
+        return courseId.getValue();
     }
 
-    public CourseImageUrl getImageUrl() {
-        return imageUrl;
+    public String getImageUrl() {
+        return imageUrl.getValue();
     }
 }

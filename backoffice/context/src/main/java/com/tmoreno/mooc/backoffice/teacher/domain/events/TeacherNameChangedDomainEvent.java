@@ -24,11 +24,11 @@ public final class TeacherNameChangedDomainEvent extends DomainEvent {
         return 1;
     }
 
-    public TeacherId getTeacherId() {
-        return teacherId;
+    public String getTeacherId() {
+        return teacherId.getValue();
     }
 
-    public PersonName getName() {
-        return name;
+    public String getName() {
+        return name.getValue();
     }
 }

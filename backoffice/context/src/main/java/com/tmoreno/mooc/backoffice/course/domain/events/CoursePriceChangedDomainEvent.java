@@ -24,11 +24,15 @@ public final class CoursePriceChangedDomainEvent extends DomainEvent {
         return 1;
     }
 
-    public CourseId getCourseId() {
-        return courseId;
+    public String getCourseId() {
+        return courseId.getValue();
     }
 
-    public Price getPrice() {
-        return price;
+    public double getPriceValue() {
+        return price.getValue();
+    }
+
+    public String getPriceCurrency() {
+        return price.getCurrency().getCurrencyCode();
     }
 }

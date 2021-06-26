@@ -18,8 +18,8 @@ public final class StudentEmailChangedDomainEventHandler implements EventHandler
 
     @Override
     public void handle(StudentEmailChangedDomainEvent event) {
-        StudentId studentId = event.getStudentId();
-        Email email = event.getEmail();
+        StudentId studentId = new StudentId(event.getStudentId());
+        Email email = new Email(event.getEmail());
 
         Student student = repository.find(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));
 

@@ -39,23 +39,23 @@ public final class CourseSectionClassAddedDomainEvent extends DomainEvent {
         return 1;
     }
 
-    public CourseId getCourseId() {
-        return courseId;
+    public String getCourseId() {
+        return courseId.getValue();
     }
 
-    public SectionId getSectionId() {
-        return sectionId;
+    public String getSectionId() {
+        return sectionId.getValue();
     }
 
-    public SectionClassId getSectionClassId() {
-        return sectionClassId;
+    public String getSectionClassId() {
+        return sectionClassId.getValue();
     }
 
-    public SectionClassTitle getTitle() {
-        return title;
+    public String getTitle() {
+        return title.getValue();
     }
 
-    public DurationInSeconds getDuration() {
-        return duration;
+    public int getDuration() {
+        return duration.getValue();
     }
 }

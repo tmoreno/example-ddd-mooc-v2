@@ -27,15 +27,15 @@ public final class StudentCreatedDomainEvent extends DomainEvent {
         return 1;
     }
 
-    public StudentId getStudentId() {
-        return studentId;
+    public String getStudentId() {
+        return studentId.getValue();
     }
 
-    public PersonName getName() {
-        return name;
+    public String getName() {
+        return name.getValue();
     }
 
-    public Email getEmail() {
-        return email;
+    public String getEmail() {
+        return email.getValue();
     }
 }

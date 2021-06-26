@@ -18,8 +18,8 @@ public final class StudentNameChangedDomainEventHandler implements EventHandler<
 
     @Override
     public void handle(StudentNameChangedDomainEvent event) {
-        StudentId studentId = event.getStudentId();
-        PersonName name = event.getName();
+        StudentId studentId = new StudentId(event.getStudentId());
+        PersonName name = new PersonName(event.getName());
 
         Student student = repository.find(studentId).orElseThrow(() -> new StudentNotFoundException(studentId));
 

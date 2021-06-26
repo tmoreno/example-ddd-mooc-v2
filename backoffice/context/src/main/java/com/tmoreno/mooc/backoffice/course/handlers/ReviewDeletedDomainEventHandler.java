@@ -19,9 +19,9 @@ public final class ReviewDeletedDomainEventHandler implements EventHandler<Revie
 
     @Override
     public void handle(ReviewDeletedDomainEvent event) {
-        ReviewId reviewId = event.getReviewId();
-        CourseId courseId = event.getCourseId();
-        StudentId studentId = event.getStudentId();
+        ReviewId reviewId = new ReviewId(event.getReviewId());
+        CourseId courseId = new CourseId(event.getCourseId());
+        StudentId studentId = new StudentId(event.getStudentId());
 
         Course course = repository.find(courseId).orElseThrow(() -> new CourseNotFoundException(courseId));
 

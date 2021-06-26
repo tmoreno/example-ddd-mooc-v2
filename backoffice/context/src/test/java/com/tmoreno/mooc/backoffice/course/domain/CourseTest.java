@@ -94,8 +94,8 @@ public class CourseTest {
 
         CourseCreatedDomainEvent event = (CourseCreatedDomainEvent) domainEvents.get(0);
 
-        assertThat(courseId, is(event.getCourseId()));
-        assertThat(title, is(event.getTitle()));
+        assertThat(courseId.getValue(), is(event.getCourseId()));
+        assertThat(title.getValue(), is(event.getTitle()));
     }
 
     @Test
@@ -111,7 +111,7 @@ public class CourseTest {
 
         CoursePublishedDomainEvent event = (CoursePublishedDomainEvent) domainEvents.get(0);
 
-        assertThat(course.getId(), is(event.getCourseId()));
+        assertThat(course.getId().getValue(), is(event.getCourseId()));
     }
 
     @Test
@@ -209,7 +209,7 @@ public class CourseTest {
 
         CourseDiscardedDomainEvent event = (CourseDiscardedDomainEvent) domainEvents.get(0);
 
-        assertThat(course.getId(), is(event.getCourseId()));
+        assertThat(course.getId().getValue(), is(event.getCourseId()));
     }
 
     @Test
@@ -225,7 +225,7 @@ public class CourseTest {
 
         CourseDiscardedDomainEvent event = (CourseDiscardedDomainEvent) domainEvents.get(0);
 
-        assertThat(course.getId(), is(event.getCourseId()));
+        assertThat(course.getId().getValue(), is(event.getCourseId()));
     }
 
     @Test
@@ -251,7 +251,7 @@ public class CourseTest {
 
         CourseTitleChangedDomainEvent event = (CourseTitleChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(title, is(event.getTitle()));
+        assertThat(title.getValue(), is(event.getTitle()));
     }
 
     @Test
@@ -290,7 +290,7 @@ public class CourseTest {
 
         CourseImageChangedDomainEvent event = (CourseImageChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(imageUrl, is(event.getImageUrl()));
+        assertThat(imageUrl.getValue(), is(event.getImageUrl()));
     }
 
     @Test
@@ -329,7 +329,7 @@ public class CourseTest {
 
         CourseSummaryChangedDomainEvent event = (CourseSummaryChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(summary, is(event.getSummary()));
+        assertThat(summary.getValue(), is(event.getSummary()));
     }
 
     @Test
@@ -368,7 +368,7 @@ public class CourseTest {
 
         CourseDescriptionChangedDomainEvent event = (CourseDescriptionChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(description, is(event.getDescription()));
+        assertThat(description.getValue(), is(event.getDescription()));
     }
 
     @Test
@@ -407,7 +407,7 @@ public class CourseTest {
 
         CourseLanguageChangedDomainEvent event = (CourseLanguageChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(language, is(event.getLanguage()));
+        assertThat(language.name(), is(event.getLanguage()));
     }
 
     @Test
@@ -446,7 +446,8 @@ public class CourseTest {
 
         CoursePriceChangedDomainEvent event = (CoursePriceChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(price, is(event.getPrice()));
+        assertThat(price.getValue(), is(event.getPriceValue()));
+        assertThat(price.getCurrency().getCurrencyCode(), is(event.getPriceCurrency()));
     }
 
     @Test
@@ -489,8 +490,8 @@ public class CourseTest {
 
         CourseSectionAddedDomainEvent event = (CourseSectionAddedDomainEvent) domainEvents.get(0);
 
-        assertThat(sectionId, is(event.getSectionId()));
-        assertThat(sectionTitle, is(event.getTitle()));
+        assertThat(sectionId.getValue(), is(event.getSectionId()));
+        assertThat(sectionTitle.getValue(), is(event.getTitle()));
     }
 
     @Test
@@ -516,7 +517,7 @@ public class CourseTest {
 
         CourseSectionDeletedDomainEvent event = (CourseSectionDeletedDomainEvent) domainEvents.get(0);
 
-        assertThat(section.getId(), is(event.getSectionId()));
+        assertThat(section.getId().getValue(), is(event.getSectionId()));
     }
 
     @Test
@@ -553,8 +554,8 @@ public class CourseTest {
 
         CourseSectionTitleChangedDomainEvent event = (CourseSectionTitleChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(section.getId(), is(event.getSectionId()));
-        assertThat(sectionTitle, is(event.getTitle()));
+        assertThat(section.getId().getValue(), is(event.getSectionId()));
+        assertThat(sectionTitle.getValue(), is(event.getTitle()));
     }
 
     @Test
@@ -609,10 +610,10 @@ public class CourseTest {
 
         CourseSectionClassAddedDomainEvent event = (CourseSectionClassAddedDomainEvent) domainEvents.get(0);
 
-        assertThat(section.getId(), is(event.getSectionId()));
-        assertThat(sectionClassId, is(event.getSectionClassId()));
-        assertThat(sectionClassTitle, is(event.getTitle()));
-        assertThat(sectionClassDuration, is(event.getDuration()));
+        assertThat(section.getId().getValue(), is(event.getSectionId()));
+        assertThat(sectionClassId.getValue(), is(event.getSectionClassId()));
+        assertThat(sectionClassTitle.getValue(), is(event.getTitle()));
+        assertThat(sectionClassDuration.getValue(), is(event.getDuration()));
     }
 
     @Test
@@ -665,8 +666,8 @@ public class CourseTest {
 
         CourseSectionClassDeletedDomainEvent event = (CourseSectionClassDeletedDomainEvent) domainEvents.get(0);
 
-        assertThat(section.getId(), is(event.getSectionId()));
-        assertThat(sectionClassId, is(event.getSectionClassId()));
+        assertThat(section.getId().getValue(), is(event.getSectionId()));
+        assertThat(sectionClassId.getValue(), is(event.getSectionClassId()));
     }
 
     @Test
@@ -730,9 +731,9 @@ public class CourseTest {
 
         CourseSectionClassTitleChangedDomainEvent event = (CourseSectionClassTitleChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(section.getId(), is(event.getSectionId()));
-        assertThat(sectionClassId, is(event.getSectionClassId()));
-        assertThat(sectionClassTitle, is(event.getTitle()));
+        assertThat(section.getId().getValue(), is(event.getSectionId()));
+        assertThat(sectionClassId.getValue(), is(event.getSectionClassId()));
+        assertThat(sectionClassTitle.getValue(), is(event.getTitle()));
     }
 
     @Test
@@ -829,9 +830,9 @@ public class CourseTest {
 
         CourseSectionClassDurationChangedDomainEvent event = (CourseSectionClassDurationChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(section.getId(), is(event.getSectionId()));
-        assertThat(sectionClassId, is(event.getSectionClassId()));
-        assertThat(duration, is(event.getDuration()));
+        assertThat(section.getId().getValue(), is(event.getSectionId()));
+        assertThat(sectionClassId.getValue(), is(event.getSectionClassId()));
+        assertThat(duration.getValue(), is(event.getDuration()));
     }
 
     @Test
@@ -1025,7 +1026,7 @@ public class CourseTest {
 
         CourseTeacherAddedDomainEvent event = (CourseTeacherAddedDomainEvent) domainEvents.get(0);
 
-        assertThat(teacherId, is(event.getTeacherId()));
+        assertThat(teacherId.getValue(), is(event.getTeacherId()));
     }
 
     @Test
@@ -1051,7 +1052,7 @@ public class CourseTest {
 
         CourseTeacherDeletedDomainEvent event = (CourseTeacherDeletedDomainEvent) domainEvents.get(0);
 
-        assertThat(teacher.getId(), is(event.getTeacherId()));
+        assertThat(teacher.getId().getValue(), is(event.getTeacherId()));
     }
 
     @Test

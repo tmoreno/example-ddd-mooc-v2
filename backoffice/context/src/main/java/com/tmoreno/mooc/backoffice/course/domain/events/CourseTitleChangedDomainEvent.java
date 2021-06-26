@@ -24,11 +24,11 @@ public final class CourseTitleChangedDomainEvent extends DomainEvent {
         return 1;
     }
 
-    public CourseId getCourseId() {
-        return courseId;
+    public String getCourseId() {
+        return courseId.getValue();
     }
 
-    public CourseTitle getTitle() {
-        return title;
+    public String getTitle() {
+        return title.getValue();
     }
 }

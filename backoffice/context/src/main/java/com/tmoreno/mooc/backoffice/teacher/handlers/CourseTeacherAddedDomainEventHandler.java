@@ -18,8 +18,8 @@ public final class CourseTeacherAddedDomainEventHandler implements EventHandler<
 
     @Override
     public void handle(CourseTeacherAddedDomainEvent event) {
-        CourseId courseId = event.getCourseId();
-        TeacherId teacherId = event.getTeacherId();
+        CourseId courseId = new CourseId(event.getCourseId());
+        TeacherId teacherId = new TeacherId(event.getTeacherId());
 
         Teacher teacher = repository.find(teacherId).orElseThrow(() -> new TeacherNotFoundException(teacherId));
 
