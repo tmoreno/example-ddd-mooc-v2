@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.commands.changeCourse;
+package com.tmoreno.mooc.backoffice.course.commands.updateCourse;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseDescription;
@@ -15,18 +15,18 @@ import com.tmoreno.mooc.shared.events.EventBus;
 
 import java.util.Currency;
 
-public final class ChangeCourseCommand implements Command<ChangeCourseCommandParams> {
+public final class UpdateCourseCommand implements Command<UpdateCourseCommandParams> {
 
     private final CourseRepository repository;
     private final EventBus eventBus;
 
-    public ChangeCourseCommand(CourseRepository repository, EventBus eventBus) {
+    public UpdateCourseCommand(CourseRepository repository, EventBus eventBus) {
         this.repository = repository;
         this.eventBus = eventBus;
     }
 
     @Override
-    public void execute(ChangeCourseCommandParams params) {
+    public void execute(UpdateCourseCommandParams params) {
         CourseId courseId = new CourseId(params.getCourseId());
         CourseTitle title = params.getTitle() == null ? null : new CourseTitle(params.getTitle());
         CourseImageUrl imageUrl = params.getImageUrl() == null ? null : new CourseImageUrl(params.getImageUrl());

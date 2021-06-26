@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.controllers;
 
-import com.tmoreno.mooc.backoffice.course.commands.changeCourse.ChangeCourseCommand;
-import com.tmoreno.mooc.backoffice.course.commands.changeCourse.ChangeCourseCommandParams;
+import com.tmoreno.mooc.backoffice.course.commands.updateCourse.UpdateCourseCommand;
+import com.tmoreno.mooc.backoffice.course.commands.updateCourse.UpdateCourseCommandParams;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,18 +14,18 @@ import javax.transaction.Transactional;
 @RestController
 public class CoursePutController {
 
-    private final ChangeCourseCommand changeCourseCommand;
+    private final UpdateCourseCommand updateCourseCommand;
 
-    public CoursePutController(ChangeCourseCommand changeCourseCommand) {
-        this.changeCourseCommand = changeCourseCommand;
+    public CoursePutController(UpdateCourseCommand updateCourseCommand) {
+        this.updateCourseCommand = updateCourseCommand;
     }
 
     @Transactional
     @PutMapping(value = "/courses/{id}")
-    public ResponseEntity<String> handle(@PathVariable String id, @RequestBody ChangeCourseCommandParams params) {
+    public ResponseEntity<String> handle(@PathVariable String id, @RequestBody UpdateCourseCommandParams params) {
         params.setCourseId(id);
 
-        changeCourseCommand.execute(params);
+        updateCourseCommand.execute(params);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

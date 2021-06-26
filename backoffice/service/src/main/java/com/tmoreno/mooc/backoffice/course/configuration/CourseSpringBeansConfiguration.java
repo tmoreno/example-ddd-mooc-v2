@@ -3,7 +3,7 @@ package com.tmoreno.mooc.backoffice.course.configuration;
 import com.tmoreno.mooc.backoffice.course.commands.addSection.CourseAddSectionCommand;
 import com.tmoreno.mooc.backoffice.course.commands.addSectionClass.CourseAddSectionClassCommand;
 import com.tmoreno.mooc.backoffice.course.commands.addTeacher.CourseAddTeacherCommand;
-import com.tmoreno.mooc.backoffice.course.commands.changeCourse.ChangeCourseCommand;
+import com.tmoreno.mooc.backoffice.course.commands.updateCourse.UpdateCourseCommand;
 import com.tmoreno.mooc.backoffice.course.commands.changeSection.ChangeCourseSectionCommand;
 import com.tmoreno.mooc.backoffice.course.commands.changeSectionClass.ChangeCourseSectionClassCommand;
 import com.tmoreno.mooc.backoffice.course.commands.create.CreateCourseCommand;
@@ -28,8 +28,8 @@ public class CourseSpringBeansConfiguration {
     }
 
     @Bean
-    public ChangeCourseCommand changeCourseCommand(CourseRepository repository, EventBus eventBus) {
-        return new ChangeCourseCommand(repository, eventBus);
+    public UpdateCourseCommand updateCourseCommand(CourseRepository repository, EventBus eventBus) {
+        return new UpdateCourseCommand(repository, eventBus);
     }
 
     @Bean

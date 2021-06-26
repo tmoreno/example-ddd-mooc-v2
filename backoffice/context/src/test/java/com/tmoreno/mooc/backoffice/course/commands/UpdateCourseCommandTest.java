@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.commands;
 
-import com.tmoreno.mooc.backoffice.course.commands.changeCourse.ChangeCourseCommand;
-import com.tmoreno.mooc.backoffice.course.commands.changeCourse.ChangeCourseCommandParams;
+import com.tmoreno.mooc.backoffice.course.commands.updateCourse.UpdateCourseCommand;
+import com.tmoreno.mooc.backoffice.course.commands.updateCourse.UpdateCourseCommandParams;
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseDescription;
 import com.tmoreno.mooc.backoffice.course.domain.CourseImageUrl;
@@ -34,19 +34,19 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ChangeCourseCommandTest {
+public class UpdateCourseCommandTest {
 
     @Mock
     private CourseRepository repository;
 
     private FakeEventBus eventBus;
 
-    private ChangeCourseCommand command;
+    private UpdateCourseCommand command;
 
     @BeforeEach
     public void setUp() {
         eventBus = new FakeEventBus();
-        command = new ChangeCourseCommand(repository, eventBus);
+        command = new UpdateCourseCommand(repository, eventBus);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class ChangeCourseCommandTest {
 
         when(repository.find(course.getId())).thenReturn(Optional.of(course));
 
-        ChangeCourseCommandParams params = new ChangeCourseCommandParams();
+        UpdateCourseCommandParams params = new UpdateCourseCommandParams();
         params.setCourseId(course.getId().getValue());
         params.setTitle(title.getValue());
         params.setImageUrl(imageUrl.getValue());
@@ -97,7 +97,7 @@ public class ChangeCourseCommandTest {
 
         when(repository.find(course.getId())).thenReturn(Optional.of(course));
 
-        ChangeCourseCommandParams params = new ChangeCourseCommandParams();
+        UpdateCourseCommandParams params = new UpdateCourseCommandParams();
         params.setCourseId(course.getId().getValue());
         params.setTitle(title.getValue());
         params.setImageUrl(imageUrl.get().getValue());
@@ -128,7 +128,7 @@ public class ChangeCourseCommandTest {
 
         when(repository.find(course.getId())).thenReturn(Optional.of(course));
 
-        ChangeCourseCommandParams params = new ChangeCourseCommandParams();
+        UpdateCourseCommandParams params = new UpdateCourseCommandParams();
         params.setCourseId(course.getId().getValue());
         params.setTitle(title.getValue());
 
@@ -149,7 +149,7 @@ public class ChangeCourseCommandTest {
     @Test
     public void given_a_not_existing_course_when_change_course_then_throws_exception() {
         assertThrows(CourseNotFoundException.class, () -> {
-            ChangeCourseCommandParams params = new ChangeCourseCommandParams();
+            UpdateCourseCommandParams params = new UpdateCourseCommandParams();
             params.setCourseId(CourseIdMother.random().getValue());
 
             command.execute(params);
