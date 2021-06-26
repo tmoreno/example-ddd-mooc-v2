@@ -38,10 +38,6 @@ public final class Student extends Entity<StudentId> {
         this.reviews = reviews;
     }
 
-    public static Student create(StudentId id, PersonName name, Email email) {
-        return new Student(id, name, email);
-    }
-
     public PersonName getName() {
         return name;
     }

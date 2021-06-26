@@ -22,7 +22,7 @@ public final class StudentCreatedDomainEventHandler implements EventHandler<Stud
         PersonName name = new PersonName(event.getName());
         Email email = new Email(event.getEmail());
 
-        Student student = Student.create(studentId, name, email);
+        Student student = new Student(studentId, name, email);
 
         repository.save(student);
     }

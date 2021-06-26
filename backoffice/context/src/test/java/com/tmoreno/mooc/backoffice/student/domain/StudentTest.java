@@ -28,7 +28,7 @@ public class StudentTest {
         PersonName name = PersonNameMother.random();
         Email email = EmailMother.random();
 
-        Student student = Student.create(id, name, email);
+        Student student = new Student(id, name, email);
 
         assertThat(student.getId(), is(id));
         assertThat(student.getName(), is(name));
