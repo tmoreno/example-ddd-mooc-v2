@@ -10,6 +10,7 @@ import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.domain.PersonName;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public final class Teacher extends AggregateRoot<TeacherId> {
@@ -47,9 +48,11 @@ public final class Teacher extends AggregateRoot<TeacherId> {
     }
 
     public void changeName(PersonName name) {
-        this.name = name;
+        if (!Objects.equals(name, this.name)) {
+            this.name = name;
 
-        recordEvent(new TeacherNameChangedDomainEvent(id, name));
+            recordEvent(new TeacherNameChangedDomainEvent(id, name));
+        }
     }
 
     public Email getEmail() {
@@ -57,9 +60,11 @@ public final class Teacher extends AggregateRoot<TeacherId> {
     }
 
     public void changeEmail(Email email) {
-        this.email = email;
+        if (!Objects.equals(email, this.email)) {
+            this.email = email;
 
-        recordEvent(new TeacherEmailChangedDomainEvent(id, email));
+            recordEvent(new TeacherEmailChangedDomainEvent(id, email));
+        }
     }
 
     public Set<CourseId> getCourses() {

@@ -41,21 +41,22 @@ public class UpdateTeacherCommandTest {
     }
 
     @Test
-    public void given_an_existing_teacher_when_change_email_then_email_is_changed_and_persisted_and_events_are_published() {
+    public void given_a_teacher_when_change_attribute_then_teacher_attribute_is_changed_and_events_are_published() {
         Teacher teacher = TeacherMother.random();
         Email email = EmailMother.random();
+        PersonName name = PersonNameMother.random();
 
         when(repository.find(teacher.getId())).thenReturn(Optional.of(teacher));
 
         UpdateTeacherCommandParams params = new UpdateTeacherCommandParams();
         params.setId(teacher.getId().getValue());
         params.setEmail(email.getValue());
-        params.setName(teacher.getName().getValue());
+        params.setName(name.getValue());
 
         command.execute(params);
 
         assertThat(teacher.getEmail(), is(email));
-        assertThat(teacher.getName(), is(teacher.getName()));
+        assertThat(teacher.getName(), is(name));
 
         verify(repository).save(teacher);
 
@@ -63,25 +64,26 @@ public class UpdateTeacherCommandTest {
     }
 
     @Test
-    public void given_an_existing_teacher_when_change_name_then_name_is_changed_and_persisted_and_events_are_published() {
+    public void given_a_teacher_when_changed_attribute_value_is_the_same_then_teacher_attribute_is_not_changed_and_events_is_not_published() {
         Teacher teacher = TeacherMother.random();
-        PersonName name = PersonNameMother.random();
+        Email email = teacher.getEmail();
+        PersonName name = teacher.getName();
 
         when(repository.find(teacher.getId())).thenReturn(Optional.of(teacher));
 
         UpdateTeacherCommandParams params = new UpdateTeacherCommandParams();
         params.setId(teacher.getId().getValue());
-        params.setEmail(teacher.getEmail().getValue());
+        params.setEmail(email.getValue());
         params.setName(name.getValue());
 
         command.execute(params);
 
-        assertThat(teacher.getEmail(), is(teacher.getEmail()));
+        assertThat(teacher.getEmail(), is(email));
         assertThat(teacher.getName(), is(name));
 
         verify(repository).save(teacher);
 
-        assertThat(eventBus.getEvents().size(), is(2));
+        assertThat(eventBus.getEvents().isEmpty(), is(true));
     }
 
     @Test
