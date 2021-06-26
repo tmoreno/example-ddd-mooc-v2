@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.commands;
 
-import com.tmoreno.mooc.backoffice.course.commands.changeSectionClass.ChangeCourseSectionClassCommand;
-import com.tmoreno.mooc.backoffice.course.commands.changeSectionClass.ChangeCourseSectionClassCommandParams;
+import com.tmoreno.mooc.backoffice.course.commands.updateSectionClass.UpdateCourseSectionClassCommand;
+import com.tmoreno.mooc.backoffice.course.commands.updateSectionClass.UpdateCourseSectionClassCommandParams;
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.Section;
@@ -32,19 +32,19 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ChangeCourseSectionClassCommandTest {
+public class UpdateCourseSectionClassCommandTest {
 
     @Mock
     private CourseRepository repository;
 
     private FakeEventBus eventBus;
 
-    private ChangeCourseSectionClassCommand command;
+    private UpdateCourseSectionClassCommand command;
 
     @BeforeEach
     public void setUp() {
         eventBus = new FakeEventBus();
-        command = new ChangeCourseSectionClassCommand(repository, eventBus);
+        command = new UpdateCourseSectionClassCommand(repository, eventBus);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class ChangeCourseSectionClassCommandTest {
 
         when(repository.find(course.getId())).thenReturn(Optional.of(course));
 
-        ChangeCourseSectionClassCommandParams params = new ChangeCourseSectionClassCommandParams();
+        UpdateCourseSectionClassCommandParams params = new UpdateCourseSectionClassCommandParams();
         params.setCourseId(course.getId().getValue());
         params.setSectionId(section.getId().getValue());
         params.setSectionClassId(sectionClassId.getValue());
@@ -88,7 +88,7 @@ public class ChangeCourseSectionClassCommandTest {
 
         when(repository.find(course.getId())).thenReturn(Optional.of(course));
 
-        ChangeCourseSectionClassCommandParams params = new ChangeCourseSectionClassCommandParams();
+        UpdateCourseSectionClassCommandParams params = new UpdateCourseSectionClassCommandParams();
         params.setCourseId(course.getId().getValue());
         params.setSectionId(section.getId().getValue());
         params.setSectionClassId(sectionClassId.getValue());
@@ -108,7 +108,7 @@ public class ChangeCourseSectionClassCommandTest {
     @Test
     public void given_a_not_existing_course_when_change_section_class_title_then_throws_exception() {
         assertThrows(CourseNotFoundException.class, () -> {
-            ChangeCourseSectionClassCommandParams params = new ChangeCourseSectionClassCommandParams();
+            UpdateCourseSectionClassCommandParams params = new UpdateCourseSectionClassCommandParams();
             params.setCourseId(CourseIdMother.random().getValue());
             params.setSectionId(SectionIdMother.random().getValue());
             params.setSectionClassId(SectionClassIdMother.random().getValue());

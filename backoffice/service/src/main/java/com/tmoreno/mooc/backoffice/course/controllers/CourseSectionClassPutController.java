@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.controllers;
 
-import com.tmoreno.mooc.backoffice.course.commands.changeSectionClass.ChangeCourseSectionClassCommand;
-import com.tmoreno.mooc.backoffice.course.commands.changeSectionClass.ChangeCourseSectionClassCommandParams;
+import com.tmoreno.mooc.backoffice.course.commands.updateSectionClass.UpdateCourseSectionClassCommand;
+import com.tmoreno.mooc.backoffice.course.commands.updateSectionClass.UpdateCourseSectionClassCommandParams;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +14,10 @@ import javax.transaction.Transactional;
 @RestController
 public class CourseSectionClassPutController {
 
-    private final ChangeCourseSectionClassCommand changeCourseSectionClassCommand;
+    private final UpdateCourseSectionClassCommand updateCourseSectionClassCommand;
 
-    public CourseSectionClassPutController(ChangeCourseSectionClassCommand changeCourseSectionClassCommand) {
-        this.changeCourseSectionClassCommand = changeCourseSectionClassCommand;
+    public CourseSectionClassPutController(UpdateCourseSectionClassCommand updateCourseSectionClassCommand) {
+        this.updateCourseSectionClassCommand = updateCourseSectionClassCommand;
     }
 
     @Transactional
@@ -26,13 +26,13 @@ public class CourseSectionClassPutController {
             @PathVariable String courseId,
             @PathVariable String sectionId,
             @PathVariable String classId,
-            @RequestBody ChangeCourseSectionClassCommandParams params
+            @RequestBody UpdateCourseSectionClassCommandParams params
     ) {
         params.setCourseId(courseId);
         params.setSectionId(sectionId);
         params.setSectionClassId(classId);
 
-        changeCourseSectionClassCommand.execute(params);
+        updateCourseSectionClassCommand.execute(params);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

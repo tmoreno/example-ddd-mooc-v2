@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.commands.changeSectionClass;
+package com.tmoreno.mooc.backoffice.course.commands.updateSectionClass;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
@@ -11,18 +11,18 @@ import com.tmoreno.mooc.shared.command.Command;
 import com.tmoreno.mooc.shared.domain.DurationInSeconds;
 import com.tmoreno.mooc.shared.events.EventBus;
 
-public final class ChangeCourseSectionClassCommand implements Command<ChangeCourseSectionClassCommandParams> {
+public final class UpdateCourseSectionClassCommand implements Command<UpdateCourseSectionClassCommandParams> {
 
     private final CourseRepository repository;
     private final EventBus eventBus;
 
-    public ChangeCourseSectionClassCommand(CourseRepository repository, EventBus eventBus) {
+    public UpdateCourseSectionClassCommand(CourseRepository repository, EventBus eventBus) {
         this.repository = repository;
         this.eventBus = eventBus;
     }
 
     @Override
-    public void execute(ChangeCourseSectionClassCommandParams params) {
+    public void execute(UpdateCourseSectionClassCommandParams params) {
         CourseId courseId = new CourseId(params.getCourseId());
         SectionId sectionId = new SectionId(params.getSectionId());
         SectionClassId sectionClassId = new SectionClassId(params.getSectionClassId());

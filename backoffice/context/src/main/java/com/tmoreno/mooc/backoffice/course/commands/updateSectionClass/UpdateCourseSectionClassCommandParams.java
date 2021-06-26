@@ -1,8 +1,8 @@
-package com.tmoreno.mooc.backoffice.course.commands.changeSectionClass;
+package com.tmoreno.mooc.backoffice.course.commands.updateSectionClass;
 
 import com.tmoreno.mooc.shared.command.CommandParams;
 
-public final class ChangeCourseSectionClassCommandParams extends CommandParams {
+public final class UpdateCourseSectionClassCommandParams extends CommandParams {
 
     private String courseId;
     private String sectionId;
