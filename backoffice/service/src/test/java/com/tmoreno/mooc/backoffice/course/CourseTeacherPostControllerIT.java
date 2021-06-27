@@ -68,13 +68,13 @@ public class CourseTeacherPostControllerIT extends BaseControllerIT {
 
     @Test
     public void given_not_existing_course_when_send_post_request_then_receive_not_found_response() {
-        Course course = CourseMother.randomInDraftState();
-        courseRepository.save(course);
+        Teacher teacher = TeacherMother.random();
+        teacherRepository.save(teacher);
 
-        url = String.format(url, course.getId().getValue());
+        url = String.format(url, CourseIdMother.random().getValue());
 
         ResponseEntity<String> response = post(Map.of(
-            "teacherId", TeacherIdMother.random().getValue()
+            "teacherId", teacher.getId().getValue()
         ));
 
         assertNotFound(response);
@@ -82,11 +82,13 @@ public class CourseTeacherPostControllerIT extends BaseControllerIT {
 
     @Test
     public void given_not_existing_teacher_when_send_post_request_then_receive_not_found_response() {
+        Course course = CourseMother.randomInDraftState();
+        courseRepository.save(course);
 
-        url = String.format(url, CourseIdMother.random().getValue());
+        url = String.format(url, course.getId().getValue());
 
         ResponseEntity<String> response = post(Map.of(
-                "teacherId", TeacherIdMother.random().getValue()
+            "teacherId", TeacherIdMother.random().getValue()
         ));
 
         assertNotFound(response);
