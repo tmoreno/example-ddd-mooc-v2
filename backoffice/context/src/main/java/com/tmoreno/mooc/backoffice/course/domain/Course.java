@@ -31,10 +31,10 @@ import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 import com.tmoreno.mooc.shared.domain.AggregateRoot;
 import com.tmoreno.mooc.shared.domain.DurationInSeconds;
+import com.tmoreno.mooc.shared.domain.Entity;
 import com.tmoreno.mooc.shared.domain.Language;
 import com.tmoreno.mooc.shared.domain.Price;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public final class Course extends AggregateRoot<CourseId> {
     private CourseTitle title;
@@ -51,7 +52,7 @@ public final class Course extends AggregateRoot<CourseId> {
     private CourseState state;
     private Language language;
     private Price price;
-    private final List<Section> sections;
+    private final Map<SectionId, Section> sections;
     private final Map<StudentId, ReviewId> reviews;
     private final Set<StudentId> students;
     private final Set<TeacherId> teachers;
@@ -75,7 +76,7 @@ public final class Course extends AggregateRoot<CourseId> {
         this.state = state;
         this.language = language;
         this.price = price;
-        this.sections = new ArrayList<>();
+        this.sections = new HashMap<>();
         this.reviews = new HashMap<>();
         this.students = new HashSet<>();
         this.teachers = new HashSet<>();
@@ -104,7 +105,7 @@ public final class Course extends AggregateRoot<CourseId> {
         this.state = state;
         this.language = language;
         this.price = price;
-        this.sections = sections;
+        this.sections = sections.stream().collect(Collectors.toMap(Entity::getId, section -> section));
         this.reviews = reviews;
         this.students = students;
         this.teachers = teachers;
@@ -283,7 +284,7 @@ public final class Course extends AggregateRoot<CourseId> {
     }
 
     public List<Section> getSections() {
-        return List.copyOf(sections);
+        return List.copyOf(sections.values());
     }
 
     public void addSection(SectionId sectionId, SectionTitle title) {
@@ -292,7 +293,7 @@ public final class Course extends AggregateRoot<CourseId> {
         }
 
         Section section = new Section(sectionId, title);
-        sections.add(section);
+        sections.put(sectionId, section);
 
         recordEvent(new CourseSectionAddedDomainEvent(id, sectionId, title));
     }
@@ -302,9 +303,9 @@ public final class Course extends AggregateRoot<CourseId> {
             throw new ChangeCourseAttributeException("Delete a section is not allowed because is not in DRAFT state");
         }
 
-        boolean removed = sections.removeIf(s -> s.getId().equals(sectionId));
+        Section removedSection = sections.remove(sectionId);
 
-        if (removed) {
+        if (removedSection != null) {
             recordEvent(new CourseSectionDeletedDomainEvent(id, sectionId));
         }
         else {
@@ -317,32 +318,18 @@ public final class Course extends AggregateRoot<CourseId> {
             throw new ChangeCourseAttributeException("Change section title is not allowed because course is not in DRAFT state");
         }
 
-        sections
-            .stream()
-            .filter(s -> s.getId().equals(sectionId))
-            .findFirst()
-            .ifPresentOrElse(
-                section -> {
-                    if (title != null && !Objects.equals(title, section.getTitle())) {
-                        section.changeTitle(title);
-                        recordEvent(new CourseSectionTitleChangedDomainEvent(id, sectionId, title));
-                    }
-                },
-                ()-> {
-                    throw new CourseSectionNotFoundException(sectionId);
-                }
-            );
+        Section section = getSection(sectionId);
+
+        if (title != null && !Objects.equals(title, section.getTitle())) {
+            section.changeTitle(title);
+            recordEvent(new CourseSectionTitleChangedDomainEvent(id, sectionId, title));
+        }
     }
 
     public List<SectionClass> getSectionClasses(SectionId sectionId) {
-        return List.copyOf(
-            sections
-                .stream()
-                .filter(section -> section.getId().equals(sectionId))
-                .findFirst()
-                .orElseThrow(() -> new CourseSectionNotFoundException(sectionId))
-                .getClasses()
-        );
+        Section section = getSection(sectionId);
+
+        return List.copyOf(section.getClasses());
     }
 
     public void addSectionClass(SectionId sectionId, SectionClassId sectionClassId, SectionClassTitle title, DurationInSeconds duration) {
@@ -350,19 +337,11 @@ public final class Course extends AggregateRoot<CourseId> {
             throw new ChangeCourseAttributeException("Add section class is not allowed because course is not in DRAFT state");
         }
 
-        sections
-            .stream()
-            .filter(s -> s.getId().equals(sectionId))
-            .findFirst()
-            .ifPresentOrElse(
-                section -> {
-                    section.addClass(sectionClassId, title, duration);
-                    recordEvent(new CourseSectionClassAddedDomainEvent(id, sectionId, sectionClassId, title, duration));
-                },
-                ()-> {
-                    throw new CourseSectionNotFoundException(sectionId);
-                }
-            );
+        Section section = getSection(sectionId);
+
+        section.addClass(sectionClassId, title, duration);
+
+        recordEvent(new CourseSectionClassAddedDomainEvent(id, sectionId, sectionClassId, title, duration));
     }
 
     public void deleteSectionClass(SectionId sectionId, SectionClassId sectionClassId) {
@@ -370,19 +349,11 @@ public final class Course extends AggregateRoot<CourseId> {
             throw new ChangeCourseAttributeException("Delete section class is not allowed because course is not in DRAFT state");
         }
 
-        sections
-            .stream()
-            .filter(s -> s.getId().equals(sectionId))
-            .findFirst()
-            .ifPresentOrElse(
-                section -> {
-                    section.deleteClass(sectionClassId);
-                    recordEvent(new CourseSectionClassDeletedDomainEvent(id, sectionId, sectionClassId));
-                },
-                ()-> {
-                    throw new CourseSectionNotFoundException(sectionId);
-                }
-            );
+        Section section = getSection(sectionId);
+
+        section.deleteClass(sectionClassId);
+
+        recordEvent(new CourseSectionClassDeletedDomainEvent(id, sectionId, sectionClassId));
     }
 
     public void changeSectionClassTitle(SectionId sectionId, SectionClassId sectionClassId, SectionClassTitle title) {
@@ -390,27 +361,18 @@ public final class Course extends AggregateRoot<CourseId> {
             throw new ChangeCourseAttributeException("Change section class title is not allowed because course is not in DRAFT state");
         }
 
-        sections
-            .stream()
-            .filter(s -> s.getId().equals(sectionId))
-            .findFirst()
-            .ifPresentOrElse(
-                section -> {
-                    SectionClass sectionClass = section.getClasses()
-                            .stream()
-                            .filter(c -> c.getId().equals(sectionClassId))
-                            .findFirst()
-                            .orElseThrow(() -> new CourseSectionClassNotFoundException(sectionClassId));
+        Section section = getSection(sectionId);
 
-                    if (title != null && !Objects.equals(title, sectionClass.getTitle())) {
-                        sectionClass.changeTitle(title);
-                        recordEvent(new CourseSectionClassTitleChangedDomainEvent(id, sectionId, sectionClassId, title));
-                    }
-                },
-                ()-> {
-                    throw new CourseSectionNotFoundException(sectionId);
-                }
-            );
+        SectionClass sectionClass = section.getClasses()
+                .stream()
+                .filter(c -> c.getId().equals(sectionClassId))
+                .findFirst()
+                .orElseThrow(() -> new CourseSectionClassNotFoundException(sectionClassId));
+
+        if (title != null && !Objects.equals(title, sectionClass.getTitle())) {
+            sectionClass.changeTitle(title);
+            recordEvent(new CourseSectionClassTitleChangedDomainEvent(id, sectionId, sectionClassId, title));
+        }
     }
 
     public void changeSectionClassDuration(SectionId sectionId, SectionClassId sectionClassId, DurationInSeconds duration) {
@@ -418,27 +380,18 @@ public final class Course extends AggregateRoot<CourseId> {
             throw new ChangeCourseAttributeException("Change section class duration is not allowed because course is not in DRAFT state");
         }
 
-        sections
-            .stream()
-            .filter(s -> s.getId().equals(sectionId))
-            .findFirst()
-            .ifPresentOrElse(
-                section -> {
-                    SectionClass sectionClass = section.getClasses()
-                            .stream()
-                            .filter(c -> c.getId().equals(sectionClassId))
-                            .findFirst()
-                            .orElseThrow(() -> new CourseSectionClassNotFoundException(sectionClassId));
+        Section section = getSection(sectionId);
 
-                    if (duration != null && !Objects.equals(duration, sectionClass.getDuration())) {
-                        sectionClass.changeDuration(duration);
-                        recordEvent(new CourseSectionClassDurationChangedDomainEvent(id, sectionId, sectionClassId, duration));
-                    }
-                },
-                ()-> {
-                    throw new CourseSectionNotFoundException(sectionId);
-                }
-            );
+        SectionClass sectionClass = section.getClasses()
+                .stream()
+                .filter(c -> c.getId().equals(sectionClassId))
+                .findFirst()
+                .orElseThrow(() -> new CourseSectionClassNotFoundException(sectionClassId));
+
+        if (duration != null && !Objects.equals(duration, sectionClass.getDuration())) {
+            sectionClass.changeDuration(duration);
+            recordEvent(new CourseSectionClassDurationChangedDomainEvent(id, sectionId, sectionClassId, duration));
+        }
     }
 
     public Map<StudentId, ReviewId> getReviews() {
@@ -516,5 +469,15 @@ public final class Course extends AggregateRoot<CourseId> {
         else {
             throw new CourseTeacherNotFoundException(id, teacherId);
         }
+    }
+
+    private Section getSection(SectionId sectionId) {
+        Section section = sections.get(sectionId);
+
+        if (section == null) {
+            throw new CourseSectionNotFoundException(sectionId);
+        }
+
+        return section;
     }
 }
