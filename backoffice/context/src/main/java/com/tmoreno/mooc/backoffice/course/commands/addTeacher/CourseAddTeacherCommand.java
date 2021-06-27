@@ -5,16 +5,20 @@ import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseNotFoundException;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
+import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
+import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherNotFoundException;
 import com.tmoreno.mooc.shared.command.Command;
 import com.tmoreno.mooc.shared.events.EventBus;
 
 public final class CourseAddTeacherCommand implements Command<CourseAddTeacherCommandParams> {
 
     private final CourseRepository repository;
+    private final TeacherRepository teacherRepository;
     private final EventBus eventBus;
 
-    public CourseAddTeacherCommand(CourseRepository repository, EventBus eventBus) {
+    public CourseAddTeacherCommand(CourseRepository repository, TeacherRepository teacherRepository, EventBus eventBus) {
         this.repository = repository;
+        this.teacherRepository = teacherRepository;
         this.eventBus = eventBus;
     }
 
@@ -22,6 +26,10 @@ public final class CourseAddTeacherCommand implements Command<CourseAddTeacherCo
     public void execute(CourseAddTeacherCommandParams params) {
         CourseId courseId = new CourseId(params.getCourseId());
         TeacherId teacherId = new TeacherId(params.getTeacherId());
+
+        if (!teacherRepository.exists(teacherId)) {
+            throw new TeacherNotFoundException(teacherId);
+        }
 
         Course course = repository.find(courseId).orElseThrow(() -> new CourseNotFoundException(courseId));
 

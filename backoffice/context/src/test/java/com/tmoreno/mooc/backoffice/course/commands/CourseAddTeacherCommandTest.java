@@ -8,6 +8,9 @@ import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseNotFoundExcept
 import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.CourseMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
+import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
+import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
+import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherNotFoundException;
 import com.tmoreno.mooc.shared.fakes.FakeEventBus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +32,9 @@ public class CourseAddTeacherCommandTest {
     @Mock
     private CourseRepository repository;
 
+    @Mock
+    private TeacherRepository teacherRepository;
+
     private FakeEventBus eventBus;
 
     private CourseAddTeacherCommand command;
@@ -36,18 +42,20 @@ public class CourseAddTeacherCommandTest {
     @BeforeEach
     public void setUp() {
         eventBus = new FakeEventBus();
-        command = new CourseAddTeacherCommand(repository, eventBus);
+        command = new CourseAddTeacherCommand(repository, teacherRepository, eventBus);
     }
 
     @Test
     public void given_a_not_added_teacher_when_add_teacher_then_teacher_is_added_and_persisted_and_an_event_is_published() {
         Course course = CourseMother.randomInDraftState();
+        TeacherId teacherId = TeacherIdMother.random();
 
         when(repository.find(course.getId())).thenReturn(Optional.of(course));
+        when(teacherRepository.exists(teacherId)).thenReturn(true);
 
         CourseAddTeacherCommandParams params = new CourseAddTeacherCommandParams();
         params.setCourseId(course.getId().getValue());
-        params.setTeacherId(TeacherIdMother.random().getValue());
+        params.setTeacherId(teacherId.getValue());
 
         command.execute(params);
 
@@ -61,6 +69,20 @@ public class CourseAddTeacherCommandTest {
     @Test
     public void given_a_not_existing_course_when_add_teacher_then_throws_exception() {
         assertThrows(CourseNotFoundException.class, () -> {
+            TeacherId teacherId = TeacherIdMother.random();
+            when(teacherRepository.exists(teacherId)).thenReturn(true);
+
+            CourseAddTeacherCommandParams params = new CourseAddTeacherCommandParams();
+            params.setCourseId(CourseIdMother.random().getValue());
+            params.setTeacherId(teacherId.getValue());
+
+            command.execute(params);
+        });
+    }
+
+    @Test
+    public void given_a_not_existing_teacher_when_add_teacher_then_throws_exception() {
+        assertThrows(TeacherNotFoundException.class, () -> {
             CourseAddTeacherCommandParams params = new CourseAddTeacherCommandParams();
             params.setCourseId(CourseIdMother.random().getValue());
             params.setTeacherId(TeacherIdMother.random().getValue());

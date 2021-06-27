@@ -15,6 +15,7 @@ import com.tmoreno.mooc.backoffice.course.commands.publish.PublishCourseCommand;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.queries.FindCourseQuery;
 import com.tmoreno.mooc.backoffice.course.queries.FindCoursesQuery;
+import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.shared.events.EventBus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -73,8 +74,8 @@ public class CourseSpringBeansConfiguration {
     }
 
     @Bean
-    public CourseAddTeacherCommand courseAddTeacherCommand(CourseRepository repository, EventBus eventBus) {
-        return new CourseAddTeacherCommand(repository, eventBus);
+    public CourseAddTeacherCommand courseAddTeacherCommand(CourseRepository repository, TeacherRepository teacherRepository, EventBus eventBus) {
+        return new CourseAddTeacherCommand(repository, teacherRepository, eventBus);
     }
 
     @Bean

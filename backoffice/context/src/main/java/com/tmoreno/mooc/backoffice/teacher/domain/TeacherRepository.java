@@ -12,5 +12,7 @@ public interface TeacherRepository {
 
     Optional<Teacher> find(TeacherId id);
 
+    boolean exists(TeacherId id);
+
     boolean exists(TeacherId id, Email email);
 }

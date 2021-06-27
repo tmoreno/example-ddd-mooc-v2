@@ -43,6 +43,11 @@ public class TeacherJpaRepository implements TeacherRepository {
     }
 
     @Override
+    public boolean exists(TeacherId id) {
+        return daoRepository.existsById(id.getValue());
+    }
+
+    @Override
     public boolean exists(TeacherId id, Email email) {
         return daoRepository.existsById(id.getValue())
                 || daoRepository.existsByEmail(email.getValue());
