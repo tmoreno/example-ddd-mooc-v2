@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.shared.domain;
 
-import com.tmoreno.mooc.shared.domain.exceptions.MoneyValueIsNegativeException;
+import com.tmoreno.mooc.shared.domain.exceptions.NegativeMoneyValueException;
 import org.hamcrest.core.Is;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ public class PriceTest {
 
     @Test
     public void should_throws_an_exception_when_price_is_less_than_zero() {
-        assertThrows(MoneyValueIsNegativeException.class, () -> new Price(-1, Currency.getInstance(Locale.US)));
+        assertThrows(NegativeMoneyValueException.class, () -> new Price(-1, Currency.getInstance(Locale.US)));
     }
 
     @Test

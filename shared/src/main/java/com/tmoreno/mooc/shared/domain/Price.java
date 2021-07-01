@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.shared.domain;
 
-import com.tmoreno.mooc.shared.domain.exceptions.MoneyValueIsNegativeException;
+import com.tmoreno.mooc.shared.domain.exceptions.NegativeMoneyValueException;
 
 import java.util.Currency;
 import java.util.Objects;
@@ -19,7 +19,7 @@ public final class Price {
 
     private void ensureValidValue(double value) {
         if (value < 0) {
-            throw new MoneyValueIsNegativeException(value);
+            throw new NegativeMoneyValueException(value);
         }
     }
 

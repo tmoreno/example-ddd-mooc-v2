@@ -28,7 +28,7 @@ import com.tmoreno.mooc.shared.domain.exceptions.InvalidDurationException;
 import com.tmoreno.mooc.shared.domain.exceptions.InvalidEmailException;
 import com.tmoreno.mooc.shared.domain.exceptions.InvalidIdentifierException;
 import com.tmoreno.mooc.shared.domain.exceptions.InvalidPersonNameException;
-import com.tmoreno.mooc.shared.domain.exceptions.MoneyValueIsNegativeException;
+import com.tmoreno.mooc.shared.domain.exceptions.NegativeMoneyValueException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -46,7 +46,7 @@ public final class ExceptionHelper {
         InvalidEmailException.class,
         InvalidIdentifierException.class,
         InvalidPersonNameException.class,
-        MoneyValueIsNegativeException.class,
+        NegativeMoneyValueException.class,
         InvalidCourseDescriptionException.class,
         InvalidCourseImageUrlException.class,
         InvalidCourseSummaryException.class,
