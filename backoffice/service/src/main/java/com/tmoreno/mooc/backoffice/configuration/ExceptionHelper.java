@@ -23,6 +23,7 @@ import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentReviewNotFou
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherCourseNotFoundException;
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherExistsException;
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherNotFoundException;
+import com.tmoreno.mooc.shared.domain.exceptions.BaseDomainException;
 import com.tmoreno.mooc.shared.domain.exceptions.InvalidDurationException;
 import com.tmoreno.mooc.shared.domain.exceptions.InvalidEmailException;
 import com.tmoreno.mooc.shared.domain.exceptions.InvalidIdentifierException;
@@ -53,12 +54,12 @@ public final class ExceptionHelper {
         InvalidSectionTitleException.class,
         InvalidSectionClassTitleException.class
     })
-    public ResponseEntity<Object> badRequestHandler(RuntimeException e) {
+    public ResponseEntity<Object> badRequestHandler(BaseDomainException e) {
         logger.error("Bad request", e);
 
         return new ResponseEntity<>(
-                new ExceptionResponseBody(HttpStatus.BAD_REQUEST.value(), e.getMessage()),
-                HttpStatus.BAD_REQUEST
+            new ExceptionResponseBody(e.getCode(), HttpStatus.BAD_REQUEST.value(), e.getMessage(), e.getTimestamp()),
+            HttpStatus.BAD_REQUEST
         );
     }
 
@@ -76,12 +77,12 @@ public final class ExceptionHelper {
         CourseStudentNotFoundException.class,
         CourseTeacherNotFoundException.class
     })
-    public ResponseEntity<Object> notFoundHandler(RuntimeException e) {
+    public ResponseEntity<Object> notFoundHandler(BaseDomainException e) {
         logger.error("Not found", e);
 
         return new ResponseEntity<>(
-                new ExceptionResponseBody(HttpStatus.NOT_FOUND.value(), e.getMessage()),
-                HttpStatus.NOT_FOUND
+            new ExceptionResponseBody(e.getCode(), HttpStatus.NOT_FOUND.value(), e.getMessage(), e.getTimestamp()),
+            HttpStatus.NOT_FOUND
         );
     }
 
@@ -92,12 +93,12 @@ public final class ExceptionHelper {
         DiscardCourseException.class,
         PublishCourseException.class
     })
-    public ResponseEntity<Object> preconditionFailedHandler(RuntimeException e) {
+    public ResponseEntity<Object> preconditionFailedHandler(BaseDomainException e) {
         logger.error("Precondition failed", e);
 
         return new ResponseEntity<>(
-                new ExceptionResponseBody(HttpStatus.PRECONDITION_FAILED.value(), e.getMessage()),
-                HttpStatus.PRECONDITION_FAILED
+            new ExceptionResponseBody(e.getCode(), HttpStatus.PRECONDITION_FAILED.value(), e.getMessage(), e.getTimestamp()),
+            HttpStatus.PRECONDITION_FAILED
         );
     }
 }
