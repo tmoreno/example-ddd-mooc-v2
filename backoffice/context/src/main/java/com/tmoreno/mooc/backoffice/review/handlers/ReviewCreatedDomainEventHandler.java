@@ -9,7 +9,7 @@ import com.tmoreno.mooc.backoffice.review.domain.ReviewText;
 import com.tmoreno.mooc.backoffice.review.domain.events.ReviewCreatedDomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.shared.domain.CreatedOn;
-import com.tmoreno.mooc.shared.events.EventHandler;
+import com.tmoreno.mooc.shared.handlers.EventHandler;
 
 public final class ReviewCreatedDomainEventHandler implements EventHandler<ReviewCreatedDomainEvent> {
 

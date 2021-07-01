@@ -6,7 +6,7 @@ import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseStudentAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseNotFoundException;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
-import com.tmoreno.mooc.shared.events.EventHandler;
+import com.tmoreno.mooc.shared.handlers.EventHandler;
 
 public final class CourseStudentAddedDomainEventHandler implements EventHandler<CourseStudentAddedDomainEvent> {
 

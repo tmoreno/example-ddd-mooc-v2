@@ -7,7 +7,7 @@ import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentRepository;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentNotFoundException;
-import com.tmoreno.mooc.shared.events.EventHandler;
+import com.tmoreno.mooc.shared.handlers.EventHandler;
 
 public final class ReviewDeletedDomainEventHandler implements EventHandler<ReviewDeletedDomainEvent> {
 
