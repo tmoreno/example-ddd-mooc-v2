@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.shared.domain;
+package com.tmoreno.mooc.backoffice.configuration;
 
 import java.time.Instant;
 

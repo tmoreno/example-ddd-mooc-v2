@@ -23,7 +23,6 @@ import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentReviewNotFou
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherCourseNotFoundException;
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherExistsException;
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherNotFoundException;
-import com.tmoreno.mooc.shared.domain.ExceptionResponseBody;
 import com.tmoreno.mooc.shared.domain.exceptions.InvalidDurationException;
 import com.tmoreno.mooc.shared.domain.exceptions.InvalidEmailException;
 import com.tmoreno.mooc.shared.domain.exceptions.InvalidIdentifierException;
