@@ -1,7 +1,12 @@
 package com.tmoreno.mooc.backoffice.course.domain.exceptions;
 
-public final class InvalidCourseImageUrlException extends RuntimeException {
+import com.tmoreno.mooc.shared.domain.exceptions.BaseDomainException;
+
+public final class InvalidCourseImageUrlException extends BaseDomainException {
     public InvalidCourseImageUrlException(String message) {
-        super(message);
+        super(
+                "invalid-course-image-url",
+                message
+        );
     }
 }

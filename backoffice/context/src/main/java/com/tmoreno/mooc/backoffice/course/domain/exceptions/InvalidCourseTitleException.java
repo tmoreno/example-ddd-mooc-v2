@@ -1,7 +1,12 @@
 package com.tmoreno.mooc.backoffice.course.domain.exceptions;
 
-public final class InvalidCourseTitleException extends RuntimeException {
+import com.tmoreno.mooc.shared.domain.exceptions.BaseDomainException;
+
+public final class InvalidCourseTitleException extends BaseDomainException {
     public InvalidCourseTitleException(String message) {
-        super(message);
+        super(
+                "invalid-course-title",
+                message
+        );
     }
 }

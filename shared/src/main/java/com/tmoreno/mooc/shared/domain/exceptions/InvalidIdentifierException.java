@@ -1,7 +1,10 @@
 package com.tmoreno.mooc.shared.domain.exceptions;
 
-public final class InvalidIdentifierException extends RuntimeException {
+public final class InvalidIdentifierException extends BaseDomainException {
     public InvalidIdentifierException(String invalidIdentifierValue) {
-        super("Invalid identifier value: " + invalidIdentifierValue);
+        super(
+                "invalid-identifier",
+                "Invalid identifier value: " + invalidIdentifierValue
+        );
     }
 }

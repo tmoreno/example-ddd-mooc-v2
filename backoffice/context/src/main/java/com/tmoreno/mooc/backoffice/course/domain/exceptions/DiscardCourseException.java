@@ -1,7 +1,12 @@
 package com.tmoreno.mooc.backoffice.course.domain.exceptions;
 
-public final class DiscardCourseException extends RuntimeException {
+import com.tmoreno.mooc.shared.domain.exceptions.BaseDomainException;
+
+public final class DiscardCourseException extends BaseDomainException {
     public DiscardCourseException(String message) {
-        super(message);
+        super(
+                "discard-course",
+                message
+        );
     }
 }

@@ -1,7 +1,12 @@
 package com.tmoreno.mooc.backoffice.course.domain.exceptions;
 
-public final class PublishCourseException extends RuntimeException {
+import com.tmoreno.mooc.shared.domain.exceptions.BaseDomainException;
+
+public final class PublishCourseException extends BaseDomainException {
     public PublishCourseException(String message) {
-        super(message);
+        super(
+                "publish-course",
+                message
+        );
     }
 }

@@ -1,7 +1,10 @@
 package com.tmoreno.mooc.shared.domain.exceptions;
 
-public final class InvalidDurationException extends RuntimeException {
+public final class InvalidDurationException extends BaseDomainException {
     public InvalidDurationException(long value) {
-        super("Duration value have to be more than 0: " + value);
+        super(
+                "invalid-duration",
+                "Duration value have to be more than 0: " + value
+        );
     }
 }

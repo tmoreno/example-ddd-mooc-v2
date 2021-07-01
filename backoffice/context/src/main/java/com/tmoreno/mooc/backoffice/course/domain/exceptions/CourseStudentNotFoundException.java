@@ -2,9 +2,13 @@ package com.tmoreno.mooc.backoffice.course.domain.exceptions;
 
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
+import com.tmoreno.mooc.shared.domain.exceptions.BaseDomainException;
 
-public final class CourseStudentNotFoundException extends RuntimeException {
+public final class CourseStudentNotFoundException extends BaseDomainException {
     public CourseStudentNotFoundException(CourseId courseId, StudentId studentId) {
-        super("Student: " + studentId + " not found in course: " + courseId);
+        super(
+                "course-student-not-found",
+                "Student: " + studentId + " not found in course: " + courseId
+        );
     }
 }

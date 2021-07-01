@@ -1,7 +1,12 @@
 package com.tmoreno.mooc.backoffice.review.domain.exceptions;
 
-public final class InvalidReviewTextException extends RuntimeException {
+import com.tmoreno.mooc.shared.domain.exceptions.BaseDomainException;
+
+public final class InvalidReviewTextException extends BaseDomainException {
     public InvalidReviewTextException(String message) {
-        super(message);
+        super(
+                "invalid-review-text",
+                message
+        );
     }
 }
