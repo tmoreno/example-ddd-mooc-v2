@@ -1,5 +1,6 @@
 package com.tmoreno.mooc.backoffice.teacher;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tmoreno.mooc.backoffice.utils.BaseControllerIT;
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
 
+import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertErrorCode;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertNotFound;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -63,7 +65,7 @@ public class TeacherPutControllerIT extends BaseControllerIT {
     }
 
     @Test
-    public void given_not_existing_teacher_when_send_put_request_then_receive_not_found_response_and_teacher_is_not_changed_and_event_is_not_stored() {
+    public void given_not_existing_teacher_when_send_put_request_then_receive_not_found_response_and_teacher_is_not_changed_and_event_is_not_stored() throws JsonProcessingException {
         String teacherId = TeacherIdMother.random().getValue();
 
         Map<String, Object> request = Map.of(
@@ -74,6 +76,8 @@ public class TeacherPutControllerIT extends BaseControllerIT {
         ResponseEntity<String> response = put(teacherId, request);
 
         assertNotFound(response);
+
+        assertErrorCode(toJson(response.getBody()), "teacher-not-found");
 
         verify(teacherRepository, never()).save(any());
 

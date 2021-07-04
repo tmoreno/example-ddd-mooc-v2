@@ -1,5 +1,6 @@
 package com.tmoreno.mooc.backoffice.teacher;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.Map;
 
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertCreated;
+import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertErrorCode;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertPreconditionFailed;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -58,7 +60,7 @@ public class TeacherPostControllerIT extends BaseControllerIT {
     }
 
     @Test
-    public void given_existing_id_teacher_when_send_post_request_then_receive_precondition_failed_response_and_teacher_is_not_persisted_and_event_is_not_stored() {
+    public void given_existing_id_teacher_when_send_post_request_then_receive_precondition_failed_response_and_teacher_is_not_persisted_and_event_is_not_stored() throws JsonProcessingException {
         Teacher teacher = TeacherMother.random();
 
         teacherRepository.save(teacher);
@@ -73,13 +75,15 @@ public class TeacherPostControllerIT extends BaseControllerIT {
 
         assertPreconditionFailed(response);
 
+        assertErrorCode(toJson(response.getBody()), "teacher-exists");
+
         verify(teacherRepository, times(1)).save(any());
 
         verify(domainEventRepository, never()).store(any());
     }
 
     @Test
-    public void given_existing_email_teacher_when_send_post_request_then_receive_precondition_failed_response_and_teacher_is_not_persisted_and_event_is_not_stored() {
+    public void given_existing_email_teacher_when_send_post_request_then_receive_precondition_failed_response_and_teacher_is_not_persisted_and_event_is_not_stored() throws JsonProcessingException {
         Teacher teacher = TeacherMother.random();
 
         teacherRepository.save(teacher);
@@ -93,6 +97,8 @@ public class TeacherPostControllerIT extends BaseControllerIT {
         ResponseEntity<String> response = post(request);
 
         assertPreconditionFailed(response);
+
+        assertErrorCode(toJson(response.getBody()), "teacher-exists");
 
         verify(teacherRepository, times(1)).save(any());
 

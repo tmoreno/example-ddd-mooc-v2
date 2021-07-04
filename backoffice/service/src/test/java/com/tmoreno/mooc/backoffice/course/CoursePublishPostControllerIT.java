@@ -1,5 +1,6 @@
 package com.tmoreno.mooc.backoffice.course;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.CourseState;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.ResponseEntity;
 
+import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertErrorCode;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertNotFound;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertOk;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertPreconditionFailed;
@@ -49,7 +51,7 @@ public class CoursePublishPostControllerIT extends BaseControllerIT {
     }
 
     @Test
-    public void given_a_course_not_ready_to_publish_when_send_publish_request_then_receive_precondition_failed_response() {
+    public void given_a_course_not_ready_to_publish_when_send_publish_request_then_receive_precondition_failed_response() throws JsonProcessingException {
         Course course = CourseMother.randomInNotPublishState();
         courseRepository.save(course);
 
@@ -58,15 +60,17 @@ public class CoursePublishPostControllerIT extends BaseControllerIT {
         ResponseEntity<String> response = post();
 
         assertPreconditionFailed(response);
+        assertErrorCode(toJson(response.getBody()), "publish-course");
     }
 
     @Test
-    public void given_not_existing_course_when_send_publish_request_then_receive_not_found_response() {
+    public void given_not_existing_course_when_send_publish_request_then_receive_not_found_response() throws JsonProcessingException {
         url = String.format(url, CourseIdMother.random().getValue());
 
         ResponseEntity<String> response = post();
 
         assertNotFound(response);
+        assertErrorCode(toJson(response.getBody()), "course-not-found");
     }
 
     @Test

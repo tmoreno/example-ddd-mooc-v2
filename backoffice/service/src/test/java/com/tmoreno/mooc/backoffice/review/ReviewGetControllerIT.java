@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
+import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertErrorCode;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertNotFound;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -44,10 +45,12 @@ public class ReviewGetControllerIT extends BaseControllerIT {
     }
 
     @Test
-    public void given_not_existing_review_when_send_get_request_then_receive_not_found_response() {
+    public void given_not_existing_review_when_send_get_request_then_receive_not_found_response() throws JsonProcessingException {
         ResponseEntity<String> response = get(ReviewIdMother.random().getValue());
 
         assertNotFound(response);
+
+        assertErrorCode(toJson(response.getBody()), "review-not-found");
     }
 
     @Test

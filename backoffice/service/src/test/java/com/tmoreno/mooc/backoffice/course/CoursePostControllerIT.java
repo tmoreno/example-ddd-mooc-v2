@@ -1,5 +1,6 @@
 package com.tmoreno.mooc.backoffice.course;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.Map;
 
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertCreated;
+import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertErrorCode;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertPreconditionFailed;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -56,7 +58,7 @@ public class CoursePostControllerIT extends BaseControllerIT {
     }
 
     @Test
-    public void given_existing_id_course_when_send_post_request_then_receive_precondition_failed_response_and_course_is_not_persisted_and_event_is_not_stored() {
+    public void given_existing_id_course_when_send_post_request_then_receive_precondition_failed_response_and_course_is_not_persisted_and_event_is_not_stored() throws JsonProcessingException {
         Course course = CourseMother.random();
 
         courseRepository.save(course);
@@ -68,13 +70,15 @@ public class CoursePostControllerIT extends BaseControllerIT {
 
         assertPreconditionFailed(response);
 
+        assertErrorCode(toJson(response.getBody()), "course-exists");
+
         verify(courseRepository, times(1)).save(any());
 
         verify(domainEventRepository, never()).store(any());
     }
 
     @Test
-    public void given_existing_course_title_when_send_post_request_then_receive_precondition_failed_response_and_course_is_not_persisted_and_event_is_not_stored() {
+    public void given_existing_course_title_when_send_post_request_then_receive_precondition_failed_response_and_course_is_not_persisted_and_event_is_not_stored() throws JsonProcessingException {
         Course course = CourseMother.random();
 
         courseRepository.save(course);
@@ -85,6 +89,8 @@ public class CoursePostControllerIT extends BaseControllerIT {
         ));
 
         assertPreconditionFailed(response);
+
+        assertErrorCode(toJson(response.getBody()), "course-exists");
 
         verify(courseRepository, times(1)).save(any());
 

@@ -1,5 +1,6 @@
 package com.tmoreno.mooc.backoffice.course;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.Section;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.ResponseEntity;
 
+import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertErrorCode;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertNotFound;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -52,17 +54,19 @@ public class CourseSectionDeleteControllerIT extends BaseControllerIT {
     }
 
     @Test
-    public void given_not_existing_course_when_send_delete_request_then_receive_not_found_response() {
+    public void given_not_existing_course_when_send_delete_request_then_receive_not_found_response() throws JsonProcessingException {
 
         url = String.format(url, CourseIdMother.random().getValue(), SectionIdMother.random().getValue());
 
         ResponseEntity<String> response = delete();
 
         assertNotFound(response);
+
+        assertErrorCode(toJson(response.getBody()), "course-not-found");
     }
 
     @Test
-    public void given_course_when_send_delete_request_for_a_not_existing_section_then_receive_not_found_response() {
+    public void given_course_when_send_delete_request_for_a_not_existing_section_then_receive_not_found_response() throws JsonProcessingException {
         Section section = SectionMother.random();
         Course course = CourseMother.randomInDraftStateWithSection(section);
 
@@ -73,10 +77,12 @@ public class CourseSectionDeleteControllerIT extends BaseControllerIT {
         ResponseEntity<String> response = delete();
 
         assertNotFound(response);
+
+        assertErrorCode(toJson(response.getBody()), "course-section-not-found");
     }
 
     @Test
-    public void given_course_without_sections_when_send_delete_request_then_receive_not_found_response() {
+    public void given_course_without_sections_when_send_delete_request_then_receive_not_found_response() throws JsonProcessingException {
         Course course = CourseMother.randomInDraftState();
 
         courseRepository.save(course);
@@ -86,6 +92,8 @@ public class CourseSectionDeleteControllerIT extends BaseControllerIT {
         ResponseEntity<String> response = delete();
 
         assertNotFound(response);
+
+        assertErrorCode(toJson(response.getBody()), "course-section-not-found");
     }
 
     @Test

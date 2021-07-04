@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertErrorCode;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertNotFound;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -55,10 +56,12 @@ public class StudentGetControllerIT extends BaseControllerIT {
     }
 
     @Test
-    public void given_not_existing_student_when_send_get_request_then_receive_not_found_response() {
+    public void given_not_existing_student_when_send_get_request_then_receive_not_found_response() throws JsonProcessingException {
         ResponseEntity<String> response = get(StudentIdMother.random().getValue());
 
         assertNotFound(response);
+
+        assertErrorCode(toJson(response.getBody()), "student-not-found");
     }
 
     @Test

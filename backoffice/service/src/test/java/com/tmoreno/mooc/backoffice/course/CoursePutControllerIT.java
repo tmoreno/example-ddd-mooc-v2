@@ -1,5 +1,6 @@
 package com.tmoreno.mooc.backoffice.course;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseDescription;
 import com.tmoreno.mooc.backoffice.course.domain.CourseImageUrl;
@@ -25,6 +26,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertErrorCode;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertNotFound;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -83,10 +85,12 @@ public class CoursePutControllerIT extends BaseControllerIT {
     }
 
     @Test
-    public void given_not_existing_course_when_send_put_request_then_receive_not_found_response() {
+    public void given_not_existing_course_when_send_put_request_then_receive_not_found_response() throws JsonProcessingException {
         ResponseEntity<String> response = put(CourseIdMother.random().getValue(), Map.of());
 
         assertNotFound(response);
+
+        assertErrorCode(toJson(response.getBody()), "course-not-found");
     }
 
     @Test

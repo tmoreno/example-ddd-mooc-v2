@@ -1,5 +1,6 @@
 package com.tmoreno.mooc.backoffice.utils;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -23,5 +24,9 @@ public final class ResponseAssertions {
 
     public static void assertPreconditionFailed(ResponseEntity<String> response) {
         assertThat(response.getStatusCode(), is(HttpStatus.PRECONDITION_FAILED));
+    }
+
+    public static void assertErrorCode(JsonNode responseBody, String code) {
+        assertThat(responseBody.get("code").asText(), is(code));
     }
 }

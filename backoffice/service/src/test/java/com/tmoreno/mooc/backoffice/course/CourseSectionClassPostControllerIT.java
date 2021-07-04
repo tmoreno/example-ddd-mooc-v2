@@ -1,5 +1,6 @@
 package com.tmoreno.mooc.backoffice.course;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.SectionClassId;
@@ -23,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.Map;
 
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertCreated;
+import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertErrorCode;
 import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertNotFound;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -73,7 +75,7 @@ public class CourseSectionClassPostControllerIT extends BaseControllerIT {
     }
 
     @Test
-    public void given_not_existing_course_when_send_post_request_then_receive_not_found_response() {
+    public void given_not_existing_course_when_send_post_request_then_receive_not_found_response() throws JsonProcessingException {
 
         url = String.format(url, CourseIdMother.random().getValue(), SectionIdMother.random().getValue());
 
@@ -84,10 +86,12 @@ public class CourseSectionClassPostControllerIT extends BaseControllerIT {
         ));
 
         assertNotFound(response);
+
+        assertErrorCode(toJson(response.getBody()), "course-not-found");
     }
 
     @Test
-    public void given_existing_course_with_sections_when_send_post_request_for_a_not_existing_section_then_receive_not_found_response() {
+    public void given_existing_course_with_sections_when_send_post_request_for_a_not_existing_section_then_receive_not_found_response() throws JsonProcessingException {
         Course course = CourseMother.randomInDraftState();
         course.addSection(SectionIdMother.random(), SectionTitleMother.random());
 
@@ -102,6 +106,8 @@ public class CourseSectionClassPostControllerIT extends BaseControllerIT {
         ));
 
         assertNotFound(response);
+
+        assertErrorCode(toJson(response.getBody()), "course-section-not-found");
     }
 
     @Test
