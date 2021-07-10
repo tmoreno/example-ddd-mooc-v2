@@ -1,6 +1,7 @@
 package com.tmoreno.mooc.frontoffice.teacher.listeners;
 
 import com.tmoreno.mooc.frontoffice.teacher.domain.events.TeacherCreatedDomainEvent;
+import com.tmoreno.mooc.frontoffice.teacher.handlers.TeacherCreatedDomainEventHandler;
 import com.tmoreno.mooc.shared.events.MoocEventListener;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Exchange;
@@ -11,6 +12,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public final class TeacherCreatedListener implements MoocEventListener<TeacherCreatedDomainEvent> {
+
+    private final TeacherCreatedDomainEventHandler teacherCreatedDomainEventHandler;
+
+    public TeacherCreatedListener(TeacherCreatedDomainEventHandler teacherCreatedDomainEventHandler) {
+        this.teacherCreatedDomainEventHandler = teacherCreatedDomainEventHandler;
+    }
 
     @RabbitListener(
         bindings = @QueueBinding(
@@ -27,6 +34,6 @@ public final class TeacherCreatedListener implements MoocEventListener<TeacherCr
         messageConverter = "jsonConverter"
     )
     public void on(TeacherCreatedDomainEvent event) {
-        System.out.println(event);
+        teacherCreatedDomainEventHandler.handle(event);
     }
 }
