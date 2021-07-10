@@ -7,7 +7,7 @@ import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
-import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
+import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.shared.mothers.DurationInSecondsMother;
 import com.tmoreno.mooc.shared.mothers.LanguageMother;
 import com.tmoreno.mooc.shared.mothers.PriceMother;

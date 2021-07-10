@@ -1,6 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.domain;
-
-import com.tmoreno.mooc.shared.domain.Identifier;
+package com.tmoreno.mooc.shared.domain;
 
 public final class CourseId extends Identifier {
     public CourseId(String value) {

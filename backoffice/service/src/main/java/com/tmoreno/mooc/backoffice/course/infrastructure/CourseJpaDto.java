@@ -2,14 +2,14 @@ package com.tmoreno.mooc.backoffice.course.infrastructure;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseDescription;
-import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseImageUrl;
 import com.tmoreno.mooc.backoffice.course.domain.CourseState;
 import com.tmoreno.mooc.backoffice.course.domain.CourseSummary;
 import com.tmoreno.mooc.backoffice.course.domain.CourseTitle;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
-import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
+import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.shared.domain.Identifier;
 import com.tmoreno.mooc.shared.domain.Language;
 import com.tmoreno.mooc.shared.domain.Price;

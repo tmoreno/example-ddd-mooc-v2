@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.handlers;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
-import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseStudentDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseNotFoundException;

@@ -1,11 +1,11 @@
 package com.tmoreno.mooc.backoffice.teacher.queries;
 
-import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
-import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
+import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherNotFoundException;
 import com.tmoreno.mooc.shared.domain.Identifier;

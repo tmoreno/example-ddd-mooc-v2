@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.teacher.domain;
 
-import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
@@ -10,6 +10,7 @@ import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherNameChangedDomai
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherCourseNotFoundException;
 import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.domain.PersonName;
+import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.shared.events.DomainEvent;
 import com.tmoreno.mooc.shared.mothers.EmailMother;
 import com.tmoreno.mooc.shared.mothers.PersonNameMother;

@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.course.commands.updateCourse;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseDescription;
-import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseImageUrl;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.CourseSummary;

@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.teacher.domain;
 
-import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherCreatedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherEmailChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherNameChangedDomainEvent;
@@ -8,6 +8,7 @@ import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherCourseNotFou
 import com.tmoreno.mooc.shared.domain.AggregateRoot;
 import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.domain.PersonName;
+import com.tmoreno.mooc.shared.domain.TeacherId;
 
 import java.util.HashSet;
 import java.util.Objects;

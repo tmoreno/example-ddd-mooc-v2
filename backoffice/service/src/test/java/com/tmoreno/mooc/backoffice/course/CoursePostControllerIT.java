@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.course;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tmoreno.mooc.backoffice.course.domain.Course;
-import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.CourseTitle;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseCreatedDomainEvent;

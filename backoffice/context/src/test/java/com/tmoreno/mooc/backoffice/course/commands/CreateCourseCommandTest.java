@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.course.commands;
 
 import com.tmoreno.mooc.backoffice.course.commands.create.CreateCourseCommand;
 import com.tmoreno.mooc.backoffice.course.commands.create.CreateCourseCommandParams;
-import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.CourseTitle;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseExistsException;

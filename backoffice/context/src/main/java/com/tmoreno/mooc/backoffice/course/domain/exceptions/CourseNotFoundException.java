@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.course.domain.exceptions;
 
-import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.domain.exceptions.BaseDomainException;
 
 public final class CourseNotFoundException extends BaseDomainException {

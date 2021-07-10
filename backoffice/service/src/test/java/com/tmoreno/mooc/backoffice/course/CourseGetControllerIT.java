@@ -10,7 +10,7 @@ import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.CourseMother;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
-import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
+import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.backoffice.utils.BaseControllerIT;
 import com.tmoreno.mooc.shared.domain.Identifier;
 import org.junit.jupiter.api.BeforeEach;

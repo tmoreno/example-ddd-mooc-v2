@@ -1,9 +1,9 @@
 package com.tmoreno.mooc.backoffice.teacher.handlers;
 
-import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseTeacherAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
-import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
+import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherNotFoundException;
 import com.tmoreno.mooc.shared.handlers.EventHandler;

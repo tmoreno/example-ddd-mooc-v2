@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.infrastructure;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
-import com.tmoreno.mooc.backoffice.course.domain.CourseId;
+import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.CourseTitle;
 import org.springframework.stereotype.Repository;
