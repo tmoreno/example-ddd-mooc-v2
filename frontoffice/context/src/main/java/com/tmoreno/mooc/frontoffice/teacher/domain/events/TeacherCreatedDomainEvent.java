@@ -1,10 +1,22 @@
 package com.tmoreno.mooc.frontoffice.teacher.domain.events;
 
-public class TeacherCreatedDomainEvent {
+import com.tmoreno.mooc.shared.events.DomainEvent;
+
+public class TeacherCreatedDomainEvent extends DomainEvent {
 
     private String name;
     private String email;
     private String teacherId;
+
+    @Override
+    public String getEventName() {
+        return eventName;
+    }
+
+    @Override
+    public int getVersion() {
+        return version;
+    }
 
     public String getName() {
         return name;
