@@ -20,9 +20,9 @@ import com.tmoreno.mooc.backoffice.review.domain.exceptions.ReviewNotFoundExcept
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentCourseNotFoundException;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentNotFoundException;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentReviewNotFoundException;
-import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherCourseNotFoundException;
-import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherExistsException;
-import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherNotFoundException;
+import com.tmoreno.mooc.shared.domain.exceptions.teacher.TeacherCourseNotFoundException;
+import com.tmoreno.mooc.shared.domain.exceptions.teacher.TeacherExistsException;
+import com.tmoreno.mooc.shared.domain.exceptions.teacher.TeacherNotFoundException;
 import com.tmoreno.mooc.shared.domain.exceptions.BaseDomainException;
 import com.tmoreno.mooc.shared.domain.exceptions.InvalidDurationException;
 import com.tmoreno.mooc.shared.domain.exceptions.InvalidEmailException;

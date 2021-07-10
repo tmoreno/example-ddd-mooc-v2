@@ -6,7 +6,7 @@ import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseNotFoundException;
 import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
-import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherNotFoundException;
+import com.tmoreno.mooc.shared.domain.exceptions.teacher.TeacherNotFoundException;
 import com.tmoreno.mooc.shared.command.Command;
 import com.tmoreno.mooc.shared.events.EventBus;
 

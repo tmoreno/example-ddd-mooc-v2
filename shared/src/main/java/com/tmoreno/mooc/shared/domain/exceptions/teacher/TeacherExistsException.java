@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.teacher.domain.exceptions;
+package com.tmoreno.mooc.shared.domain.exceptions.teacher;
 
 import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.shared.domain.Email;
