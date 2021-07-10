@@ -4,6 +4,8 @@ import com.tmoreno.mooc.backoffice.eventpublisher.configuration.RabbitMqConfigur
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class RabbitMqPublisher {
 
@@ -13,7 +15,7 @@ public class RabbitMqPublisher {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void publish(String eventName, int version, String body) {
+    public void publish(String eventName, int version, Map<String, Object> body) {
         String routingKey = String.format("mooc.backoffice.%d.%s", version, eventName);
         rabbitTemplate.convertAndSend(RabbitMqConfiguration.EXCHANGE_NAME, routingKey, body);
     }
