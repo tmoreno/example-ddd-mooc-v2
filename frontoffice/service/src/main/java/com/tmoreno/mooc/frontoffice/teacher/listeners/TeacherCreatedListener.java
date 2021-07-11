@@ -19,6 +19,7 @@ public final class TeacherCreatedListener implements MoocEventListener<TeacherCr
         this.teacherCreatedDomainEventHandler = teacherCreatedDomainEventHandler;
     }
 
+    @Override
     @RabbitListener(
         bindings = @QueueBinding(
             exchange = @Exchange(
