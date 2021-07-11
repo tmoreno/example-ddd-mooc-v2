@@ -4,6 +4,8 @@ import com.tmoreno.mooc.frontoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.frontoffice.teacher.handlers.TeacherCreatedDomainEventHandler;
 import com.tmoreno.mooc.frontoffice.teacher.handlers.TeacherEmailChangedDomainEventHandler;
 import com.tmoreno.mooc.frontoffice.teacher.handlers.TeacherNameChangedDomainEventHandler;
+import com.tmoreno.mooc.frontoffice.teacher.queries.FindTeacherQuery;
+import com.tmoreno.mooc.frontoffice.teacher.queries.FindTeachersQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,5 +25,15 @@ public class TeacherSpringBeansConfiguration {
     @Bean
     public TeacherNameChangedDomainEventHandler teacherNameChangedDomainEventHandler(TeacherRepository repository) {
         return new TeacherNameChangedDomainEventHandler(repository);
+    }
+
+    @Bean
+    public FindTeacherQuery findTeacherQuery(TeacherRepository repository) {
+        return new FindTeacherQuery(repository);
+    }
+
+    @Bean
+    public FindTeachersQuery findTeachersQuery(TeacherRepository repository) {
+        return new FindTeachersQuery(repository);
     }
 }
