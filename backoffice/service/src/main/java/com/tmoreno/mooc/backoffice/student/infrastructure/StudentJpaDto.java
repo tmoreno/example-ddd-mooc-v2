@@ -1,12 +1,7 @@
 package com.tmoreno.mooc.backoffice.student.infrastructure;
 
-import com.tmoreno.mooc.shared.domain.CourseId;
-import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
-import com.tmoreno.mooc.backoffice.student.domain.StudentId;
-import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.domain.Identifier;
-import com.tmoreno.mooc.shared.domain.PersonName;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -58,22 +53,12 @@ public final class StudentJpaDto {
     }
 
     public static Student toStudent(StudentJpaDto studentJpaDto) {
-        Set<CourseId> courses = studentJpaDto.getCourses()
-                .stream()
-                .map(CourseId::new)
-                .collect(Collectors.toSet());
-
-        Map<CourseId, ReviewId> reviews = studentJpaDto.getReviews()
-                .entrySet()
-                .stream()
-                .collect(Collectors.toMap(entry -> new CourseId(entry.getKey()), entry -> new ReviewId(entry.getValue())));
-
-        return new Student(
-            new StudentId(studentJpaDto.getId()),
-            new PersonName(studentJpaDto.getName()),
-            new Email(studentJpaDto.getEmail()),
-            courses,
-            reviews
+        return Student.restore(
+            studentJpaDto.getId(),
+            studentJpaDto.getName(),
+            studentJpaDto.getEmail(),
+            studentJpaDto.getCourses(),
+            studentJpaDto.getReviews()
         );
     }
 

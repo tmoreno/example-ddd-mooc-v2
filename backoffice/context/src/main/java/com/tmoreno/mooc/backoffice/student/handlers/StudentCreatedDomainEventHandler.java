@@ -1,12 +1,11 @@
 package com.tmoreno.mooc.backoffice.student.handlers;
 
 import com.tmoreno.mooc.backoffice.student.domain.Student;
-import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentRepository;
 import com.tmoreno.mooc.backoffice.student.domain.events.StudentCreatedDomainEvent;
-import com.tmoreno.mooc.shared.domain.Email;
-import com.tmoreno.mooc.shared.domain.PersonName;
 import com.tmoreno.mooc.shared.handlers.EventHandler;
+
+import java.util.Collections;
 
 public final class StudentCreatedDomainEventHandler implements EventHandler<StudentCreatedDomainEvent> {
 
@@ -18,11 +17,13 @@ public final class StudentCreatedDomainEventHandler implements EventHandler<Stud
 
     @Override
     public void handle(StudentCreatedDomainEvent event) {
-        StudentId studentId = new StudentId(event.getStudentId());
-        PersonName name = new PersonName(event.getName());
-        Email email = new Email(event.getEmail());
-
-        Student student = new Student(studentId, name, email);
+        Student student = Student.restore(
+            event.getStudentId(),
+            event.getName(),
+            event.getEmail(),
+            Collections.emptySet(),
+            Collections.emptyMap()
+        );
 
         repository.save(student);
     }

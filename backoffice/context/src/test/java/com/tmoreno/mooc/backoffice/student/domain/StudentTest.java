@@ -3,7 +3,6 @@ package com.tmoreno.mooc.backoffice.student.domain;
 import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.ReviewIdMother;
-import com.tmoreno.mooc.backoffice.mothers.StudentIdMother;
 import com.tmoreno.mooc.backoffice.mothers.StudentMother;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentCourseNotFoundException;
@@ -15,26 +14,11 @@ import com.tmoreno.mooc.shared.mothers.PersonNameMother;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static java.util.Collections.emptySet;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StudentTest {
-
-    @Test
-    public void should_create_a_student() {
-        StudentId id = StudentIdMother.random();
-        PersonName name = PersonNameMother.random();
-        Email email = EmailMother.random();
-
-        Student student = new Student(id, name, email);
-
-        assertThat(student.getId(), is(id));
-        assertThat(student.getName(), is(name));
-        assertThat(student.getEmail(), is(email));
-        assertThat(student.getCourses(), is(emptySet()));
-    }
 
     @Test
     public void given_a_student_when_change_the_name_then_name_is_changed() {

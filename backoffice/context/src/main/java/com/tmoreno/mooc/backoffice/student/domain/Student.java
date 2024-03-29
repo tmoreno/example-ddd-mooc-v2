@@ -8,10 +8,9 @@ import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.domain.Entity;
 import com.tmoreno.mooc.shared.domain.PersonName;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public final class Student extends Entity<StudentId> {
 
@@ -20,22 +19,26 @@ public final class Student extends Entity<StudentId> {
     private final Set<CourseId> courses;
     private final Map<CourseId, ReviewId> reviews;
 
-    public Student(StudentId id, PersonName name, Email email) {
-        super(id);
-
-        this.name = name;
-        this.email = email;
-        this.courses = new HashSet<>();
-        this.reviews = new HashMap<>();
-    }
-
-    public Student(StudentId id, PersonName name, Email email, Set<CourseId> courses, Map<CourseId, ReviewId> reviews) {
+    private Student(StudentId id, PersonName name, Email email, Set<CourseId> courses, Map<CourseId, ReviewId> reviews) {
         super(id);
 
         this.name = name;
         this.email = email;
         this.courses = courses;
         this.reviews = reviews;
+    }
+
+    public static Student restore(String id, String name, String email, Set<String> courses, Map<String, String> reviews) {
+        return new Student(
+            new StudentId(id),
+            new PersonName(name),
+            new Email(email),
+            courses.stream().map(CourseId::new).collect(Collectors.toSet()),
+            reviews.entrySet().stream().collect(Collectors.toMap(
+                e -> new CourseId(e.getKey()),
+                e -> new ReviewId(e.getValue())
+            ))
+        );
     }
 
     public PersonName getName() {
