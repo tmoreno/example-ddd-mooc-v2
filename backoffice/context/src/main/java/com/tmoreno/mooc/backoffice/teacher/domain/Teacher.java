@@ -42,7 +42,7 @@ public final class Teacher extends AggregateRoot<TeacherId> {
             new TeacherId(id),
             new PersonName(name),
             new Email(email),
-            courses.stream().map(CourseId::new).collect(Collectors.toCollection(HashSet::new))
+            courses.stream().map(CourseId::new).collect(Collectors.toSet())
         );
     }
 
