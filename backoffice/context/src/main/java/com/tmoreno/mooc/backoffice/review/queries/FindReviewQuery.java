@@ -4,7 +4,6 @@ import com.tmoreno.mooc.backoffice.review.domain.Review;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewRepository;
 import com.tmoreno.mooc.backoffice.review.domain.exceptions.ReviewNotFoundException;
-import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentNotFoundException;
 import com.tmoreno.mooc.shared.query.Query;
 
 public final class FindReviewQuery implements Query<FindReviewQueryParams, FindReviewQueryResponse> {

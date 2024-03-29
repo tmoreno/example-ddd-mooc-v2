@@ -13,13 +13,13 @@ public final class Review extends Entity<ReviewId> {
     private final ReviewText text;
     private final CreatedOn createdOn;
 
-    public Review(
-            ReviewId id,
-            CourseId courseId,
-            StudentId studentId,
-            ReviewRating rating,
-            ReviewText text,
-            CreatedOn createdOn
+    private Review(
+        ReviewId id,
+        CourseId courseId,
+        StudentId studentId,
+        ReviewRating rating,
+        ReviewText text,
+        CreatedOn createdOn
     ) {
         super(id);
 
@@ -28,6 +28,24 @@ public final class Review extends Entity<ReviewId> {
         this.rating = rating;
         this.text = text;
         this.createdOn = createdOn;
+    }
+
+    public static Review restore(
+        String id,
+        String courseId,
+        String studentId,
+        String rating,
+        String text,
+        long createdOn
+    ) {
+        return new Review(
+            new ReviewId(id),
+            new CourseId(courseId),
+            new StudentId(studentId),
+            ReviewRating.valueOf(rating),
+            new ReviewText(text),
+            new CreatedOn(createdOn)
+        );
     }
 
     public CourseId getCourseId() {

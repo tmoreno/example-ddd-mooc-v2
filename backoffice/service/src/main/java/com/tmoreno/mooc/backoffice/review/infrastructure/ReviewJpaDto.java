@@ -1,12 +1,6 @@
 package com.tmoreno.mooc.backoffice.review.infrastructure;
 
-import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.review.domain.Review;
-import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
-import com.tmoreno.mooc.backoffice.review.domain.ReviewRating;
-import com.tmoreno.mooc.backoffice.review.domain.ReviewText;
-import com.tmoreno.mooc.backoffice.student.domain.StudentId;
-import com.tmoreno.mooc.shared.domain.CreatedOn;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -38,13 +32,13 @@ public final class ReviewJpaDto {
     }
 
     public static Review toReview(ReviewJpaDto reviewJpaDto) {
-        return new Review(
-            new ReviewId(reviewJpaDto.getId()),
-            new CourseId(reviewJpaDto.getCourseId()),
-            new StudentId(reviewJpaDto.getStudentId()),
-            ReviewRating.valueOf(reviewJpaDto.getRating()),
-            new ReviewText(reviewJpaDto.getText()),
-            new CreatedOn(reviewJpaDto.getCreatedOn().toEpochMilli())
+        return Review.restore(
+            reviewJpaDto.getId(),
+            reviewJpaDto.getCourseId(),
+            reviewJpaDto.getStudentId(),
+            reviewJpaDto.getRating(),
+            reviewJpaDto.getText(),
+            reviewJpaDto.getCreatedOn().toEpochMilli()
         );
     }
 
