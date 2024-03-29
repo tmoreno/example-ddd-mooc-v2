@@ -13,6 +13,7 @@ import com.tmoreno.mooc.shared.domain.TeacherId;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public final class Teacher extends AggregateRoot<TeacherId> {
 
@@ -20,15 +21,7 @@ public final class Teacher extends AggregateRoot<TeacherId> {
     private Email email;
     private final Set<CourseId> courses;
 
-    public Teacher(TeacherId id, PersonName name, Email email) {
-        super(id);
-
-        this.name = name;
-        this.email = email;
-        this.courses = new HashSet<>();
-    }
-
-    public Teacher(TeacherId id, PersonName name, Email email, Set<CourseId> courses) {
+    private Teacher(TeacherId id, PersonName name, Email email, Set<CourseId> courses) {
         super(id);
 
         this.name = name;
@@ -37,11 +30,20 @@ public final class Teacher extends AggregateRoot<TeacherId> {
     }
 
     public static Teacher create(TeacherId id, PersonName name, Email email) {
-        Teacher teacher = new Teacher(id, name, email);
+        Teacher teacher = new Teacher(id, name, email, new HashSet<>());
 
         teacher.recordEvent(new TeacherCreatedDomainEvent(id, name, email));
 
         return teacher;
+    }
+
+    public static Teacher restore(String id, String name, String email, Set<String> courses) {
+        return new Teacher(
+            new TeacherId(id),
+            new PersonName(name),
+            new Email(email),
+            courses.stream().map(CourseId::new).collect(Collectors.toCollection(HashSet::new))
+        );
     }
 
     public PersonName getName() {

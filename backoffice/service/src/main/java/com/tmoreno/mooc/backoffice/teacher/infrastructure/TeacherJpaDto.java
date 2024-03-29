@@ -1,11 +1,7 @@
 package com.tmoreno.mooc.backoffice.teacher.infrastructure;
 
-import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
-import com.tmoreno.mooc.shared.domain.TeacherId;
-import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.domain.Identifier;
-import com.tmoreno.mooc.shared.domain.PersonName;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -52,11 +48,11 @@ public final class TeacherJpaDto {
     }
 
     public static Teacher toTeacher(TeacherJpaDto teacherJpaDto) {
-        return new Teacher(
-            new TeacherId(teacherJpaDto.getId()),
-            new PersonName(teacherJpaDto.getName()),
-            new Email(teacherJpaDto.getEmail()),
-            teacherJpaDto.getCourses().stream().map(CourseId::new).collect(Collectors.toSet())
+        return Teacher.restore(
+            teacherJpaDto.getId(),
+            teacherJpaDto.getName(),
+            teacherJpaDto.getEmail(),
+            teacherJpaDto.getCourses()
         );
     }
 
