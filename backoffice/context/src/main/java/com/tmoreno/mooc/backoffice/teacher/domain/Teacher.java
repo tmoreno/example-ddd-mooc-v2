@@ -51,11 +51,13 @@ public final class Teacher extends AggregateRoot<TeacherId> {
     }
 
     public void changeName(PersonName name) {
-        if (!Objects.equals(name, this.name)) {
-            this.name = name;
-
-            recordEvent(new TeacherNameChangedDomainEvent(id, name));
+        if (Objects.equals(name, this.name)) {
+            return;
         }
+
+        this.name = name;
+
+        recordEvent(new TeacherNameChangedDomainEvent(id, name));
     }
 
     public Email getEmail() {
@@ -63,11 +65,13 @@ public final class Teacher extends AggregateRoot<TeacherId> {
     }
 
     public void changeEmail(Email email) {
-        if (!Objects.equals(email, this.email)) {
-            this.email = email;
-
-            recordEvent(new TeacherEmailChangedDomainEvent(id, email));
+        if (Objects.equals(email, this.email)) {
+            return;
         }
+        
+        this.email = email;
+
+        recordEvent(new TeacherEmailChangedDomainEvent(id, email));
     }
 
     public Set<CourseId> getCourses() {
