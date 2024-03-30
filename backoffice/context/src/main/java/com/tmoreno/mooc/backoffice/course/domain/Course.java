@@ -36,6 +36,8 @@ import com.tmoreno.mooc.shared.domain.Entity;
 import com.tmoreno.mooc.shared.domain.Language;
 import com.tmoreno.mooc.shared.domain.Price;
 
+import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -46,6 +48,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class Course extends AggregateRoot<CourseId> {
+
     private CourseTitle title;
     private CourseImageUrl imageUrl;
     private CourseSummary summary;
@@ -58,44 +61,19 @@ public final class Course extends AggregateRoot<CourseId> {
     private final Set<StudentId> students;
     private final Set<TeacherId> teachers;
 
-    public Course(
-            CourseId id,
-            CourseTitle title,
-            CourseImageUrl imageUrl,
-            CourseSummary summary,
-            CourseDescription description,
-            CourseState state,
-            Language language,
-            Price price
-    ) {
-        super(id);
-
-        this.title = title;
-        this.imageUrl = imageUrl;
-        this.summary = summary;
-        this.description = description;
-        this.state = state;
-        this.language = language;
-        this.price = price;
-        this.sections = new HashMap<>();
-        this.reviews = new HashMap<>();
-        this.students = new HashSet<>();
-        this.teachers = new HashSet<>();
-    }
-
-    public Course(
-            CourseId id,
-            CourseTitle title,
-            CourseImageUrl imageUrl,
-            CourseSummary summary,
-            CourseDescription description,
-            CourseState state,
-            Language language,
-            Price price,
-            List<Section> sections,
-            Map<StudentId, ReviewId> reviews,
-            Set<StudentId> students,
-            Set<TeacherId> teachers
+    private Course(
+        CourseId id,
+        CourseTitle title,
+        CourseImageUrl imageUrl,
+        CourseSummary summary,
+        CourseDescription description,
+        CourseState state,
+        Language language,
+        Price price,
+        List<Section> sections,
+        Map<StudentId, ReviewId> reviews,
+        Set<StudentId> students,
+        Set<TeacherId> teachers
     ) {
         super(id);
 
@@ -114,19 +92,57 @@ public final class Course extends AggregateRoot<CourseId> {
 
     public static Course create(CourseId id, CourseTitle title) {
         Course course = new Course(
-                id,
-                title,
-                null,
-                null,
-                null,
-                CourseState.DRAFT,
-                null,
-                null
+            id,
+            title,
+            null,
+            null,
+            null,
+            CourseState.DRAFT,
+            null,
+            null,
+            new ArrayList<>(),
+            new HashMap<>(),
+            new HashSet<>(),
+            new HashSet<>()
         );
 
         course.recordEvent(new CourseCreatedDomainEvent(id, title));
 
         return course;
+    }
+
+    public static Course restore(
+        String id,
+        String title,
+        String imageUrl,
+        String summary,
+        String description,
+        String state,
+        String language,
+        Double price,
+        String priceCurrency,
+        List<Section> sections,
+        Map<String, String> reviews,
+        Set<String> students,
+        Set<String> teachers
+    ) {
+        return new Course(
+            new CourseId(id),
+            new CourseTitle(title),
+            imageUrl == null ? null : new CourseImageUrl(imageUrl),
+            summary == null ? null : new CourseSummary(summary),
+            description == null ? null : new CourseDescription(description),
+            CourseState.valueOf(state),
+            language == null ? null : Language.valueOf(language),
+            price == null ? null : new Price(price, Currency.getInstance(priceCurrency)),
+            sections,
+            reviews.entrySet().stream().collect(Collectors.toMap(
+                e -> new StudentId(e.getKey()),
+                e -> new ReviewId(e.getValue())
+            )),
+            students.stream().map(StudentId::new).collect(Collectors.toSet()),
+            teachers.stream().map(TeacherId::new).collect(Collectors.toSet())
+        );
     }
 
     public void publish() {

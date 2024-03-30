@@ -7,16 +7,14 @@ import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
-import com.tmoreno.mooc.shared.domain.TeacherId;
+import com.tmoreno.mooc.shared.domain.Price;
 import com.tmoreno.mooc.shared.mothers.DurationInSecondsMother;
 import com.tmoreno.mooc.shared.mothers.LanguageMother;
 import com.tmoreno.mooc.shared.mothers.PriceMother;
 import org.apache.commons.lang3.RandomUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,16 +24,18 @@ public final class CourseMother {
 
     public static Course random() {
         StudentId studentId = StudentIdMother.random();
+        Price price = PriceMother.random();
 
-        return new Course(
-            CourseIdMother.random(),
-            CourseTitleMother.random(),
-            CourseImageUrlMother.random(),
-            CourseSummaryMother.random(),
-            CourseDescriptionMother.random(),
-            CourseStateMother.random(),
-            LanguageMother.random(),
-            PriceMother.random(),
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            CourseStateMother.random().name(),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
             List.of(
                 SectionMother.randomWithClass(
                     SectionClassIdMother.random(),
@@ -43,213 +43,259 @@ public final class CourseMother {
                     DurationInSecondsMother.random()
                 )
             ),
-            Map.of(studentId, ReviewIdMother.random()),
-            Set.of(studentId),
-            Set.of(TeacherIdMother.random())
+            Map.of(studentId.getValue(), ReviewIdMother.random().getValue()),
+            Set.of(studentId.getValue()),
+            Set.of(TeacherIdMother.random().getValue())
         );
     }
 
     public static Course randomInDraftState() {
-        return new Course(
-            CourseIdMother.random(),
-            CourseTitleMother.random(),
-            CourseImageUrlMother.random(),
-            CourseSummaryMother.random(),
-            CourseDescriptionMother.random(),
-            CourseState.DRAFT,
-            LanguageMother.random(),
-            PriceMother.random()
+        Price price = PriceMother.random();
+
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            CourseState.DRAFT.name(),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
+            Collections.emptyList(),
+            Collections.emptyMap(),
+            Collections.emptySet(),
+            Collections.emptySet()
         );
     }
 
     public static Course randomInNotDraftState() {
-        List<CourseState> notDraftStates = Arrays.stream(CourseState.values())
-                .filter(state -> state != CourseState.DRAFT)
-                .collect(Collectors.toList());
+        Price price = PriceMother.random();
 
-        return new Course(
-                CourseIdMother.random(),
-                CourseTitleMother.random(),
-                CourseImageUrlMother.random(),
-                CourseSummaryMother.random(),
-                CourseDescriptionMother.random(),
-                notDraftStates.get(RandomUtils.nextInt(0, notDraftStates.size())),
-                LanguageMother.random(),
-                PriceMother.random()
+        List<String> notDraftStates = Arrays.stream(CourseState.values())
+            .filter(state -> state != CourseState.DRAFT)
+            .map(Enum::name)
+            .collect(Collectors.toList());
+
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            notDraftStates.get(RandomUtils.nextInt(0, notDraftStates.size())),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
+            Collections.emptyList(),
+            Collections.emptyMap(),
+            Collections.emptySet(),
+            Collections.emptySet()
         );
     }
 
     public static Course randomInDraftStateWithSection(Section section) {
-        List<Section> sections = new ArrayList<>();
-        sections.add(section);
+        Price price = PriceMother.random();
 
-        return new Course(
-                CourseIdMother.random(),
-                CourseTitleMother.random(),
-                CourseImageUrlMother.random(),
-                CourseSummaryMother.random(),
-                CourseDescriptionMother.random(),
-                CourseState.DRAFT,
-                LanguageMother.random(),
-                PriceMother.random(),
-                sections,
-                Map.of(),
-                Set.of(),
-                Set.of()
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            CourseState.DRAFT.name(),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
+            List.of(section),
+            Collections.emptyMap(),
+            Collections.emptySet(),
+            Collections.emptySet()
         );
     }
 
     public static Course randomInDraftStateWithTeacher(Teacher teacher) {
-        Set<TeacherId> teachers = new HashSet<>();
-        teachers.add(teacher.getId());
+        Price price = PriceMother.random();
 
-        return new Course(
-                CourseIdMother.random(),
-                CourseTitleMother.random(),
-                CourseImageUrlMother.random(),
-                CourseSummaryMother.random(),
-                CourseDescriptionMother.random(),
-                CourseState.DRAFT,
-                LanguageMother.random(),
-                PriceMother.random(),
-                List.of(),
-                Map.of(),
-                Set.of(),
-                teachers
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            CourseState.DRAFT.name(),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
+            Collections.emptyList(),
+            Collections.emptyMap(),
+            Collections.emptySet(),
+            Set.of(teacher.getId().getValue())
         );
     }
 
     public static Course randomInPublishState() {
-        return new Course(
-                CourseIdMother.random(),
-                CourseTitleMother.random(),
-                CourseImageUrlMother.random(),
-                CourseSummaryMother.random(),
-                CourseDescriptionMother.random(),
-                CourseState.PUBLISHED,
-                LanguageMother.random(),
-                PriceMother.random()
+        Price price = PriceMother.random();
+
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            CourseState.PUBLISHED.name(),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
+            Collections.emptyList(),
+            Collections.emptyMap(),
+            Collections.emptySet(),
+            Collections.emptySet()
         );
     }
 
     public static Course randomInNotPublishState() {
-        List<CourseState> notPublishedStates = Arrays.stream(CourseState.values())
-                .filter(state -> state != CourseState.PUBLISHED)
-                .collect(Collectors.toList());
+        Price price = PriceMother.random();
 
-        return new Course(
-                CourseIdMother.random(),
-                CourseTitleMother.random(),
-                CourseImageUrlMother.random(),
-                CourseSummaryMother.random(),
-                CourseDescriptionMother.random(),
-                notPublishedStates.get(RandomUtils.nextInt(0, notPublishedStates.size())),
-                LanguageMother.random(),
-                PriceMother.random()
+        List<String> notPublishedStates = Arrays.stream(CourseState.values())
+            .filter(state -> state != CourseState.PUBLISHED)
+            .map(Enum::name)
+            .collect(Collectors.toList());
+
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            notPublishedStates.get(RandomUtils.nextInt(0, notPublishedStates.size())),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
+            Collections.emptyList(),
+            Collections.emptyMap(),
+            Collections.emptySet(),
+            Collections.emptySet()
         );
     }
 
     public static Course randomInPublishStateWithReview(StudentId studentId, ReviewId reviewId) {
-        Map<StudentId, ReviewId> reviews = new HashMap<>();
-        reviews.put(studentId, reviewId);
+        Price price = PriceMother.random();
 
-        return new Course(
-                CourseIdMother.random(),
-                CourseTitleMother.random(),
-                CourseImageUrlMother.random(),
-                CourseSummaryMother.random(),
-                CourseDescriptionMother.random(),
-                CourseState.PUBLISHED,
-                LanguageMother.random(),
-                PriceMother.random(),
-                List.of(),
-                reviews,
-                Set.of(),
-                Set.of()
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            CourseState.PUBLISHED.name(),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
+            Collections.emptyList(),
+            Map.of(studentId.getValue(), reviewId.getValue()),
+            Collections.emptySet(),
+            Collections.emptySet()
         );
     }
 
     public static Course randomInPublishStateWithStudent(Student student) {
-        Set<StudentId> students = new HashSet<>();
-        students.add(student.getId());
+        Price price = PriceMother.random();
 
-        return new Course(
-                CourseIdMother.random(),
-                CourseTitleMother.random(),
-                CourseImageUrlMother.random(),
-                CourseSummaryMother.random(),
-                CourseDescriptionMother.random(),
-                CourseState.PUBLISHED,
-                LanguageMother.random(),
-                PriceMother.random(),
-                List.of(),
-                Map.of(),
-                students,
-                Set.of()
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            CourseState.PUBLISHED.name(),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
+            Collections.emptyList(),
+            Collections.emptyMap(),
+            Set.of(student.getId().getValue()),
+            Collections.emptySet()
         );
     }
 
     public static Course randomInDiscardedState() {
-        return new Course(
-                CourseIdMother.random(),
-                CourseTitleMother.random(),
-                CourseImageUrlMother.random(),
-                CourseSummaryMother.random(),
-                CourseDescriptionMother.random(),
-                CourseState.DISCARDED,
-                LanguageMother.random(),
-                PriceMother.random()
+        Price price = PriceMother.random();
+
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            CourseState.DISCARDED.name(),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
+            Collections.emptyList(),
+            Collections.emptyMap(),
+            Collections.emptySet(),
+            Collections.emptySet()
         );
     }
 
     public static Course randomReadyToPublish() {
-        return new Course(
-                CourseIdMother.random(),
-                CourseTitleMother.random(),
-                CourseImageUrlMother.random(),
-                CourseSummaryMother.random(),
-                CourseDescriptionMother.random(),
-                CourseState.DRAFT,
-                LanguageMother.random(),
-                PriceMother.random(),
-                List.of(SectionMother.random()),
-                Map.of(),
-                Set.of(),
-                Set.of(TeacherIdMother.random())
+        Price price = PriceMother.random();
+
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            CourseState.DRAFT.name(),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
+            List.of(SectionMother.random()),
+            Collections.emptyMap(),
+            Collections.emptySet(),
+            Set.of(TeacherIdMother.random().getValue())
         );
     }
 
     public static Course randomReadyToPublishWithoutSections() {
-        return new Course(
-                CourseIdMother.random(),
-                CourseTitleMother.random(),
-                CourseImageUrlMother.random(),
-                CourseSummaryMother.random(),
-                CourseDescriptionMother.random(),
-                CourseState.DRAFT,
-                LanguageMother.random(),
-                PriceMother.random(),
-                List.of(),
-                Map.of(),
-                Set.of(),
-                Set.of(TeacherIdMother.random())
+        Price price = PriceMother.random();
+
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            CourseState.DRAFT.name(),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
+            Collections.emptyList(),
+            Collections.emptyMap(),
+            Collections.emptySet(),
+            Set.of(TeacherIdMother.random().getValue())
         );
     }
 
     public static Course randomReadyToPublishWithoutTeachers() {
-        return new Course(
-                CourseIdMother.random(),
-                CourseTitleMother.random(),
-                CourseImageUrlMother.random(),
-                CourseSummaryMother.random(),
-                CourseDescriptionMother.random(),
-                CourseState.DRAFT,
-                LanguageMother.random(),
-                PriceMother.random(),
-                List.of(SectionMother.random()),
-                Map.of(),
-                Set.of(),
-                Set.of()
+        Price price = PriceMother.random();
+
+        return Course.restore(
+            CourseIdMother.random().getValue(),
+            CourseTitleMother.random().getValue(),
+            CourseImageUrlMother.random().getValue(),
+            CourseSummaryMother.random().getValue(),
+            CourseDescriptionMother.random().getValue(),
+            CourseState.DRAFT.name(),
+            LanguageMother.random().name(),
+            price.getValue(),
+            price.getCurrency().getCurrencyCode(),
+            List.of(SectionMother.random()),
+            Collections.emptyMap(),
+            Collections.emptySet(),
+            Collections.emptySet()
         );
     }
 }

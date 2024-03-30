@@ -1,17 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.infrastructure;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
-import com.tmoreno.mooc.backoffice.course.domain.CourseDescription;
-import com.tmoreno.mooc.shared.domain.CourseId;
-import com.tmoreno.mooc.backoffice.course.domain.CourseImageUrl;
-import com.tmoreno.mooc.backoffice.course.domain.CourseState;
-import com.tmoreno.mooc.backoffice.course.domain.CourseSummary;
-import com.tmoreno.mooc.backoffice.course.domain.CourseTitle;
-import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
-import com.tmoreno.mooc.backoffice.student.domain.StudentId;
-import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.shared.domain.Identifier;
-import com.tmoreno.mooc.shared.domain.Language;
 import com.tmoreno.mooc.shared.domain.Price;
 import com.tmoreno.mooc.shared.domain.StringValueObject;
 
@@ -25,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
-import java.util.Currency;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -92,19 +81,20 @@ public final class CourseJpaDto {
     }
 
     public static Course toCourse(CourseJpaDto courseJpaDto) {
-        return new Course(
-            new CourseId(courseJpaDto.getId()),
-            new CourseTitle(courseJpaDto.getTitle()),
-            courseJpaDto.getImageUrl() == null ? null : new CourseImageUrl(courseJpaDto.getImageUrl()),
-            courseJpaDto.getSummary() == null ? null : new CourseSummary(courseJpaDto.getSummary()),
-            courseJpaDto.getDescription() == null ? null : new CourseDescription(courseJpaDto.getDescription()),
-            CourseState.valueOf(courseJpaDto.getState()),
-            courseJpaDto.getLanguage() == null ? null : Language.valueOf(courseJpaDto.getLanguage()),
-            courseJpaDto.getPriceValue() == null ? null : new Price(courseJpaDto.getPriceValue(), Currency.getInstance(courseJpaDto.getPriceCurrency())),
+        return Course.restore(
+            courseJpaDto.getId(),
+            courseJpaDto.getTitle(),
+            courseJpaDto.getImageUrl(),
+            courseJpaDto.getSummary(),
+            courseJpaDto.getDescription(),
+            courseJpaDto.getState(),
+            courseJpaDto.getLanguage(),
+            courseJpaDto.getPriceValue(),
+            courseJpaDto.getPriceCurrency(),
             courseJpaDto.getSections().stream().map(SectionJpaDto::toSection).collect(Collectors.toList()),
-            courseJpaDto.getReviews().entrySet().stream().collect(Collectors.toMap(e -> new StudentId(e.getKey()), e -> new ReviewId(e.getValue()))),
-            courseJpaDto.getStudents().stream().map(StudentId::new).collect(Collectors.toSet()),
-            courseJpaDto.getTeachers().stream().map(TeacherId::new).collect(Collectors.toSet())
+            courseJpaDto.getReviews(),
+            courseJpaDto.getStudents(),
+            courseJpaDto.getTeachers()
         );
     }
 
