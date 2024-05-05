@@ -4,7 +4,6 @@ services:
 
   backoffice-db:
     image: mysql:8.0.25
-    container_name: backoffice-db
     environment:
       MYSQL_ROOT_PASSWORD: backoffice
       MYSQL_DATABASE: backoffice
@@ -18,7 +17,6 @@ services:
 
   frontoffice-db:
     image: mysql:8.0.25
-    container_name: frontoffice-db
     environment:
       MYSQL_ROOT_PASSWORD: frontoffice
       MYSQL_DATABASE: frontoffice
@@ -32,7 +30,6 @@ services:
 
   rabbitmq:
     image: rabbitmq:3.8.17-management
-    container_name: mooc-rabbitmq
     ports:
       - 5672:5672
       - 8090:15672
