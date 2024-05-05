@@ -6,14 +6,13 @@ import com.tmoreno.mooc.backoffice.course.commands.discard.DiscardCourseCommand;
 import com.tmoreno.mooc.backoffice.course.commands.discard.DiscardCourseCommandParams;
 import com.tmoreno.mooc.backoffice.course.commands.publish.PublishCourseCommand;
 import com.tmoreno.mooc.backoffice.course.commands.publish.PublishCourseCommandParams;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.transaction.Transactional;
 
 @RestController
 public class CoursePostController {

@@ -1,9 +1,9 @@
 package com.tmoreno.mooc.backoffice.review.infrastructure;
 
 import com.tmoreno.mooc.backoffice.review.domain.Review;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.time.Instant;
 
 @Entity(name = "reviews")

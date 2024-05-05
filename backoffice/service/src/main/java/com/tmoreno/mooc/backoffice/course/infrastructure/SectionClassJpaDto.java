@@ -4,11 +4,10 @@ import com.tmoreno.mooc.backoffice.course.domain.SectionClass;
 import com.tmoreno.mooc.backoffice.course.domain.SectionClassId;
 import com.tmoreno.mooc.backoffice.course.domain.SectionClassTitle;
 import com.tmoreno.mooc.shared.domain.DurationInSeconds;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity(name = "course_section_classes")
 public final class SectionClassJpaDto {
