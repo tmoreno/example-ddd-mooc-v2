@@ -7,7 +7,7 @@ public final class StudentNotFoundException extends BaseDomainException {
     public StudentNotFoundException(StudentId studentId) {
         super(
                 "student-not-found",
-                "Student not found: " + studentId
+                "Student not found: " + studentId.getValue()
         );
     }
 }
