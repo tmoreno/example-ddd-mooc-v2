@@ -7,7 +7,7 @@ public final class ReviewNotFoundException extends BaseDomainException {
     public ReviewNotFoundException(ReviewId reviewId) {
         super(
                 "review-not-found",
-                "Review not found: " + reviewId
+                "Review not found: " + reviewId.getValue()
         );
     }
 }
