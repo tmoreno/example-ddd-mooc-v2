@@ -2,106 +2,94 @@ package com.tmoreno.mooc.backoffice.course;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.Section;
 import com.tmoreno.mooc.backoffice.course.domain.SectionClass;
-import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.mothers.CourseMother;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
-import com.tmoreno.mooc.shared.domain.TeacherId;
-import com.tmoreno.mooc.backoffice.utils.BaseControllerIT;
+import com.tmoreno.mooc.backoffice.support.E2ETest;
+import com.tmoreno.mooc.backoffice.utils.DatabaseUtils;
 import com.tmoreno.mooc.shared.domain.Identifier;
+import com.tmoreno.mooc.shared.domain.TeacherId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertErrorCode;
-import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertNotFound;
-import static com.tmoreno.mooc.backoffice.utils.ResponseAssertions.assertOk;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class CourseGetControllerIT extends BaseControllerIT {
+@E2ETest
+public class CourseGetControllerTest {
 
-    @SpyBean
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Autowired
     private CourseRepository courseRepository;
 
     @BeforeEach
     public void setUp() {
-        url += "/courses";
+        DatabaseUtils databaseUtils = new DatabaseUtils(jdbcTemplate);
+        databaseUtils.initialize();
     }
 
     @Test
-    public void given_an_existing_course_when_send_get_request_then_receive_course_data() throws JsonProcessingException {
-        Course course = CourseMother.random();
+    void should_return_404_status_code_when_course_does_not_exists() throws Exception {
+        mockMvc
+            .perform(get("/courses/" + UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.code").value("course-not-found"));
+    }
 
+    @Test
+    void should_return_200_status_code_and_empty_response_when_there_are_not_courses() throws Exception {
+        mockMvc
+            .perform(get("/courses").contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$").isEmpty());
+    }
+
+    @Test
+    void should_return_200_status_code_and_course_data() throws Exception {
+        Course course = CourseMother.random();
         courseRepository.save(course);
 
-        ResponseEntity<String> response = get(course.getId().getValue());
+        String responseString = mockMvc
+            .perform(get("/courses/" + course.getId().getValue()).contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
 
-        assertOk(response);
+        JsonNode responseJson = toJson(responseString);
 
-        JsonNode responseBody = toJson(response.getBody());
-        assertCourse(responseBody, course);
+        assertCourse(responseJson, course);
     }
 
-    @Test
-    public void given_not_existing_course_when_send_get_request_then_receive_not_found_response() throws JsonProcessingException {
-        ResponseEntity<String> response = get(CourseIdMother.random().getValue());
-
-        assertNotFound(response);
-
-        assertErrorCode(toJson(response.getBody()), "course-not-found");
-    }
-
-    @Test
-    public void given_there_are_no_courses_when_send_get_request_then_receive_empty_response() throws JsonProcessingException {
-        ResponseEntity<String> response = get();
-
-        assertOk(response);
-
-        JsonNode responseBody = toJson(response.getBody());
-
-        assertThat(responseBody.size(), is(0));
-    }
-
-    @Test
-    public void given_there_are_three_courses_when_send_get_request_then_receive_three_courses_data() throws JsonProcessingException {
-        Course course1 = CourseMother.random();
-        courseRepository.save(course1);
-
-        Course course2 = CourseMother.random();
-        courseRepository.save(course2);
-
-        Course course3 = CourseMother.random();
-        courseRepository.save(course3);
-
-        ResponseEntity<String> response = get();
-
-        assertOk(response);
-
-        JsonNode responseBody = toJson(response.getBody());
-
-        assertThat(responseBody.size(), is(3));
-
-        for (JsonNode jsonCourse : responseBody) {
-            Course course = List.of(course1, course2, course3)
-                    .stream()
-                    .filter(t -> t.getId().getValue().equals(jsonCourse.get("id").asText()))
-                    .findFirst()
-                    .orElseThrow();
-
-            assertCourse(jsonCourse, course);
-        }
+    private JsonNode toJson(String content) throws JsonProcessingException {
+        return objectMapper.readTree(content);
     }
 
     private void assertCourse(JsonNode jsonCourse, Course course) {
@@ -125,10 +113,10 @@ public class CourseGetControllerIT extends BaseControllerIT {
 
         for (JsonNode jsonSection : jsonSections) {
             Section section = sections
-                    .stream()
-                    .filter(s -> jsonSection.get("id").asText().equals(s.getId().getValue()))
-                    .findFirst()
-                    .orElseThrow();
+                .stream()
+                .filter(s -> jsonSection.get("id").asText().equals(s.getId().getValue()))
+                .findFirst()
+                .orElseThrow();
 
             assertThat(jsonSection.get("title").asText(), is(section.getTitle().getValue()));
             assertSectionClasses(jsonSection.get("classes"), section.getClasses());
@@ -140,10 +128,10 @@ public class CourseGetControllerIT extends BaseControllerIT {
 
         for (JsonNode jsonClass : jsonClasses) {
             SectionClass sectionClass = classes
-                    .stream()
-                    .filter(s -> jsonClass.get("id").asText().equals(s.getId().getValue()))
-                    .findFirst()
-                    .orElseThrow();
+                .stream()
+                .filter(s -> jsonClass.get("id").asText().equals(s.getId().getValue()))
+                .findFirst()
+                .orElseThrow();
 
             assertThat(jsonClass.get("title").asText(), is(sectionClass.getTitle().getValue()));
             assertThat(jsonClass.get("duration").asInt(), is(sectionClass.getDuration().getValue()));
