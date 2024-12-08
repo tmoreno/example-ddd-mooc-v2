@@ -11,7 +11,7 @@ import java.time.Duration;
 
 public class TestcontainersInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-    static ComposeContainer dockerComposeContainer = new ComposeContainer(new File("../../docker-compose.yml"))
+    static ComposeContainer dockerComposeContainer = new ComposeContainer(new File("../docker-compose.yml"))
         .withLocalCompose(true)
         .withExposedService("backoffice-db", 3306, Wait.forListeningPort().withStartupTimeout(Duration.ofSeconds(120)));
 
