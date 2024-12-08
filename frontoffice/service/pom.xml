@@ -42,8 +42,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.tmoreno.mooc.frontoffice</groupId>
-            <artifactId>frontoffice-context</artifactId>
+            <groupId>com.tmoreno.mooc.shared</groupId>
+            <artifactId>shared-context</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
