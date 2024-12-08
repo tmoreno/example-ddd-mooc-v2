@@ -12,7 +12,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - "./service/src/main/resources/database/:/docker-entrypoint-initdb.d/"
+      - "./backoffice-service/src/main/resources/database/:/docker-entrypoint-initdb.d/"
     command: [ "--default-authentication-plugin=mysql_native_password" ]
 
   frontoffice-db:
