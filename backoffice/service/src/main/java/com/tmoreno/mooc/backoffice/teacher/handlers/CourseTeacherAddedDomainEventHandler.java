@@ -1,0 +1,30 @@
+package com.tmoreno.mooc.backoffice.teacher.handlers;
+
+import com.tmoreno.mooc.backoffice.course.domain.events.CourseTeacherAddedDomainEvent;
+import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
+import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
+import com.tmoreno.mooc.shared.domain.CourseId;
+import com.tmoreno.mooc.shared.domain.TeacherId;
+import com.tmoreno.mooc.shared.domain.exceptions.teacher.TeacherNotFoundException;
+import com.tmoreno.mooc.shared.handlers.EventHandler;
+
+public final class CourseTeacherAddedDomainEventHandler implements EventHandler<CourseTeacherAddedDomainEvent> {
+
+    private final TeacherRepository repository;
+
+    public CourseTeacherAddedDomainEventHandler(TeacherRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public void handle(CourseTeacherAddedDomainEvent event) {
+        CourseId courseId = new CourseId(event.getCourseId());
+        TeacherId teacherId = new TeacherId(event.getTeacherId());
+
+        Teacher teacher = repository.find(teacherId).orElseThrow(() -> new TeacherNotFoundException(teacherId));
+
+        teacher.addCourse(courseId);
+
+        repository.save(teacher);
+    }
+}

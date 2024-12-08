@@ -36,8 +36,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.tmoreno.mooc.backoffice</groupId>
-            <artifactId>backoffice-context</artifactId>
+            <groupId>com.tmoreno.mooc.shared</groupId>
+            <artifactId>shared-context</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
@@ -50,14 +50,6 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.tmoreno.mooc.backoffice</groupId>
-            <artifactId>backoffice-context</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <type>test-jar</type>
             <scope>test</scope>
         </dependency>
 
