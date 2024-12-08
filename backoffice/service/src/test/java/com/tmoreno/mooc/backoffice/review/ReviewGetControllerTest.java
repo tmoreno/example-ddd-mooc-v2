@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,13 +26,13 @@ public class ReviewGetControllerTest {
     private static final String ANY_RATING_TEXT = "ONE_AND_A_HALF";
     private static final double ANY_RATING_VALUE = 1.5;
     private static final String ANY_TEXT = RandomStringUtils.randomAlphabetic(100, 5000);
-    private static final Instant ANY_CREATION_INSTANT = Instant.now();
+    private static final Instant ANY_CREATION_INSTANT = Instant.now().truncatedTo(ChronoUnit.SECONDS);
     private static final String OTHER_REVIEW_ID = UUID.randomUUID().toString();
     private static final String OTHER_COURSE_ID = UUID.randomUUID().toString();
     private static final String OTHER_STUDENT_ID = UUID.randomUUID().toString();
     private static final String OTHER_RATING_TEXT = "ONE_AND_A_HALF";
     private static final String OTHER_TEXT = RandomStringUtils.randomAlphabetic(100, 5000);
-    private static final Instant OTHER_CREATION_INSTANT = Instant.now();
+    private static final Instant OTHER_CREATION_INSTANT = Instant.now().truncatedTo(ChronoUnit.SECONDS);
 
     @Autowired
     private MockMvc mockMvc;
