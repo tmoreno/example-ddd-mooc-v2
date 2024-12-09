@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.configuration;
+package com.tmoreno.mooc.backoffice.common.infrastructure;
 
 import java.time.Instant;
 

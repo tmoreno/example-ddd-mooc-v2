@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.configuration;
+package com.tmoreno.mooc.backoffice.common.infrastructure;
 
 import com.tmoreno.mooc.shared.domain.DomainEventRepository;
 import com.tmoreno.mooc.shared.handlers.StoreDomainEventHandler;

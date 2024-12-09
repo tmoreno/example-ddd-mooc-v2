@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.listeners;
+package com.tmoreno.mooc.backoffice.common.infrastructure;
 
 import com.tmoreno.mooc.shared.events.DomainEvent;
 import com.tmoreno.mooc.shared.events.MoocEventListener;

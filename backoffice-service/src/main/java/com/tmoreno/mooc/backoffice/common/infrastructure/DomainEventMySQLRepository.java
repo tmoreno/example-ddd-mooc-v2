@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.infrastructure;
+package com.tmoreno.mooc.backoffice.common.infrastructure;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

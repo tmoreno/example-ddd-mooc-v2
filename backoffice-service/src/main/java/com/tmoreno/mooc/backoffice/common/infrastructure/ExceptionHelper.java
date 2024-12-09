@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.configuration;
+package com.tmoreno.mooc.backoffice.common.infrastructure;
 
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.ChangeCourseAttributeException;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseExistsException;
