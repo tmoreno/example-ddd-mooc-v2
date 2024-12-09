@@ -1,10 +1,10 @@
 package com.tmoreno.mooc.backoffice.review.handlers;
 
-import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
-import com.tmoreno.mooc.backoffice.mothers.ReviewIdMother;
-import com.tmoreno.mooc.backoffice.mothers.ReviewRatingMother;
-import com.tmoreno.mooc.backoffice.mothers.ReviewTextMother;
-import com.tmoreno.mooc.backoffice.mothers.StudentIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.CourseIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.ReviewIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.ReviewRatingMother;
+import com.tmoreno.mooc.backoffice.common.mothers.ReviewTextMother;
+import com.tmoreno.mooc.backoffice.common.mothers.StudentIdMother;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewRepository;
 import com.tmoreno.mooc.backoffice.review.domain.events.ReviewCreatedDomainEvent;
 import com.tmoreno.mooc.shared.mothers.CreatedOnMother;

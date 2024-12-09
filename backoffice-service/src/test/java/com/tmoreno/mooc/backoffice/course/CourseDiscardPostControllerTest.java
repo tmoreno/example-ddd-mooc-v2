@@ -2,9 +2,9 @@ package com.tmoreno.mooc.backoffice.course;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
-import com.tmoreno.mooc.backoffice.mothers.CourseMother;
-import com.tmoreno.mooc.backoffice.support.E2ETest;
-import com.tmoreno.mooc.backoffice.utils.DatabaseUtils;
+import com.tmoreno.mooc.backoffice.common.mothers.CourseMother;
+import com.tmoreno.mooc.backoffice.common.E2ETest;
+import com.tmoreno.mooc.backoffice.common.DatabaseUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

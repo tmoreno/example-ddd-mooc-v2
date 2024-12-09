@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.teacher.queries;
 
-import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
-import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
+import com.tmoreno.mooc.backoffice.common.mothers.CourseIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.shared.domain.Identifier;

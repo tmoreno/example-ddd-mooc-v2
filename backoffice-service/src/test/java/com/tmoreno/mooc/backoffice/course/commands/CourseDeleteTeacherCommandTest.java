@@ -5,10 +5,10 @@ import com.tmoreno.mooc.backoffice.course.commands.deleteTeacher.CourseDeleteTea
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseNotFoundException;
-import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
-import com.tmoreno.mooc.backoffice.mothers.CourseMother;
-import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
-import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
+import com.tmoreno.mooc.backoffice.common.mothers.CourseIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.CourseMother;
+import com.tmoreno.mooc.backoffice.common.mothers.TeacherIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.shared.fakes.FakeEventBus;
 import org.junit.jupiter.api.BeforeEach;

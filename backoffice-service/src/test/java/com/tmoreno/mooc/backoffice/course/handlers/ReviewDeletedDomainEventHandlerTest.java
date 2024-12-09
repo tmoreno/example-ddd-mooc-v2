@@ -2,9 +2,9 @@ package com.tmoreno.mooc.backoffice.course.handlers;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
-import com.tmoreno.mooc.backoffice.mothers.CourseMother;
-import com.tmoreno.mooc.backoffice.mothers.ReviewIdMother;
-import com.tmoreno.mooc.backoffice.mothers.StudentIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.CourseMother;
+import com.tmoreno.mooc.backoffice.common.mothers.ReviewIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.StudentIdMother;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.review.domain.events.ReviewDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;

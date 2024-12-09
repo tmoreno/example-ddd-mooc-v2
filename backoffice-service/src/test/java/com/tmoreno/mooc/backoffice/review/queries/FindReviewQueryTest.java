@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.review.queries;
 
-import com.tmoreno.mooc.backoffice.mothers.ReviewIdMother;
-import com.tmoreno.mooc.backoffice.mothers.ReviewMother;
+import com.tmoreno.mooc.backoffice.common.mothers.ReviewIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.ReviewMother;
 import com.tmoreno.mooc.backoffice.review.domain.Review;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewRepository;

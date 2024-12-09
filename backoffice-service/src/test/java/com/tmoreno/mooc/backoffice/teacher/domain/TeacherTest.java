@@ -1,8 +1,8 @@
 package com.tmoreno.mooc.backoffice.teacher.domain;
 
-import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
-import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
-import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
+import com.tmoreno.mooc.backoffice.common.mothers.CourseIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.TeacherIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherCreatedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherEmailChangedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.events.TeacherNameChangedDomainEvent;

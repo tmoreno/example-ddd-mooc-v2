@@ -5,9 +5,9 @@ import com.tmoreno.mooc.backoffice.course.commands.addTeacher.CourseAddTeacherCo
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseNotFoundException;
-import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
-import com.tmoreno.mooc.backoffice.mothers.CourseMother;
-import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.CourseIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.CourseMother;
+import com.tmoreno.mooc.backoffice.common.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.shared.domain.exceptions.teacher.TeacherNotFoundException;

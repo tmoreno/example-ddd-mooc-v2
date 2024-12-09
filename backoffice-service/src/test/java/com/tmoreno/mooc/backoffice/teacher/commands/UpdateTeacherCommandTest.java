@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.teacher.commands;
 
-import com.tmoreno.mooc.backoffice.mothers.TeacherIdMother;
-import com.tmoreno.mooc.backoffice.mothers.TeacherMother;
+import com.tmoreno.mooc.backoffice.common.mothers.TeacherIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.TeacherMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.shared.domain.Email;

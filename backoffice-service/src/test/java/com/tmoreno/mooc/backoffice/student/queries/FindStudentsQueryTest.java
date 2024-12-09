@@ -1,8 +1,8 @@
 package com.tmoreno.mooc.backoffice.student.queries;
 
-import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
-import com.tmoreno.mooc.backoffice.mothers.ReviewIdMother;
-import com.tmoreno.mooc.backoffice.mothers.StudentMother;
+import com.tmoreno.mooc.backoffice.common.mothers.CourseIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.ReviewIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.StudentMother;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentRepository;

@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.mothers;
+package com.tmoreno.mooc.backoffice.common.mothers;
 
 import com.tmoreno.mooc.shared.domain.CourseId;
 

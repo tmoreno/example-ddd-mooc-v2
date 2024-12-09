@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.mothers;
+package com.tmoreno.mooc.backoffice.common.mothers;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseState;

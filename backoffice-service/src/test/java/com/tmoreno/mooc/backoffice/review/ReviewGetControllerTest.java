@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.review;
 
-import com.tmoreno.mooc.backoffice.support.E2ETest;
-import com.tmoreno.mooc.backoffice.utils.DatabaseUtils;
+import com.tmoreno.mooc.backoffice.common.E2ETest;
+import com.tmoreno.mooc.backoffice.common.DatabaseUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

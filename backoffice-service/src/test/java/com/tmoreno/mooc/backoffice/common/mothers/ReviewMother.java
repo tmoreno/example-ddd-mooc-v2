@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.mothers;
+package com.tmoreno.mooc.backoffice.common.mothers;
 
 import com.tmoreno.mooc.backoffice.review.domain.Review;
 import com.tmoreno.mooc.shared.mothers.CreatedOnMother;

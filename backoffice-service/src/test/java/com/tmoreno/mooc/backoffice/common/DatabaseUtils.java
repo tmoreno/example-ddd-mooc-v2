@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.utils;
+package com.tmoreno.mooc.backoffice.common;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

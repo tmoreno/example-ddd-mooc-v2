@@ -1,6 +1,5 @@
-package com.tmoreno.mooc.backoffice.support;
+package com.tmoreno.mooc.backoffice.common;
 
-import com.tmoreno.mooc.backoffice.config.TestcontainersInitializer;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;

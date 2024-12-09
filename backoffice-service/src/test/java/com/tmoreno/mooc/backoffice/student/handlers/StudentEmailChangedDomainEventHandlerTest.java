@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.student.handlers;
 
-import com.tmoreno.mooc.backoffice.mothers.StudentMother;
+import com.tmoreno.mooc.backoffice.common.mothers.StudentMother;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentRepository;
 import com.tmoreno.mooc.backoffice.student.domain.events.StudentEmailChangedDomainEvent;

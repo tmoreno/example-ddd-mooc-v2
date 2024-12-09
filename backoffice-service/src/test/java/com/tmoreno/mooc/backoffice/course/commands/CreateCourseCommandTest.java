@@ -5,8 +5,8 @@ import com.tmoreno.mooc.backoffice.course.commands.create.CreateCourseCommandPar
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.CourseTitle;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseExistsException;
-import com.tmoreno.mooc.backoffice.mothers.CourseIdMother;
-import com.tmoreno.mooc.backoffice.mothers.CourseTitleMother;
+import com.tmoreno.mooc.backoffice.common.mothers.CourseIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.CourseTitleMother;
 import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.fakes.FakeEventBus;
 import org.junit.jupiter.api.BeforeEach;

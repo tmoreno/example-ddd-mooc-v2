@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.config;
+package com.tmoreno.mooc.backoffice.common;
 
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
