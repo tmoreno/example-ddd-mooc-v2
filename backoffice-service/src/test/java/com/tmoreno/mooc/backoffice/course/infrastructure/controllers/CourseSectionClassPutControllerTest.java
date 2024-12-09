@@ -1,15 +1,18 @@
-package com.tmoreno.mooc.backoffice.course;
+package com.tmoreno.mooc.backoffice.course.infrastructure.controllers;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.Section;
+import com.tmoreno.mooc.backoffice.course.domain.SectionClassId;
 import com.tmoreno.mooc.backoffice.common.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.common.mothers.CourseMother;
+import com.tmoreno.mooc.backoffice.common.mothers.SectionClassIdMother;
+import com.tmoreno.mooc.backoffice.common.mothers.SectionClassTitleMother;
 import com.tmoreno.mooc.backoffice.common.mothers.SectionIdMother;
 import com.tmoreno.mooc.backoffice.common.mothers.SectionMother;
-import com.tmoreno.mooc.backoffice.common.mothers.SectionTitleMother;
 import com.tmoreno.mooc.backoffice.common.E2ETest;
 import com.tmoreno.mooc.backoffice.common.DatabaseUtils;
+import com.tmoreno.mooc.shared.mothers.DurationInSecondsMother;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @E2ETest
-public class CourseSectionPutControllerTest {
+public class CourseSectionClassPutControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -40,21 +43,24 @@ public class CourseSectionPutControllerTest {
     }
 
     @Test
-    void should_return_404_status_code_when_update_a_section_for_a_not_existing_course() throws Exception {
+    void should_return_404_status_code_when_update_a_not_existing_course() throws Exception {
         String content = """
         {
-            "title": "%s"
+            "title": "%s",
+            "duration": %d
         }
         """.formatted(
-            SectionTitleMother.random().getValue()
+            SectionClassTitleMother.random().getValue(),
+            DurationInSecondsMother.random().getValue()
         );
 
         mockMvc
             .perform(
                 put(String.format(
-                    "/courses/%s/sections/%s",
+                    "/courses/%s/sections/%s/classes/%s",
                     CourseIdMother.random().getValue(),
-                    SectionIdMother.random().getValue()
+                    SectionIdMother.random().getValue(),
+                    SectionClassIdMother.random().getValue()
                 ))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content)
@@ -64,54 +70,64 @@ public class CourseSectionPutControllerTest {
     }
 
     @Test
-    void should_return_404_when_section_does_not_exist() throws Exception {
-        Section section = SectionMother.random();
+    void should_return_404_when_class_does_not_exist() throws Exception {
+        Section section = SectionMother.randomWithClass(
+            SectionClassIdMother.random(),
+            SectionClassTitleMother.random(),
+            DurationInSecondsMother.random()
+        );
         Course course = CourseMother.randomInDraftStateWithSection(section);
         courseRepository.save(course);
 
         String content = """
         {
-            "title": "%s"
+            "title": "%s",
+            "duration": %d
         }
         """.formatted(
-            SectionTitleMother.random().getValue()
+            SectionClassTitleMother.random().getValue(),
+            DurationInSecondsMother.random().getValue()
         );
 
         mockMvc
             .perform(
                 put(String.format(
-                    "/courses/%s/sections/%s",
+                    "/courses/%s/sections/%s/classes/%s",
                     course.getId().getValue(),
-                    SectionIdMother.random().getValue()
+                    section.getId().getValue(),
+                    SectionClassIdMother.random().getValue()
                 ))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content)
             )
             .andExpect(status().isNotFound())
-            .andExpect(jsonPath("$.code").value("course-section-not-found"));
+            .andExpect(jsonPath("$.code").value("course-section-class-not-found"));
     }
 
     @Test
-    void should_return_200_status_code_when_update_a_section() throws Exception {
-        Section section = SectionMother.random();
+    void should_return_200_status_code_when_update_the_class_of_a_course_in_draft_state() throws Exception {
+        SectionClassId sectionClassId = SectionClassIdMother.random();
+        Section section = SectionMother.randomWithClass(sectionClassId, SectionClassTitleMother.random(), DurationInSecondsMother.random());
         Course course = CourseMother.randomInDraftStateWithSection(section);
-
         courseRepository.save(course);
 
         String content = """
         {
-            "title": "%s"
+            "title": "%s",
+            "duration": %d
         }
         """.formatted(
-            SectionTitleMother.random().getValue()
+            SectionClassTitleMother.random().getValue(),
+            DurationInSecondsMother.random().getValue()
         );
 
         mockMvc
             .perform(
                 put(String.format(
-                    "/courses/%s/sections/%s",
+                    "/courses/%s/sections/%s/classes/%s",
                     course.getId().getValue(),
-                    section.getId().getValue()
+                    section.getId().getValue(),
+                    sectionClassId.getValue()
                 ))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content)

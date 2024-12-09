@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.student;
+package com.tmoreno.mooc.backoffice.student.infrastructure.controllers;
 
 import com.github.javafaker.Faker;
 import com.tmoreno.mooc.backoffice.common.E2ETest;

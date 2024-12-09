@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.review;
+package com.tmoreno.mooc.backoffice.review.infrastructure.controllers;
 
 import com.tmoreno.mooc.backoffice.common.E2ETest;
 import com.tmoreno.mooc.backoffice.common.DatabaseUtils;
