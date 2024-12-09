@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.configuration;
+package com.tmoreno.mooc.backoffice.course.infrastructure.configuration;
 
 import com.tmoreno.mooc.backoffice.course.commands.addSection.CourseAddSectionCommand;
 import com.tmoreno.mooc.backoffice.course.commands.addSectionClass.CourseAddSectionClassCommand;

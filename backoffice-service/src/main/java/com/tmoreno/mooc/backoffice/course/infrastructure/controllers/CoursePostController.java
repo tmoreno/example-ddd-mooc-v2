@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.controllers;
+package com.tmoreno.mooc.backoffice.course.infrastructure.controllers;
 
 import com.tmoreno.mooc.backoffice.course.commands.create.CreateCourseCommand;
 import com.tmoreno.mooc.backoffice.course.commands.create.CreateCourseCommandParams;

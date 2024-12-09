@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.controllers;
+package com.tmoreno.mooc.backoffice.course.infrastructure.controllers;
 
 import com.tmoreno.mooc.backoffice.course.commands.updateSectionClass.UpdateCourseSectionClassCommand;
 import com.tmoreno.mooc.backoffice.course.commands.updateSectionClass.UpdateCourseSectionClassCommandParams;

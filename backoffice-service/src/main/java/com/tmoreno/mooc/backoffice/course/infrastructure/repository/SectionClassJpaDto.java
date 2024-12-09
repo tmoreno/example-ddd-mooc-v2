@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.infrastructure;
+package com.tmoreno.mooc.backoffice.course.infrastructure.repository;
 
 import com.tmoreno.mooc.backoffice.course.domain.SectionClass;
 import com.tmoreno.mooc.backoffice.course.domain.SectionClassId;
