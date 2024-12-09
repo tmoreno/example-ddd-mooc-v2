@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.student.configuration;
+package com.tmoreno.mooc.backoffice.student.infrastructure.configuration;
 
 import com.tmoreno.mooc.backoffice.student.domain.StudentRepository;
 import com.tmoreno.mooc.backoffice.student.queries.FindStudentQuery;

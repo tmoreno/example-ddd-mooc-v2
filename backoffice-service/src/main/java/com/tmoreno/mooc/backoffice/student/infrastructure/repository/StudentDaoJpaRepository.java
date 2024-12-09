@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.student.infrastructure;
+package com.tmoreno.mooc.backoffice.student.infrastructure.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

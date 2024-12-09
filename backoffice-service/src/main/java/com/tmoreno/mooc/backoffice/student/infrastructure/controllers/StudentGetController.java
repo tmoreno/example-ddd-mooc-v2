@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.student.controllers;
+package com.tmoreno.mooc.backoffice.student.infrastructure.controllers;
 
 import com.tmoreno.mooc.backoffice.student.queries.FindStudentQuery;
 import com.tmoreno.mooc.backoffice.student.queries.FindStudentQueryParams;
