@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.review.configuration;
+package com.tmoreno.mooc.backoffice.review.infrastructure.configuration;
 
 import com.tmoreno.mooc.backoffice.review.domain.ReviewRepository;
 import com.tmoreno.mooc.backoffice.review.queries.FindReviewQuery;

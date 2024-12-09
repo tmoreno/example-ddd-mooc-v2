@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.review.controllers;
+package com.tmoreno.mooc.backoffice.review.infrastructure.controllers;
 
 import com.tmoreno.mooc.backoffice.review.queries.FindReviewQuery;
 import com.tmoreno.mooc.backoffice.review.queries.FindReviewQueryParams;
