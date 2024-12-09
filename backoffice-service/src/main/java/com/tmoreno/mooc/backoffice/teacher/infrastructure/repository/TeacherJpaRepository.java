@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.teacher.infrastructure;
+package com.tmoreno.mooc.backoffice.teacher.infrastructure.repository;
 
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.shared.domain.TeacherId;

@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.teacher.listeners;
+package com.tmoreno.mooc.backoffice.teacher.infrastructure.listeners;
 
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseTeacherDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.handlers.CourseTeacherDeletedDomainEventHandler;

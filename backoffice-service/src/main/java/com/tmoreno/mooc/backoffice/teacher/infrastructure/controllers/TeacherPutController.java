@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.teacher.controllers;
+package com.tmoreno.mooc.backoffice.teacher.infrastructure.controllers;
 
 import com.tmoreno.mooc.backoffice.teacher.commands.UpdateTeacherCommand;
 import com.tmoreno.mooc.backoffice.teacher.commands.UpdateTeacherCommandParams;

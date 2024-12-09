@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.teacher.controllers;
+package com.tmoreno.mooc.backoffice.teacher.infrastructure.controllers;
 
 import com.tmoreno.mooc.backoffice.teacher.queries.FindTeacherQuery;
 import com.tmoreno.mooc.backoffice.teacher.queries.FindTeacherQueryParams;
