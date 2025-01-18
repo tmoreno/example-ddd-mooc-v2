@@ -59,8 +59,8 @@ public class FindCourseQueryTest {
         assertThat(response.getDescription(), is(course.getDescription().get().getValue()));
         assertThat(response.getState(), is(course.getState().name()));
         assertThat(response.getLanguage(), is(course.getLanguage().get().name()));
-        assertThat(response.getPriceValue(), is(course.getPrice().get().getValue()));
-        assertThat(response.getPriceCurrency(), is(course.getPrice().get().getCurrency().getCurrencyCode()));
+        assertThat(response.getPriceValue(), is(course.getPrice().get().value()));
+        assertThat(response.getPriceCurrency(), is(course.getPrice().get().currency().getCurrencyCode()));
         assertSections(response.getSections(), course.getSections());
         assertReviews(response.getReviews(), course.getReviews());
         assertThat(response.getStudents(), is(course.getStudents().stream().map(Identifier::getValue).collect(Collectors.toSet())));

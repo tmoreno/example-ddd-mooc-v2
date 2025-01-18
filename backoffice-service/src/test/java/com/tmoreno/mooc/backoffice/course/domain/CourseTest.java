@@ -447,8 +447,8 @@ public class CourseTest {
 
         CoursePriceChangedDomainEvent event = (CoursePriceChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(price.getValue(), is(event.getPriceValue()));
-        assertThat(price.getCurrency().getCurrencyCode(), is(event.getPriceCurrency()));
+        assertThat(price.value(), is(event.getPriceValue()));
+        assertThat(price.currency().getCurrencyCode(), is(event.getPriceCurrency()));
     }
 
     @Test

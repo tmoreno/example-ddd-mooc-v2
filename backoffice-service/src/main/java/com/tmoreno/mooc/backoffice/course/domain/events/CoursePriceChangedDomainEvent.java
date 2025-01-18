@@ -29,10 +29,10 @@ public final class CoursePriceChangedDomainEvent extends DomainEvent {
     }
 
     public double getPriceValue() {
-        return price.getValue();
+        return price.value();
     }
 
     public String getPriceCurrency() {
-        return price.getCurrency().getCurrencyCode();
+        return price.currency().getCurrencyCode();
     }
 }

@@ -38,8 +38,8 @@ public final class FindCourseQueryResponse implements QueryResponse {
         this.description = course.getDescription().map(StringValueObject::getValue).orElse(null);
         this.state = course.getState().name();
         this.language = course.getLanguage().map(Enum::name).orElse(null);
-        this.priceValue = course.getPrice().map(Price::getValue).orElse(null);
-        this.priceCurrency = course.getPrice().map(p->p.getCurrency().getCurrencyCode()).orElse(null);
+        this.priceValue = course.getPrice().map(Price::value).orElse(null);
+        this.priceCurrency = course.getPrice().map(p->p.currency().getCurrencyCode()).orElse(null);
         this.sections = course.getSections().stream().map(SectionResponse::new).collect(Collectors.toList());
         this.students = course.getStudents().stream().map(Identifier::getValue).collect(Collectors.toSet());
         this.teachers = course.getTeachers().stream().map(Identifier::getValue).collect(Collectors.toSet());

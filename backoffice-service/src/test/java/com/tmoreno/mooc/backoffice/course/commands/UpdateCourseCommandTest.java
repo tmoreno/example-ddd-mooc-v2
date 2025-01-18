@@ -68,8 +68,8 @@ public class UpdateCourseCommandTest {
         params.setSummary(summary.getValue());
         params.setDescription(description.getValue());
         params.setLanguage(language.name());
-        params.setPriceValue(price.getValue());
-        params.setPriceCurrency(price.getCurrency().getCurrencyCode());
+        params.setPriceValue(price.value());
+        params.setPriceCurrency(price.currency().getCurrencyCode());
 
         command.execute(params);
 
@@ -104,8 +104,8 @@ public class UpdateCourseCommandTest {
         params.setSummary(summary.get().getValue());
         params.setDescription(description.get().getValue());
         params.setLanguage(language.get().name());
-        params.setPriceValue(price.get().getValue());
-        params.setPriceCurrency(price.get().getCurrency().getCurrencyCode());
+        params.setPriceValue(price.get().value());
+        params.setPriceCurrency(price.get().currency().getCurrencyCode());
 
         command.execute(params);
 

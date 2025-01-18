@@ -77,8 +77,8 @@ public class CoursePutControllerTest {
                 ANY_SUMMARY,
                 ANY_DESCRIPTION,
                 ANY_LANGUAGE,
-                ANY_PRICE.getValue(),
-                ANY_PRICE.getCurrency().getCurrencyCode()
+                ANY_PRICE.value(),
+                ANY_PRICE.currency().getCurrencyCode()
             );
 
         mockMvc

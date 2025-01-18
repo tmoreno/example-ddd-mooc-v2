@@ -70,8 +70,8 @@ public final class CourseJpaDto {
         courseJpaDto.setDescription(course.getDescription().map(StringValueObject::getValue).orElse(null));
         courseJpaDto.setState(course.getState().name());
         courseJpaDto.setLanguage(course.getLanguage().map(Enum::name).orElse(null));
-        courseJpaDto.setPriceValue(course.getPrice().map(Price::getValue).orElse(null));
-        courseJpaDto.setPriceCurrency(course.getPrice().map(p -> p.getCurrency().getCurrencyCode()).orElse(null));
+        courseJpaDto.setPriceValue(course.getPrice().map(Price::value).orElse(null));
+        courseJpaDto.setPriceCurrency(course.getPrice().map(p -> p.currency().getCurrencyCode()).orElse(null));
         courseJpaDto.setSections(sections);
         courseJpaDto.setReviews(course.getReviews().entrySet().stream().collect(Collectors.toMap(e -> e.getKey().getValue(), e -> e.getValue().getValue())));
         courseJpaDto.setStudents(course.getStudents().stream().map(Identifier::getValue).collect(Collectors.toSet()));
