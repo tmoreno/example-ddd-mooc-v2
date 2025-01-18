@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.teacher.commands;
 
 import com.tmoreno.mooc.shared.command.CommandParams;
 
-public final class UpdateTeacherCommandParams extends CommandParams {
+public final class UpdateTeacherCommandParams implements CommandParams {
 
     private String id;
     private String name;

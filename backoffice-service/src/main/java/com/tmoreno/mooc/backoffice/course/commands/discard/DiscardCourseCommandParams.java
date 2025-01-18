@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.course.commands.discard;
 
 import com.tmoreno.mooc.shared.command.CommandParams;
 
-public final class DiscardCourseCommandParams extends CommandParams {
+public final class DiscardCourseCommandParams implements CommandParams {
 
     private String courseId;
 

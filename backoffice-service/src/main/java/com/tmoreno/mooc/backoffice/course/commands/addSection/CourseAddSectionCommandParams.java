@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.course.commands.addSection;
 
 import com.tmoreno.mooc.shared.command.CommandParams;
 
-public final class CourseAddSectionCommandParams extends CommandParams {
+public final class CourseAddSectionCommandParams implements CommandParams {
 
     private String courseId;
     private String sectionId;

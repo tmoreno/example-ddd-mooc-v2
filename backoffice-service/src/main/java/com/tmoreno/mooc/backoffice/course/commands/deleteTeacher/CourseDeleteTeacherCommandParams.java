@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.course.commands.deleteTeacher;
 
 import com.tmoreno.mooc.shared.command.CommandParams;
 
-public final class CourseDeleteTeacherCommandParams extends CommandParams {
+public final class CourseDeleteTeacherCommandParams implements CommandParams {
 
     private String courseId;
     private String teacherId;

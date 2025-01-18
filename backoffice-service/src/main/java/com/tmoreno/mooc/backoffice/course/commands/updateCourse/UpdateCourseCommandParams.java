@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.course.commands.updateCourse;
 
 import com.tmoreno.mooc.shared.command.CommandParams;
 
-public final class UpdateCourseCommandParams extends CommandParams {
+public final class UpdateCourseCommandParams implements CommandParams {
 
     private String courseId;
     private String title;
