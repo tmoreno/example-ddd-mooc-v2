@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.course.queries;
 
 import com.tmoreno.mooc.shared.query.QueryParams;
 
-public final class FindCourseQueryParams extends QueryParams {
+public final class FindCourseQueryParams implements QueryParams {
 
     private String courseId;
 

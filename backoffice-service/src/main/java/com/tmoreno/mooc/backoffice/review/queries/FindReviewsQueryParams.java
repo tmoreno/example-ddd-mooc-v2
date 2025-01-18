@@ -2,7 +2,7 @@ package com.tmoreno.mooc.backoffice.review.queries;
 
 import com.tmoreno.mooc.shared.query.QueryParams;
 
-public final class FindReviewsQueryParams extends QueryParams {
+public final class FindReviewsQueryParams implements QueryParams {
 
     private String courseId;
     private String studentId;
