@@ -291,7 +291,7 @@ public class CourseTest {
 
         CourseImageChangedDomainEvent event = (CourseImageChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(imageUrl.getValue(), is(event.getImageUrl()));
+        assertThat(imageUrl.value(), is(event.getImageUrl()));
     }
 
     @Test

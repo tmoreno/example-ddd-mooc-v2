@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CoursePutControllerTest {
 
     private static final String ANY_COURSE_TITLE = CourseTitleMother.random().getValue();
-    private static final String ANY_IMAGE_URL = CourseImageUrlMother.random().getValue();
+    private static final String ANY_IMAGE_URL = CourseImageUrlMother.random().value();
     private static final String ANY_SUMMARY = CourseSummaryMother.random().getValue();
     private static final String ANY_DESCRIPTION = CourseDescriptionMother.random().value();
     private static final String ANY_LANGUAGE = LanguageMother.random().name();

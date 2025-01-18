@@ -29,7 +29,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             CourseStateMother.random().name(),
@@ -55,7 +55,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             CourseState.DRAFT.name(),
@@ -80,7 +80,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             notDraftStates.get(RandomUtils.nextInt(0, notDraftStates.size())),
@@ -100,7 +100,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             CourseState.DRAFT.name(),
@@ -120,7 +120,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             CourseState.DRAFT.name(),
@@ -140,7 +140,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             CourseState.PUBLISHED.name(),
@@ -165,7 +165,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             notPublishedStates.get(RandomUtils.nextInt(0, notPublishedStates.size())),
@@ -185,7 +185,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             CourseState.PUBLISHED.name(),
@@ -205,7 +205,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             CourseState.PUBLISHED.name(),
@@ -225,7 +225,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             CourseState.DISCARDED.name(),
@@ -245,7 +245,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             CourseState.DRAFT.name(),
@@ -265,7 +265,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             CourseState.DRAFT.name(),
@@ -285,7 +285,7 @@ public final class CourseMother {
         return Course.restore(
             CourseIdMother.random().getValue(),
             CourseTitleMother.random().getValue(),
-            CourseImageUrlMother.random().getValue(),
+            CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().getValue(),
             CourseDescriptionMother.random().value(),
             CourseState.DRAFT.name(),

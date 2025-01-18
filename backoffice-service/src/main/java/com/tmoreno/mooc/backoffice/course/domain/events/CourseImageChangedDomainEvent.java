@@ -29,6 +29,6 @@ public final class CourseImageChangedDomainEvent extends DomainEvent {
     }
 
     public String getImageUrl() {
-        return imageUrl.getValue();
+        return imageUrl.value();
     }
 }

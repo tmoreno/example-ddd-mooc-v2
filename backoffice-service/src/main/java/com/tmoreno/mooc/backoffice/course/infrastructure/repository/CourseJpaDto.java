@@ -2,6 +2,7 @@ package com.tmoreno.mooc.backoffice.course.infrastructure.repository;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseDescription;
+import com.tmoreno.mooc.backoffice.course.domain.CourseImageUrl;
 import com.tmoreno.mooc.shared.domain.Identifier;
 import com.tmoreno.mooc.shared.domain.Price;
 import com.tmoreno.mooc.shared.domain.StringValueObject;
@@ -66,7 +67,7 @@ public final class CourseJpaDto {
 
         courseJpaDto.setId(course.getId().getValue());
         courseJpaDto.setTitle(course.getTitle().getValue());
-        courseJpaDto.setImageUrl(course.getImageUrl().map(StringValueObject::getValue).orElse(null));
+        courseJpaDto.setImageUrl(course.getImageUrl().map(CourseImageUrl::value).orElse(null));
         courseJpaDto.setSummary(course.getSummary().map(StringValueObject::getValue).orElse(null));
         courseJpaDto.setDescription(course.getDescription().map(CourseDescription::value).orElse(null));
         courseJpaDto.setState(course.getState().name());
