@@ -133,7 +133,7 @@ public class CourseGetControllerTest {
                 .findFirst()
                 .orElseThrow();
 
-            assertThat(jsonClass.get("title").asText(), is(sectionClass.getTitle().getValue()));
+            assertThat(jsonClass.get("title").asText(), is(sectionClass.getTitle().value()));
             assertThat(jsonClass.get("duration").asInt(), is(sectionClass.getDuration().value()));
         }
     }

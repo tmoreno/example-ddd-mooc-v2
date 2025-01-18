@@ -50,7 +50,7 @@ public class CourseSectionClassPutControllerTest {
             "duration": %d
         }
         """.formatted(
-            SectionClassTitleMother.random().getValue(),
+            SectionClassTitleMother.random().value(),
             DurationInSecondsMother.random().value()
         );
 
@@ -85,7 +85,7 @@ public class CourseSectionClassPutControllerTest {
             "duration": %d
         }
         """.formatted(
-            SectionClassTitleMother.random().getValue(),
+            SectionClassTitleMother.random().value(),
             DurationInSecondsMother.random().value()
         );
 
@@ -117,7 +117,7 @@ public class CourseSectionClassPutControllerTest {
             "duration": %d
         }
         """.formatted(
-            SectionClassTitleMother.random().getValue(),
+            SectionClassTitleMother.random().value(),
             DurationInSecondsMother.random().value()
         );
 

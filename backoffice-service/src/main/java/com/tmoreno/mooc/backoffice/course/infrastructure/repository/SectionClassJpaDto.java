@@ -25,7 +25,7 @@ public final class SectionClassJpaDto {
         SectionClassJpaDto sectionClassJpaDto = new SectionClassJpaDto();
 
         sectionClassJpaDto.setId(sectionClass.getId().getValue());
-        sectionClassJpaDto.setTitle(sectionClass.getTitle().getValue());
+        sectionClassJpaDto.setTitle(sectionClass.getTitle().value());
         sectionClassJpaDto.setDurationInSeconds(sectionClass.getDuration().value());
         sectionClassJpaDto.setSection(section);
 

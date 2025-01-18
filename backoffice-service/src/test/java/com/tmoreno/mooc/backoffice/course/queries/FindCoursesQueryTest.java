@@ -101,7 +101,7 @@ public class FindCoursesQueryTest {
                     .findFirst()
                     .orElseThrow();
 
-            assertThat(responseClass.getTitle(), is(sectionClass.getTitle().getValue()));
+            assertThat(responseClass.getTitle(), is(sectionClass.getTitle().value()));
             assertThat(responseClass.getDuration(), is(sectionClass.getDuration().value()));
         }
     }
