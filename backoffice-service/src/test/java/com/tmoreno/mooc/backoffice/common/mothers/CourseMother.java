@@ -28,7 +28,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),
@@ -54,7 +54,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),
@@ -79,7 +79,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),
@@ -99,7 +99,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),
@@ -119,7 +119,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),
@@ -139,7 +139,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),
@@ -164,7 +164,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),
@@ -184,7 +184,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),
@@ -204,7 +204,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),
@@ -224,7 +224,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),
@@ -244,7 +244,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),
@@ -264,7 +264,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),
@@ -284,7 +284,7 @@ public final class CourseMother {
 
         return Course.restore(
             CourseIdMother.random().getValue(),
-            CourseTitleMother.random().getValue(),
+            CourseTitleMother.random().value(),
             CourseImageUrlMother.random().value(),
             CourseSummaryMother.random().value(),
             CourseDescriptionMother.random().value(),

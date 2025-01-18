@@ -62,7 +62,7 @@ public class FindCoursesQueryTest {
 
     private void assertCourse(FindCourseQueryResponse response, Course course) {
         assertThat(response.getId(), is(course.getId().getValue()));
-        assertThat(response.getTitle(), is(course.getTitle().getValue()));
+        assertThat(response.getTitle(), is(course.getTitle().value()));
         assertThat(response.getImageUrl(), is(course.getImageUrl().get().value()));
         assertThat(response.getSummary(), is(course.getSummary().get().value()));
         assertThat(response.getDescription(), is(course.getDescription().get().value()));

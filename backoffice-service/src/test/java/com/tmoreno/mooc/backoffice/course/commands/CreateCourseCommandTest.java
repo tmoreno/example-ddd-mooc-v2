@@ -42,7 +42,7 @@ public class CreateCourseCommandTest {
     public void given_a_not_existing_course_when_create_course_then_course_is_created_and_persisted_and_an_event_is_published() {
         CreateCourseCommandParams params = new CreateCourseCommandParams();
         params.setId(CourseIdMother.random().getValue());
-        params.setTitle(CourseTitleMother.random().getValue());
+        params.setTitle(CourseTitleMother.random().value());
 
         command.execute(params);
 
@@ -61,7 +61,7 @@ public class CreateCourseCommandTest {
 
             CreateCourseCommandParams params = new CreateCourseCommandParams();
             params.setId(courseId.getValue());
-            params.setTitle(title.getValue());
+            params.setTitle(title.value());
 
             command.execute(params);
         });

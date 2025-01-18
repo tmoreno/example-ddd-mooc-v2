@@ -94,7 +94,7 @@ public class CourseGetControllerTest {
 
     private void assertCourse(JsonNode jsonCourse, Course course) {
         assertThat(jsonCourse.get("id").asText(), is(course.getId().getValue()));
-        assertThat(jsonCourse.get("title").asText(), is(course.getTitle().getValue()));
+        assertThat(jsonCourse.get("title").asText(), is(course.getTitle().value()));
         assertThat(jsonCourse.get("imageUrl").asText(), is(course.getImageUrl().get().value()));
         assertThat(jsonCourse.get("summary").asText(), is(course.getSummary().get().value()));
         assertThat(jsonCourse.get("description").asText(), is(course.getDescription().get().value()));

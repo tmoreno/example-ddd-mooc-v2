@@ -29,6 +29,6 @@ public final class CourseTitleChangedDomainEvent extends DomainEvent {
     }
 
     public String getTitle() {
-        return title.getValue();
+        return title.value();
     }
 }

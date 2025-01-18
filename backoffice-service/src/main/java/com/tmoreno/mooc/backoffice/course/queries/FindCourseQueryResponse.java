@@ -10,7 +10,6 @@ import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.shared.domain.Identifier;
 import com.tmoreno.mooc.shared.domain.Price;
-import com.tmoreno.mooc.shared.domain.StringValueObject;
 import com.tmoreno.mooc.shared.query.QueryResponse;
 
 import java.util.List;
@@ -35,7 +34,7 @@ public final class FindCourseQueryResponse implements QueryResponse {
 
     public FindCourseQueryResponse(Course course) {
         this.id = course.getId().getValue();
-        this.title = course.getTitle().getValue();
+        this.title = course.getTitle().value();
         this.imageUrl = course.getImageUrl().map(CourseImageUrl::value).orElse(null);
         this.summary = course.getSummary().map(CourseSummary::value).orElse(null);
         this.description = course.getDescription().map(CourseDescription::value).orElse(null);

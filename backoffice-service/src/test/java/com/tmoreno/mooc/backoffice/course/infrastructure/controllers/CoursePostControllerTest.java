@@ -68,7 +68,7 @@ public class CoursePostControllerTest {
                 "id": "%s",
                 "title": "%s"
             }
-            """.formatted(ANY_COURSE_ID, course.getTitle().getValue());
+            """.formatted(ANY_COURSE_ID, course.getTitle().value());
 
         mockMvc
             .perform(post("/courses").contentType(MediaType.APPLICATION_JSON).content(content))

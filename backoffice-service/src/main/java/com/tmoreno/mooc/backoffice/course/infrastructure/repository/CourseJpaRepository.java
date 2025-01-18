@@ -45,6 +45,6 @@ public class CourseJpaRepository implements CourseRepository {
     @Override
     public boolean exists(CourseId id, CourseTitle title) {
         return daoRepository.existsById(id.getValue())
-                || daoRepository.existsByTitle(title.getValue());
+                || daoRepository.existsByTitle(title.value());
     }
 }

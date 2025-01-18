@@ -6,7 +6,6 @@ import com.tmoreno.mooc.backoffice.course.domain.CourseImageUrl;
 import com.tmoreno.mooc.backoffice.course.domain.CourseSummary;
 import com.tmoreno.mooc.shared.domain.Identifier;
 import com.tmoreno.mooc.shared.domain.Price;
-import com.tmoreno.mooc.shared.domain.StringValueObject;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -67,7 +66,7 @@ public final class CourseJpaDto {
                 .collect(Collectors.toList());
 
         courseJpaDto.setId(course.getId().getValue());
-        courseJpaDto.setTitle(course.getTitle().getValue());
+        courseJpaDto.setTitle(course.getTitle().value());
         courseJpaDto.setImageUrl(course.getImageUrl().map(CourseImageUrl::value).orElse(null));
         courseJpaDto.setSummary(course.getSummary().map(CourseSummary::value).orElse(null));
         courseJpaDto.setDescription(course.getDescription().map(CourseDescription::value).orElse(null));
