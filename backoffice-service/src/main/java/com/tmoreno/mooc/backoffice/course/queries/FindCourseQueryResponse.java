@@ -1,6 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.queries;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
+import com.tmoreno.mooc.backoffice.course.domain.CourseDescription;
 import com.tmoreno.mooc.backoffice.course.domain.Section;
 import com.tmoreno.mooc.backoffice.course.domain.SectionClass;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
@@ -35,7 +36,7 @@ public final class FindCourseQueryResponse implements QueryResponse {
         this.title = course.getTitle().getValue();
         this.imageUrl = course.getImageUrl().map(StringValueObject::getValue).orElse(null);
         this.summary = course.getSummary().map(StringValueObject::getValue).orElse(null);
-        this.description = course.getDescription().map(StringValueObject::getValue).orElse(null);
+        this.description = course.getDescription().map(CourseDescription::value).orElse(null);
         this.state = course.getState().name();
         this.language = course.getLanguage().map(Enum::name).orElse(null);
         this.priceValue = course.getPrice().map(Price::value).orElse(null);

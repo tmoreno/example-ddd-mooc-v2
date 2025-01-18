@@ -97,7 +97,7 @@ public class CourseGetControllerTest {
         assertThat(jsonCourse.get("title").asText(), is(course.getTitle().getValue()));
         assertThat(jsonCourse.get("imageUrl").asText(), is(course.getImageUrl().get().getValue()));
         assertThat(jsonCourse.get("summary").asText(), is(course.getSummary().get().getValue()));
-        assertThat(jsonCourse.get("description").asText(), is(course.getDescription().get().getValue()));
+        assertThat(jsonCourse.get("description").asText(), is(course.getDescription().get().value()));
         assertThat(jsonCourse.get("state").asText(), is(course.getState().name()));
         assertThat(jsonCourse.get("language").asText(), is(course.getLanguage().get().name()));
         assertThat(jsonCourse.get("priceValue").asDouble(), is(course.getPrice().get().value()));

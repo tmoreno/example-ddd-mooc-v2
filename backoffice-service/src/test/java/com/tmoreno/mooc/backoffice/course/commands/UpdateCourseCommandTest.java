@@ -66,7 +66,7 @@ public class UpdateCourseCommandTest {
         params.setTitle(title.getValue());
         params.setImageUrl(imageUrl.getValue());
         params.setSummary(summary.getValue());
-        params.setDescription(description.getValue());
+        params.setDescription(description.value());
         params.setLanguage(language.name());
         params.setPriceValue(price.value());
         params.setPriceCurrency(price.currency().getCurrencyCode());
@@ -102,7 +102,7 @@ public class UpdateCourseCommandTest {
         params.setTitle(title.getValue());
         params.setImageUrl(imageUrl.get().getValue());
         params.setSummary(summary.get().getValue());
-        params.setDescription(description.get().getValue());
+        params.setDescription(description.get().value());
         params.setLanguage(language.get().name());
         params.setPriceValue(price.get().value());
         params.setPriceCurrency(price.get().currency().getCurrencyCode());

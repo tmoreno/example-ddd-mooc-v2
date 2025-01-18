@@ -1,21 +1,20 @@
 package com.tmoreno.mooc.backoffice.course.domain;
 
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.InvalidCourseDescriptionException;
-import com.tmoreno.mooc.shared.domain.StringValueObject;
 import org.apache.commons.lang3.StringUtils;
 
-public final class CourseDescription extends StringValueObject {
+public record CourseDescription(
+    String value
+) {
 
     private static final int MAX_LENGTH = 5000;
     private static final int MIN_LENGTH = 100;
 
-    public CourseDescription(String value) {
-        super(value);
-
-        ensureValidDescription();
+    public CourseDescription {
+        ensureValidDescription(value);
     }
 
-    private void ensureValidDescription() {
+    private void ensureValidDescription(String value) {
         if (StringUtils.isBlank(value)) {
             throw new InvalidCourseDescriptionException("Course description can't be blank");
         }
