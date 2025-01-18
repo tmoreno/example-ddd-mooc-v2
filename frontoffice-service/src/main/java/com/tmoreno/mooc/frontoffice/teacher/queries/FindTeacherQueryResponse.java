@@ -7,7 +7,7 @@ import com.tmoreno.mooc.shared.query.QueryResponse;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public final class FindTeacherQueryResponse extends QueryResponse {
+public final class FindTeacherQueryResponse implements QueryResponse {
 
     private final String id;
     private final String name;

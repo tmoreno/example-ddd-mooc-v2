@@ -3,7 +3,7 @@ package com.tmoreno.mooc.backoffice.review.queries;
 import com.tmoreno.mooc.backoffice.review.domain.Review;
 import com.tmoreno.mooc.shared.query.QueryResponse;
 
-public final class FindReviewQueryResponse extends QueryResponse {
+public final class FindReviewQueryResponse implements QueryResponse {
 
     private final String id;
     private final String courseId;

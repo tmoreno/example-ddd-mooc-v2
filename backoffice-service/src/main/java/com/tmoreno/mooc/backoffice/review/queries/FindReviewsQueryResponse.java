@@ -4,7 +4,7 @@ import com.tmoreno.mooc.shared.query.QueryResponse;
 
 import java.util.List;
 
-public final class FindReviewsQueryResponse extends QueryResponse {
+public final class FindReviewsQueryResponse implements QueryResponse {
 
     private final List<FindReviewQueryResponse> reviews;
 

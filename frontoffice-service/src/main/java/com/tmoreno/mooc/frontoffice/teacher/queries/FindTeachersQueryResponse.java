@@ -4,7 +4,7 @@ import com.tmoreno.mooc.shared.query.QueryResponse;
 
 import java.util.List;
 
-public final class FindTeachersQueryResponse extends QueryResponse {
+public final class FindTeachersQueryResponse implements QueryResponse {
 
     private final List<FindTeacherQueryResponse> teachers;
 

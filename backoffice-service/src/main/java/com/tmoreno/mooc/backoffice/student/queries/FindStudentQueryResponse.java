@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public final class FindStudentQueryResponse extends QueryResponse {
+public final class FindStudentQueryResponse implements QueryResponse {
 
     private final String id;
     private final String name;

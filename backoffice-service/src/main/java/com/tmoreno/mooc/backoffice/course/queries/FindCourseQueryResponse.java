@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public final class FindCourseQueryResponse extends QueryResponse {
+public final class FindCourseQueryResponse implements QueryResponse {
 
     private final String id;
     private final String title;

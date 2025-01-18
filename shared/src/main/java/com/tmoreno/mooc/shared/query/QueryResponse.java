@@ -1,5 +1,5 @@
 package com.tmoreno.mooc.shared.query;
 
-public abstract class QueryResponse {
+public interface QueryResponse {
 
 }
