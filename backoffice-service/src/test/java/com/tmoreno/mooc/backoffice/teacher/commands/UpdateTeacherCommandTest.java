@@ -51,7 +51,7 @@ public class UpdateTeacherCommandTest {
         UpdateTeacherCommandParams params = new UpdateTeacherCommandParams();
         params.setId(teacher.getId().getValue());
         params.setEmail(email.value());
-        params.setName(name.getValue());
+        params.setName(name.value());
 
         command.execute(params);
 
@@ -74,7 +74,7 @@ public class UpdateTeacherCommandTest {
         UpdateTeacherCommandParams params = new UpdateTeacherCommandParams();
         params.setId(teacher.getId().getValue());
         params.setEmail(email.value());
-        params.setName(name.getValue());
+        params.setName(name.value());
 
         command.execute(params);
 
@@ -91,7 +91,7 @@ public class UpdateTeacherCommandTest {
         Assertions.assertThrows(TeacherNotFoundException.class, () -> {
             UpdateTeacherCommandParams params = new UpdateTeacherCommandParams();
             params.setId(TeacherIdMother.random().getValue());
-            params.setName(PersonNameMother.random().getValue());
+            params.setName(PersonNameMother.random().value());
             params.setEmail(EmailMother.random().value());
 
             command.execute(params);

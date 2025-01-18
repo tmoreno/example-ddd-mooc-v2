@@ -16,7 +16,7 @@ public final class FindTeacherQueryResponse implements QueryResponse {
 
     public FindTeacherQueryResponse(Teacher teacher) {
         this.id = teacher.getId().getValue();
-        this.name = teacher.getName().getValue();
+        this.name = teacher.getName().value();
         this.email = teacher.getEmail().value();
         this.courses = teacher.getCourses().stream().map(Identifier::getValue).collect(Collectors.toSet());
     }

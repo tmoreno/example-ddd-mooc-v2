@@ -61,7 +61,7 @@ public class FindStudentsQueryTest {
 
     private void assertStudent(FindStudentQueryResponse response, Student student) {
         assertThat(response.getId(), is(student.getId().getValue()));
-        assertThat(response.getName(), is(student.getName().getValue()));
+        assertThat(response.getName(), is(student.getName().value()));
         assertThat(response.getEmail(), is(student.getEmail().value()));
         assertThat(response.getCourses(), is(student.getCourses().stream().map(Identifier::getValue).collect(Collectors.toSet())));
 

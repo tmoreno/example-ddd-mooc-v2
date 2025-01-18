@@ -29,6 +29,6 @@ public final class StudentNameChangedDomainEvent extends DomainEvent {
     }
 
     public String getName() {
-        return name.getValue();
+        return name.value();
     }
 }

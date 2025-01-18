@@ -49,7 +49,7 @@ public class FindTeacherQueryTest {
         FindTeacherQueryResponse response = query.execute(params);
 
         assertThat(response.getId(), is(teacher.getId().getValue()));
-        assertThat(response.getName(), is(teacher.getName().getValue()));
+        assertThat(response.getName(), is(teacher.getName().value()));
         assertThat(response.getEmail(), is(teacher.getEmail().value()));
         assertThat(response.getCourses(), is(teacher.getCourses().stream().map(Identifier::getValue).collect(Collectors.toSet())));
     }

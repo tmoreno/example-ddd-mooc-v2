@@ -39,7 +39,7 @@ public final class StudentJpaDto {
         StudentJpaDto studentJpaDto = new StudentJpaDto();
 
         studentJpaDto.setId(student.getId().getValue());
-        studentJpaDto.setName(student.getName().getValue());
+        studentJpaDto.setName(student.getName().value());
         studentJpaDto.setEmail(student.getEmail().value());
         studentJpaDto.setCourses(student.getCourses().stream().map(Identifier::getValue).collect(Collectors.toSet()));
 

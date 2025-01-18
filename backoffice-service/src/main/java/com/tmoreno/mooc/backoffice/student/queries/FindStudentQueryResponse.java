@@ -20,7 +20,7 @@ public final class FindStudentQueryResponse implements QueryResponse {
 
     public FindStudentQueryResponse(Student student) {
         this.id = student.getId().getValue();
-        this.name = student.getName().getValue();
+        this.name = student.getName().value();
         this.email = student.getEmail().value();
         this.courses = student.getCourses().stream().map(Identifier::getValue).collect(Collectors.toSet());
         this.reviews = student.getReviews()

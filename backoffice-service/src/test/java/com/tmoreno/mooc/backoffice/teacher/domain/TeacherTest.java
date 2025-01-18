@@ -44,7 +44,7 @@ public class TeacherTest {
         TeacherCreatedDomainEvent event = (TeacherCreatedDomainEvent) domainEvents.get(0);
 
         assertThat(teacherId.getValue(), is(event.getTeacherId()));
-        assertThat(name.getValue(), is(event.getName()));
+        assertThat(name.value(), is(event.getName()));
         assertThat(email.value(), is(event.getEmail()));
     }
 
@@ -62,7 +62,7 @@ public class TeacherTest {
 
         TeacherNameChangedDomainEvent event = (TeacherNameChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(name.getValue(), is(event.getName()));
+        assertThat(name.value(), is(event.getName()));
     }
 
     @Test

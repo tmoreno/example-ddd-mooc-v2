@@ -32,7 +32,7 @@ public final class StudentCreatedDomainEvent extends DomainEvent {
     }
 
     public String getName() {
-        return name.getValue();
+        return name.value();
     }
 
     public String getEmail() {

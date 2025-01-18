@@ -14,7 +14,7 @@ public final class StudentMother {
     public static Student random() {
         return Student.restore(
             StudentIdMother.random().getValue(),
-            PersonNameMother.random().getValue(),
+            PersonNameMother.random().value(),
             EmailMother.random().value(),
             Collections.emptySet(),
             Collections.emptyMap()
@@ -24,7 +24,7 @@ public final class StudentMother {
     public static Student randomWithCourse(CourseId courseId) {
         return Student.restore(
             StudentIdMother.random().getValue(),
-            PersonNameMother.random().getValue(),
+            PersonNameMother.random().value(),
             EmailMother.random().value(),
             Set.of(courseId.getValue()),
             Collections.emptyMap()
@@ -34,7 +34,7 @@ public final class StudentMother {
     public static Student randomWithReview(CourseId courseId, ReviewId reviewId) {
         return Student.restore(
             StudentIdMother.random().getValue(),
-            PersonNameMother.random().getValue(),
+            PersonNameMother.random().value(),
             EmailMother.random().value(),
             Collections.emptySet(),
             Map.of(courseId.getValue(), reviewId.getValue())
@@ -44,7 +44,7 @@ public final class StudentMother {
     public static Student randomWithCourseAndReview(CourseId courseId, ReviewId reviewId) {
         return Student.restore(
             StudentIdMother.random().getValue(),
-            PersonNameMother.random().getValue(),
+            PersonNameMother.random().value(),
             EmailMother.random().value(),
             Set.of(courseId.getValue()),
             Map.of(courseId.getValue(), reviewId.getValue())

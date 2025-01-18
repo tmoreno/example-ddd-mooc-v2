@@ -41,7 +41,7 @@ public class CreateTeacherCommandTest {
     public void given_a_not_existing_teacher_when_create_teacher_then_teacher_is_created_and_persisted_and_an_event_is_published() {
         CreateTeacherCommandParams params = new CreateTeacherCommandParams();
         params.setId(TeacherIdMother.random().getValue());
-        params.setName(PersonNameMother.random().getValue());
+        params.setName(PersonNameMother.random().value());
         params.setEmail(EmailMother.random().value());
 
         command.execute(params);
@@ -61,7 +61,7 @@ public class CreateTeacherCommandTest {
 
             CreateTeacherCommandParams params = new CreateTeacherCommandParams();
             params.setId(teacherId.getValue());
-            params.setName(PersonNameMother.random().getValue());
+            params.setName(PersonNameMother.random().value());
             params.setEmail(email.value());
 
             command.execute(params);
