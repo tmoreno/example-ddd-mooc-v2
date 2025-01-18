@@ -29,6 +29,6 @@ public final class CourseSummaryChangedDomainEvent extends DomainEvent {
     }
 
     public String getSummary() {
-        return summary.getValue();
+        return summary.value();
     }
 }

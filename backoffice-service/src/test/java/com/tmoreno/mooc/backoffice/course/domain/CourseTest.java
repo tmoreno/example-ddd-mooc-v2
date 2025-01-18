@@ -330,7 +330,7 @@ public class CourseTest {
 
         CourseSummaryChangedDomainEvent event = (CourseSummaryChangedDomainEvent) domainEvents.get(0);
 
-        assertThat(summary.getValue(), is(event.getSummary()));
+        assertThat(summary.value(), is(event.getSummary()));
     }
 
     @Test
