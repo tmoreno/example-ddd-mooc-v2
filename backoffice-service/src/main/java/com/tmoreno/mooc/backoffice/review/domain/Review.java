@@ -5,6 +5,8 @@ import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.domain.CreatedOn;
 import com.tmoreno.mooc.shared.domain.Entity;
 
+import java.time.Instant;
+
 public final class Review extends Entity<ReviewId> {
 
     private final CourseId courseId;
@@ -44,7 +46,7 @@ public final class Review extends Entity<ReviewId> {
             new StudentId(studentId),
             ReviewRating.valueOf(rating),
             new ReviewText(text),
-            new CreatedOn(createdOn)
+            new CreatedOn(Instant.ofEpochMilli(createdOn))
         );
     }
 

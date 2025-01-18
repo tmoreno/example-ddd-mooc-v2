@@ -15,7 +15,7 @@ public final class CreatedOnMother {
             Date from = format.parse("01/01/1975 00:00:00");
             Date to = format.parse("31/12/2055 23:59:59");
 
-            return new CreatedOn(Faker.instance().date().between(from, to).getTime());
+            return new CreatedOn(Faker.instance().date().between(from, to).toInstant());
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
