@@ -56,6 +56,6 @@ public final class CourseSectionClassAddedDomainEvent extends DomainEvent {
     }
 
     public int getDuration() {
-        return duration.getValue();
+        return duration.value();
     }
 }

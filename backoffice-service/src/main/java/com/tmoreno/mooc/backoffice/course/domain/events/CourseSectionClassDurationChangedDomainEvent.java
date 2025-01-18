@@ -48,6 +48,6 @@ public final class CourseSectionClassDurationChangedDomainEvent extends DomainEv
     }
 
     public int getDuration() {
-        return duration.getValue();
+        return duration.value();
     }
 }

@@ -56,7 +56,7 @@ public class CourseAddSectionClassCommandTest {
         params.setSectionId(section.getId().getValue());
         params.setSectionClassId(SectionClassIdMother.random().getValue());
         params.setTitle(SectionClassTitleMother.random().getValue());
-        params.setDuration(DurationInSecondsMother.random().getValue());
+        params.setDuration(DurationInSecondsMother.random().value());
 
         command.execute(params);
 
@@ -75,7 +75,7 @@ public class CourseAddSectionClassCommandTest {
             params.setSectionId(SectionIdMother.random().getValue());
             params.setSectionClassId(SectionClassIdMother.random().getValue());
             params.setTitle(SectionClassTitleMother.random().getValue());
-            params.setDuration(DurationInSecondsMother.random().getValue());
+            params.setDuration(DurationInSecondsMother.random().value());
 
             command.execute(params);
         });

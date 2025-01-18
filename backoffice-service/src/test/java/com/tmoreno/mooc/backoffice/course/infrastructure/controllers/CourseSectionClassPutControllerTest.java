@@ -51,7 +51,7 @@ public class CourseSectionClassPutControllerTest {
         }
         """.formatted(
             SectionClassTitleMother.random().getValue(),
-            DurationInSecondsMother.random().getValue()
+            DurationInSecondsMother.random().value()
         );
 
         mockMvc
@@ -86,7 +86,7 @@ public class CourseSectionClassPutControllerTest {
         }
         """.formatted(
             SectionClassTitleMother.random().getValue(),
-            DurationInSecondsMother.random().getValue()
+            DurationInSecondsMother.random().value()
         );
 
         mockMvc
@@ -118,7 +118,7 @@ public class CourseSectionClassPutControllerTest {
         }
         """.formatted(
             SectionClassTitleMother.random().getValue(),
-            DurationInSecondsMother.random().getValue()
+            DurationInSecondsMother.random().value()
         );
 
         mockMvc

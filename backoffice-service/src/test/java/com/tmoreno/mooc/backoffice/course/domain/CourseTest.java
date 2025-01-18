@@ -614,7 +614,7 @@ public class CourseTest {
         assertThat(section.getId().getValue(), is(event.getSectionId()));
         assertThat(sectionClassId.getValue(), is(event.getSectionClassId()));
         assertThat(sectionClassTitle.getValue(), is(event.getTitle()));
-        assertThat(sectionClassDuration.getValue(), is(event.getDuration()));
+        assertThat(sectionClassDuration.value(), is(event.getDuration()));
     }
 
     @Test
@@ -833,7 +833,7 @@ public class CourseTest {
 
         assertThat(section.getId().getValue(), is(event.getSectionId()));
         assertThat(sectionClassId.getValue(), is(event.getSectionClassId()));
-        assertThat(duration.getValue(), is(event.getDuration()));
+        assertThat(duration.value(), is(event.getDuration()));
     }
 
     @Test

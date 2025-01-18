@@ -134,7 +134,7 @@ public final class FindCourseQueryResponse implements QueryResponse {
         public SectionClassResponse(SectionClass sectionClass) {
             id = sectionClass.getId().getValue();
             title = sectionClass.getTitle().getValue();
-            duration = sectionClass.getDuration().getValue();
+            duration = sectionClass.getDuration().value();
         }
 
         public String getId() {
