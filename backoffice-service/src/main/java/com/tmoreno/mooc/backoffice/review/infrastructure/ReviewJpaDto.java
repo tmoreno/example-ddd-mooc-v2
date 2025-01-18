@@ -25,7 +25,7 @@ public final class ReviewJpaDto {
         reviewJpaDto.setCourseId(review.getCourseId().getValue());
         reviewJpaDto.setStudentId(review.getStudentId().getValue());
         reviewJpaDto.setRating(review.getRating().name());
-        reviewJpaDto.setText(review.getText().getValue());
+        reviewJpaDto.setText(review.getText().value());
         reviewJpaDto.setCreatedOn(Instant.ofEpochMilli(review.getCreatedOn().getValue()));
 
         return reviewJpaDto;

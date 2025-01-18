@@ -17,7 +17,7 @@ public final class FindReviewQueryResponse implements QueryResponse {
         this.courseId = review.getCourseId().getValue();
         this.studentId = review.getStudentId().getValue();
         this.rating = review.getRating().getValue();
-        this.text = review.getText().getValue();
+        this.text = review.getText().value();
         this.createdOn = review.getCreatedOn().getValue();
     }
 

@@ -60,7 +60,7 @@ public final class ReviewCreatedDomainEvent extends DomainEvent {
     }
 
     public String getText() {
-        return text.getValue();
+        return text.value();
     }
 
     public long getCreatedOn() {

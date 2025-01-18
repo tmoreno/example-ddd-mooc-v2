@@ -92,7 +92,7 @@ public class FindReviewsQueryTest {
         assertThat(response.getCourseId(), is(review.getCourseId().getValue()));
         assertThat(response.getStudentId(), is(review.getStudentId().getValue()));
         assertThat(response.getRating(), is(review.getRating().getValue()));
-        assertThat(response.getText(), is(review.getText().getValue()));
+        assertThat(response.getText(), is(review.getText().value()));
         assertThat(response.getCreatedOn(), is(review.getCreatedOn().getValue()));
     }
 }

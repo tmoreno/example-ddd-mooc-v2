@@ -10,7 +10,7 @@ public final class ReviewMother {
             CourseIdMother.random().getValue(),
             StudentIdMother.random().getValue(),
             ReviewRatingMother.random().name(),
-            ReviewTextMother.random().getValue(),
+            ReviewTextMother.random().value(),
             CreatedOnMother.random().getValue()
         );
     }
