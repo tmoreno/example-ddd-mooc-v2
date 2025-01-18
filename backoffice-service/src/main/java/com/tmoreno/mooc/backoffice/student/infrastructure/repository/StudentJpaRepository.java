@@ -45,6 +45,6 @@ public class StudentJpaRepository implements StudentRepository {
     @Override
     public boolean exists(StudentId id, Email email) {
         return daoRepository.existsById(id.getValue())
-                || daoRepository.existsByEmail(email.getValue());
+                || daoRepository.existsByEmail(email.value());
     }
 }

@@ -36,6 +36,6 @@ public final class StudentCreatedDomainEvent extends DomainEvent {
     }
 
     public String getEmail() {
-        return email.getValue();
+        return email.value();
     }
 }

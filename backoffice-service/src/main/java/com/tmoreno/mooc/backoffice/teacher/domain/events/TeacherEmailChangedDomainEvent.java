@@ -29,6 +29,6 @@ public final class TeacherEmailChangedDomainEvent extends DomainEvent {
     }
 
     public String getEmail() {
-        return email.getValue();
+        return email.value();
     }
 }

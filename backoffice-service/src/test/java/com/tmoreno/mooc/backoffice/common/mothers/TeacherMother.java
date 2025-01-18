@@ -13,7 +13,7 @@ public final class TeacherMother {
         return Teacher.restore(
             TeacherIdMother.random().getValue(),
             PersonNameMother.random().getValue(),
-            EmailMother.random().getValue(),
+            EmailMother.random().value(),
             Set.of()
         );
     }
@@ -22,7 +22,7 @@ public final class TeacherMother {
         return Teacher.restore(
             TeacherIdMother.random().getValue(),
             PersonNameMother.random().getValue(),
-            EmailMother.random().getValue(),
+            EmailMother.random().value(),
             Set.of(courseId.getValue())
         );
     }

@@ -42,7 +42,7 @@ public class CreateTeacherCommandTest {
         CreateTeacherCommandParams params = new CreateTeacherCommandParams();
         params.setId(TeacherIdMother.random().getValue());
         params.setName(PersonNameMother.random().getValue());
-        params.setEmail(EmailMother.random().getValue());
+        params.setEmail(EmailMother.random().value());
 
         command.execute(params);
 
@@ -62,7 +62,7 @@ public class CreateTeacherCommandTest {
             CreateTeacherCommandParams params = new CreateTeacherCommandParams();
             params.setId(teacherId.getValue());
             params.setName(PersonNameMother.random().getValue());
-            params.setEmail(email.getValue());
+            params.setEmail(email.value());
 
             command.execute(params);
         });

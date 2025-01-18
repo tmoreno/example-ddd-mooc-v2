@@ -40,7 +40,7 @@ public final class StudentJpaDto {
 
         studentJpaDto.setId(student.getId().getValue());
         studentJpaDto.setName(student.getName().getValue());
-        studentJpaDto.setEmail(student.getEmail().getValue());
+        studentJpaDto.setEmail(student.getEmail().value());
         studentJpaDto.setCourses(student.getCourses().stream().map(Identifier::getValue).collect(Collectors.toSet()));
 
         Map<String, String> reviews = student.getReviews()

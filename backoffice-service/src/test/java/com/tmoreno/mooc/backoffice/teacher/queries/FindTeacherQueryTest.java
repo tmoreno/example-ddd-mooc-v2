@@ -50,7 +50,7 @@ public class FindTeacherQueryTest {
 
         assertThat(response.getId(), is(teacher.getId().getValue()));
         assertThat(response.getName(), is(teacher.getName().getValue()));
-        assertThat(response.getEmail(), is(teacher.getEmail().getValue()));
+        assertThat(response.getEmail(), is(teacher.getEmail().value()));
         assertThat(response.getCourses(), is(teacher.getCourses().stream().map(Identifier::getValue).collect(Collectors.toSet())));
     }
 

@@ -8,7 +8,7 @@ public final class TeacherExistsException extends BaseDomainException {
     public TeacherExistsException(TeacherId teacherId, Email email) {
         super(
                 "teacher-exists",
-                "A teacher with this id: " + teacherId.getValue() + " or with this email: "+ email.getValue() + " already exists"
+                "A teacher with this id: " + teacherId.getValue() + " or with this email: "+ email.value() + " already exists"
         );
     }
 }

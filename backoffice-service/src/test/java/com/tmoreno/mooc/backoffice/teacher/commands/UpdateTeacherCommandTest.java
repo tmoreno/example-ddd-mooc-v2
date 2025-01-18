@@ -50,7 +50,7 @@ public class UpdateTeacherCommandTest {
 
         UpdateTeacherCommandParams params = new UpdateTeacherCommandParams();
         params.setId(teacher.getId().getValue());
-        params.setEmail(email.getValue());
+        params.setEmail(email.value());
         params.setName(name.getValue());
 
         command.execute(params);
@@ -73,7 +73,7 @@ public class UpdateTeacherCommandTest {
 
         UpdateTeacherCommandParams params = new UpdateTeacherCommandParams();
         params.setId(teacher.getId().getValue());
-        params.setEmail(email.getValue());
+        params.setEmail(email.value());
         params.setName(name.getValue());
 
         command.execute(params);
@@ -92,7 +92,7 @@ public class UpdateTeacherCommandTest {
             UpdateTeacherCommandParams params = new UpdateTeacherCommandParams();
             params.setId(TeacherIdMother.random().getValue());
             params.setName(PersonNameMother.random().getValue());
-            params.setEmail(EmailMother.random().getValue());
+            params.setEmail(EmailMother.random().value());
 
             command.execute(params);
         });

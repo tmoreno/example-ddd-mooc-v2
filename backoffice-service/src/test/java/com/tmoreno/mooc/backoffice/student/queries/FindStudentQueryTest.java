@@ -53,7 +53,7 @@ public class FindStudentQueryTest {
 
         assertThat(response.getId(), is(student.getId().getValue()));
         assertThat(response.getName(), is(student.getName().getValue()));
-        assertThat(response.getEmail(), is(student.getEmail().getValue()));
+        assertThat(response.getEmail(), is(student.getEmail().value()));
         assertThat(response.getCourses(), is(student.getCourses().stream().map(Identifier::getValue).collect(Collectors.toSet())));
         assertThat(response.getReviews().size(), is(1));
         assertThat(response.getReviews().get(0).getCourseId(), is(courseId.getValue()));

@@ -42,7 +42,7 @@ public final class TeacherJpaDto {
         return new TeacherJpaDto(
             teacher.getId().getValue(),
             teacher.getName().getValue(),
-            teacher.getEmail().getValue(),
+            teacher.getEmail().value(),
             teacher.getCourses().stream().map(Identifier::getValue).collect(Collectors.toSet())
         );
     }
