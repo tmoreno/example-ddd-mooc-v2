@@ -118,7 +118,7 @@ public class CourseGetControllerTest {
                 .findFirst()
                 .orElseThrow();
 
-            assertThat(jsonSection.get("title").asText(), is(section.getTitle().getValue()));
+            assertThat(jsonSection.get("title").asText(), is(section.getTitle().value()));
             assertSectionClasses(jsonSection.get("classes"), section.getClasses());
         }
     }

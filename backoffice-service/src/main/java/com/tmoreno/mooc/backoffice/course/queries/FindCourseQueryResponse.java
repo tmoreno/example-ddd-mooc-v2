@@ -111,7 +111,7 @@ public final class FindCourseQueryResponse implements QueryResponse {
 
         public SectionResponse(Section section) {
             id = section.getId().getValue();
-            title = section.getTitle().getValue();
+            title = section.getTitle().value();
             classes = section.getClasses().stream().map(SectionClassResponse::new).collect(Collectors.toList());
         }
 

@@ -49,7 +49,7 @@ public class CourseSectionPostControllerTest {
         }
         """.formatted(
             SectionIdMother.random().getValue(),
-            SectionTitleMother.random().getValue()
+            SectionTitleMother.random().value()
         );
 
         mockMvc
@@ -70,7 +70,7 @@ public class CourseSectionPostControllerTest {
         }
         """.formatted(
             SectionIdMother.random().getValue(),
-            SectionTitleMother.random().getValue()
+            SectionTitleMother.random().value()
         );
 
         mockMvc

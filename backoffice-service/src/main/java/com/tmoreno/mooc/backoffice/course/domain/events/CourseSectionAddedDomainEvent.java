@@ -36,6 +36,6 @@ public final class CourseSectionAddedDomainEvent extends DomainEvent {
     }
 
     public String getTitle() {
-        return title.getValue();
+        return title.value();
     }
 }

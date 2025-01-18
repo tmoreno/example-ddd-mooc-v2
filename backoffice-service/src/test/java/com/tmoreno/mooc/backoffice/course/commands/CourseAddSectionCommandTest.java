@@ -53,7 +53,7 @@ public class CourseAddSectionCommandTest {
         CourseAddSectionCommandParams params = new CourseAddSectionCommandParams();
         params.setCourseId(course.getId().getValue());
         params.setSectionId(sectionId.getValue());
-        params.setTitle(sectionTitle.getValue());
+        params.setTitle(sectionTitle.value());
 
         command.execute(params);
 
@@ -70,7 +70,7 @@ public class CourseAddSectionCommandTest {
             CourseAddSectionCommandParams params = new CourseAddSectionCommandParams();
             params.setCourseId(CourseIdMother.random().getValue());
             params.setSectionId(SectionIdMother.random().getValue());
-            params.setTitle(SectionTitleMother.random().getValue());
+            params.setTitle(SectionTitleMother.random().value());
 
             command.execute(params);
         });

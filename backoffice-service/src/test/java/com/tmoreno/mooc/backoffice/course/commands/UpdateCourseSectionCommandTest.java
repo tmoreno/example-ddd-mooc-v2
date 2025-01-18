@@ -54,7 +54,7 @@ public class UpdateCourseSectionCommandTest {
         UpdateCourseSectionCommandParams params = new UpdateCourseSectionCommandParams();
         params.setCourseId(course.getId().getValue());
         params.setSectionId(section.getId().getValue());
-        params.setTitle(title.getValue());
+        params.setTitle(title.value());
 
         command.execute(params);
 
@@ -75,7 +75,7 @@ public class UpdateCourseSectionCommandTest {
         UpdateCourseSectionCommandParams params = new UpdateCourseSectionCommandParams();
         params.setCourseId(course.getId().getValue());
         params.setSectionId(section.getId().getValue());
-        params.setTitle(section.getTitle().getValue());
+        params.setTitle(section.getTitle().value());
 
         command.execute(params);
 
@@ -92,7 +92,7 @@ public class UpdateCourseSectionCommandTest {
             UpdateCourseSectionCommandParams params = new UpdateCourseSectionCommandParams();
             params.setCourseId(CourseIdMother.random().getValue());
             params.setSectionId(SectionIdMother.random().getValue());
-            params.setTitle(SectionTitleMother.random().getValue());
+            params.setTitle(SectionTitleMother.random().value());
 
             command.execute(params);
         });

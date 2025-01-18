@@ -37,7 +37,7 @@ public final class SectionJpaDto {
                 .collect(Collectors.toList());
 
         sectionJpaDto.setId(section.getId().getValue());
-        sectionJpaDto.setTitle(section.getTitle().getValue());
+        sectionJpaDto.setTitle(section.getTitle().value());
         sectionJpaDto.setCourse(course);
         sectionJpaDto.setClasses(sectionClasses);
 

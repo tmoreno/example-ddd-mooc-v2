@@ -91,7 +91,7 @@ public class FindCourseQueryTest {
                     .findFirst()
                     .orElseThrow();
 
-            assertThat(responseSection.getTitle(), is(section.getTitle().getValue()));
+            assertThat(responseSection.getTitle(), is(section.getTitle().value()));
             assertSectionClasses(responseSection.getClasses(), section.getClasses());
         }
     }

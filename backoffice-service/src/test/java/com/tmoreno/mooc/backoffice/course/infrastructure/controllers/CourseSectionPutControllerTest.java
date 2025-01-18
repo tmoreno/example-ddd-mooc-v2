@@ -46,7 +46,7 @@ public class CourseSectionPutControllerTest {
             "title": "%s"
         }
         """.formatted(
-            SectionTitleMother.random().getValue()
+            SectionTitleMother.random().value()
         );
 
         mockMvc
@@ -74,7 +74,7 @@ public class CourseSectionPutControllerTest {
             "title": "%s"
         }
         """.formatted(
-            SectionTitleMother.random().getValue()
+            SectionTitleMother.random().value()
         );
 
         mockMvc
@@ -103,7 +103,7 @@ public class CourseSectionPutControllerTest {
             "title": "%s"
         }
         """.formatted(
-            SectionTitleMother.random().getValue()
+            SectionTitleMother.random().value()
         );
 
         mockMvc
