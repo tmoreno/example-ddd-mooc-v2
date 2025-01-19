@@ -1,8 +1,8 @@
 package com.tmoreno.mooc.backoffice.student.queries;
 
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
-import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.domain.Identifier;
 import com.tmoreno.mooc.shared.query.QueryResponse;
 

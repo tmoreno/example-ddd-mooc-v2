@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.review.domain;
 
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
-import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.domain.CreatedOn;
 import com.tmoreno.mooc.shared.domain.Entity;
 

@@ -47,7 +47,6 @@ import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
-import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.domain.DurationInSeconds;
 import com.tmoreno.mooc.shared.domain.Language;
 import com.tmoreno.mooc.shared.domain.Price;

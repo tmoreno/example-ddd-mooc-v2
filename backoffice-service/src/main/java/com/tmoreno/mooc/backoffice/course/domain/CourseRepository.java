@@ -1,7 +1,5 @@
 package com.tmoreno.mooc.backoffice.course.domain;
 
-import com.tmoreno.mooc.shared.domain.CourseId;
-
 import java.util.List;
 import java.util.Optional;
 

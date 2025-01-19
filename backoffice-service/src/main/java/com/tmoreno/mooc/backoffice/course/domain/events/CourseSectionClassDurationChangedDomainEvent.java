@@ -1,8 +1,8 @@
 package com.tmoreno.mooc.backoffice.course.domain.events;
 
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.SectionClassId;
 import com.tmoreno.mooc.backoffice.course.domain.SectionId;
-import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.domain.DurationInSeconds;
 import com.tmoreno.mooc.shared.events.DomainEvent;
 

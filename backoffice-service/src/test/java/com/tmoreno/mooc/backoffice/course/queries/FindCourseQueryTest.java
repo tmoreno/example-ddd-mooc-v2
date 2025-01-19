@@ -1,6 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.queries;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.Section;
 import com.tmoreno.mooc.backoffice.course.domain.SectionClass;
@@ -9,7 +10,6 @@ import com.tmoreno.mooc.backoffice.common.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.common.mothers.CourseMother;
 import com.tmoreno.mooc.backoffice.review.domain.ReviewId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
-import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.domain.Identifier;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

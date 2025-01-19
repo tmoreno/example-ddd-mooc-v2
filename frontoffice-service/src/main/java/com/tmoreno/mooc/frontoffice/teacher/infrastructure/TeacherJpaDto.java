@@ -1,8 +1,8 @@
 package com.tmoreno.mooc.frontoffice.teacher.infrastructure;
 
+import com.tmoreno.mooc.frontoffice.teacher.domain.CourseId;
 import com.tmoreno.mooc.frontoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.frontoffice.teacher.domain.TeacherId;
-import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.domain.Identifier;
 import com.tmoreno.mooc.shared.domain.PersonName;

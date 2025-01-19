@@ -1,10 +1,10 @@
 package com.tmoreno.mooc.backoffice.course.commands.publish;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseNotFoundException;
 import com.tmoreno.mooc.shared.command.Command;
-import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.events.EventBus;
 
 public final class PublishCourseCommand implements Command<PublishCourseCommandParams> {

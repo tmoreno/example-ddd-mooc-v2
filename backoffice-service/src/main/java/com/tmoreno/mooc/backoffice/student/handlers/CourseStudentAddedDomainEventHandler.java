@@ -1,11 +1,11 @@
 package com.tmoreno.mooc.backoffice.student.handlers;
 
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseStudentAddedDomainEvent;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentId;
 import com.tmoreno.mooc.backoffice.student.domain.StudentRepository;
 import com.tmoreno.mooc.backoffice.student.domain.exceptions.StudentNotFoundException;
-import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.handlers.EventHandler;
 
 public final class CourseStudentAddedDomainEventHandler implements EventHandler<CourseStudentAddedDomainEvent> {

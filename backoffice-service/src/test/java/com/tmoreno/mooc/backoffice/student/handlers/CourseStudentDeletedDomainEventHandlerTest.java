@@ -1,11 +1,11 @@
 package com.tmoreno.mooc.backoffice.student.handlers;
 
+import com.tmoreno.mooc.backoffice.course.domain.CourseId;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseStudentDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.common.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.common.mothers.StudentMother;
 import com.tmoreno.mooc.backoffice.student.domain.Student;
 import com.tmoreno.mooc.backoffice.student.domain.StudentRepository;
-import com.tmoreno.mooc.shared.domain.CourseId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
