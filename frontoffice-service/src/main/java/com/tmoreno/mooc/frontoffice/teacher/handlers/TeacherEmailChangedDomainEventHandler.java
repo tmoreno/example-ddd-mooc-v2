@@ -1,11 +1,11 @@
 package com.tmoreno.mooc.frontoffice.teacher.handlers;
 
 import com.tmoreno.mooc.frontoffice.teacher.domain.Teacher;
+import com.tmoreno.mooc.frontoffice.teacher.domain.TeacherId;
 import com.tmoreno.mooc.frontoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.frontoffice.teacher.domain.events.TeacherEmailChangedDomainEvent;
 import com.tmoreno.mooc.frontoffice.teacher.domain.exceptions.TeacherNotFoundException;
 import com.tmoreno.mooc.shared.domain.Email;
-import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.shared.handlers.EventHandler;
 
 public final class TeacherEmailChangedDomainEventHandler implements EventHandler<TeacherEmailChangedDomainEvent> {

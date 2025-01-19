@@ -10,7 +10,6 @@ import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherCourseNotFou
 import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.domain.PersonName;
-import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.shared.events.DomainEvent;
 import com.tmoreno.mooc.shared.mothers.EmailMother;
 import com.tmoreno.mooc.shared.mothers.PersonNameMother;

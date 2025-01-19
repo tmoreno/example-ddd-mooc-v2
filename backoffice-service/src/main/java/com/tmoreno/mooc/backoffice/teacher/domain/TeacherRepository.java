@@ -1,7 +1,6 @@
 package com.tmoreno.mooc.backoffice.teacher.domain;
 
 import com.tmoreno.mooc.shared.domain.Email;
-import com.tmoreno.mooc.shared.domain.TeacherId;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,9 +1,9 @@
 package com.tmoreno.mooc.frontoffice.teacher.queries;
 
 import com.tmoreno.mooc.frontoffice.teacher.domain.Teacher;
+import com.tmoreno.mooc.frontoffice.teacher.domain.TeacherId;
 import com.tmoreno.mooc.frontoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.frontoffice.teacher.domain.exceptions.TeacherNotFoundException;
-import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.shared.query.Query;
 
 public final class FindTeacherQuery implements Query<FindTeacherQueryParams, FindTeacherQueryResponse> {

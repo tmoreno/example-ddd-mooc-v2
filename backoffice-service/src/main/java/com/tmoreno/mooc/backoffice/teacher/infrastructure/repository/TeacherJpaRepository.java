@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.teacher.infrastructure.repository;
 
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
-import com.tmoreno.mooc.shared.domain.TeacherId;
+import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.shared.domain.Email;
 import org.springframework.stereotype.Repository;

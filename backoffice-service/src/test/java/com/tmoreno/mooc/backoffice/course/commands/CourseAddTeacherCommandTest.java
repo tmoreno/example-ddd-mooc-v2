@@ -8,9 +8,9 @@ import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseNotFoundExcept
 import com.tmoreno.mooc.backoffice.common.mothers.CourseIdMother;
 import com.tmoreno.mooc.backoffice.common.mothers.CourseMother;
 import com.tmoreno.mooc.backoffice.common.mothers.TeacherIdMother;
+import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherNotFoundException;
-import com.tmoreno.mooc.shared.domain.TeacherId;
 import com.tmoreno.mooc.shared.fakes.FakeEventBus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
