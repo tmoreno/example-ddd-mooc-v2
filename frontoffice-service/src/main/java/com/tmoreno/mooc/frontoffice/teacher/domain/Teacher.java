@@ -1,11 +1,11 @@
 package com.tmoreno.mooc.frontoffice.teacher.domain;
 
+import com.tmoreno.mooc.frontoffice.teacher.domain.exceptions.TeacherCourseNotFoundException;
 import com.tmoreno.mooc.shared.domain.AggregateRoot;
 import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.domain.PersonName;
 import com.tmoreno.mooc.shared.domain.TeacherId;
-import com.tmoreno.mooc.shared.domain.exceptions.teacher.TeacherCourseNotFoundException;
 
 import java.util.HashSet;
 import java.util.Objects;

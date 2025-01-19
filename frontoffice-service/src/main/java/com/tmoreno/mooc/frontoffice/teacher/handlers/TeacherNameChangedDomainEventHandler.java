@@ -3,9 +3,9 @@ package com.tmoreno.mooc.frontoffice.teacher.handlers;
 import com.tmoreno.mooc.frontoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.frontoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.frontoffice.teacher.domain.events.TeacherNameChangedDomainEvent;
+import com.tmoreno.mooc.frontoffice.teacher.domain.exceptions.TeacherNotFoundException;
 import com.tmoreno.mooc.shared.domain.PersonName;
 import com.tmoreno.mooc.shared.domain.TeacherId;
-import com.tmoreno.mooc.shared.domain.exceptions.teacher.TeacherNotFoundException;
 import com.tmoreno.mooc.shared.handlers.EventHandler;
 
 public final class TeacherNameChangedDomainEventHandler implements EventHandler<TeacherNameChangedDomainEvent> {

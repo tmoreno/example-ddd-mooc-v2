@@ -2,9 +2,9 @@ package com.tmoreno.mooc.backoffice.teacher.commands;
 
 import com.tmoreno.mooc.backoffice.common.mothers.TeacherIdMother;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
+import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherExistsException;
 import com.tmoreno.mooc.shared.domain.Email;
 import com.tmoreno.mooc.shared.domain.TeacherId;
-import com.tmoreno.mooc.shared.domain.exceptions.teacher.TeacherExistsException;
 import com.tmoreno.mooc.shared.fakes.FakeEventBus;
 import com.tmoreno.mooc.shared.mothers.EmailMother;
 import com.tmoreno.mooc.shared.mothers.PersonNameMother;

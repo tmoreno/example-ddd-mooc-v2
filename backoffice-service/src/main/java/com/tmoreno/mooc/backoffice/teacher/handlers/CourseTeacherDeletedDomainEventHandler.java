@@ -3,9 +3,9 @@ package com.tmoreno.mooc.backoffice.teacher.handlers;
 import com.tmoreno.mooc.backoffice.course.domain.events.CourseTeacherDeletedDomainEvent;
 import com.tmoreno.mooc.backoffice.teacher.domain.Teacher;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherRepository;
+import com.tmoreno.mooc.backoffice.teacher.domain.exceptions.TeacherNotFoundException;
 import com.tmoreno.mooc.shared.domain.CourseId;
 import com.tmoreno.mooc.shared.domain.TeacherId;
-import com.tmoreno.mooc.shared.domain.exceptions.teacher.TeacherNotFoundException;
 import com.tmoreno.mooc.shared.handlers.EventHandler;
 
 public final class CourseTeacherDeletedDomainEventHandler implements EventHandler<CourseTeacherDeletedDomainEvent> {
