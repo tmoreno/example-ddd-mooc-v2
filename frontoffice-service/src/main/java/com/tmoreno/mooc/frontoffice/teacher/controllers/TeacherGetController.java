@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class TeacherGetController {
@@ -23,15 +24,30 @@ public class TeacherGetController {
     }
 
     @GetMapping(value = "/teachers")
-    public List<FindTeacherQueryResponse> getAll() {
-        return findTeachersQuery.execute(new VoidQueryParams()).getTeachers();
+    public List<Teacher> getAll() {
+        return findTeachersQuery.execute(new VoidQueryParams())
+            .getTeachers()
+            .stream()
+            .map(Teacher::from)
+            .toList();
     }
 
     @GetMapping(value = "/teachers/{id}")
-    public FindTeacherQueryResponse getById(@PathVariable String id) {
+    public Teacher getById(@PathVariable String id) {
         FindTeacherQueryParams params = new FindTeacherQueryParams();
         params.setTeacherId(id);
 
-        return findTeacherQuery.execute(params);
+        return Teacher.from(findTeacherQuery.execute(params));
+    }
+
+    public record Teacher(
+        String id,
+        String name,
+        String email,
+        Set<String> courses
+    ) {
+        public static Teacher from(FindTeacherQueryResponse response) {
+            return new Teacher(response.getId(), response.getName(), response.getEmail(), response.getCourses());
+        }
     }
 }
