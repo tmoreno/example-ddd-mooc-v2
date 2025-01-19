@@ -19,7 +19,7 @@ public final class FindTeachersQuery implements Query<VoidQueryParams, FindTeach
     public FindTeachersQueryResponse execute(VoidQueryParams params) {
         List<FindTeacherQueryResponse> teachers = repository.findAll()
                 .stream()
-                .map(FindTeacherQueryResponse::new)
+                .map(FindTeacherQueryResponse::from)
                 .collect(Collectors.toList());
 
         return new FindTeachersQueryResponse(teachers);

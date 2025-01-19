@@ -16,10 +16,10 @@ public final class FindTeacherQuery implements Query<FindTeacherQueryParams, Fin
     
     @Override
     public FindTeacherQueryResponse execute(FindTeacherQueryParams params) {
-        TeacherId id = new TeacherId(params.getTeacherId());
+        TeacherId id = new TeacherId(params.teacherId());
 
         Teacher teacher = repository.find(id).orElseThrow(() -> new TeacherNotFoundException(id));
 
-        return new FindTeacherQueryResponse(teacher);
+        return FindTeacherQueryResponse.from(teacher);
     }
 }

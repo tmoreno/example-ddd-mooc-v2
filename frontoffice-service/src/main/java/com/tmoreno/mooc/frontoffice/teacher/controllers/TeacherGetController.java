@@ -24,30 +24,29 @@ public class TeacherGetController {
     }
 
     @GetMapping(value = "/teachers")
-    public List<Teacher> getAll() {
+    public List<TeacherResponseBody> getAll() {
         return findTeachersQuery.execute(new VoidQueryParams())
-            .getTeachers()
+            .teachers()
             .stream()
-            .map(Teacher::from)
+            .map(TeacherResponseBody::from)
             .toList();
     }
 
     @GetMapping(value = "/teachers/{id}")
-    public Teacher getById(@PathVariable String id) {
-        FindTeacherQueryParams params = new FindTeacherQueryParams();
-        params.setTeacherId(id);
+    public TeacherResponseBody getById(@PathVariable String id) {
+        FindTeacherQueryParams params = new FindTeacherQueryParams(id);
 
-        return Teacher.from(findTeacherQuery.execute(params));
+        return TeacherResponseBody.from(findTeacherQuery.execute(params));
     }
 
-    public record Teacher(
+    public record TeacherResponseBody(
         String id,
         String name,
         String email,
         Set<String> courses
     ) {
-        public static Teacher from(FindTeacherQueryResponse response) {
-            return new Teacher(response.getId(), response.getName(), response.getEmail(), response.getCourses());
+        public static TeacherResponseBody from(FindTeacherQueryResponse response) {
+            return new TeacherResponseBody(response.id(), response.name(), response.email(), response.courses());
         }
     }
 }
