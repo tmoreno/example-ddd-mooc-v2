@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.frontoffice.configuration;
+package com.tmoreno.mooc.frontoffice.common.infrastructure.configuration;
 
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;

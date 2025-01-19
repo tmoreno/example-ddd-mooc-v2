@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.frontoffice.teacher.listeners;
+package com.tmoreno.mooc.frontoffice.teacher.infrastructure.listeners;
 
 import com.tmoreno.mooc.frontoffice.teacher.domain.events.TeacherNameChangedDomainEvent;
 import com.tmoreno.mooc.frontoffice.teacher.handlers.TeacherNameChangedDomainEventHandler;

@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.frontoffice.common.controllers;
+package com.tmoreno.mooc.frontoffice.common.infrastructure.controllers;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;

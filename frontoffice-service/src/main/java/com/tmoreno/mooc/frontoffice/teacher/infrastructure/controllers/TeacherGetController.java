@@ -1,6 +1,6 @@
-package com.tmoreno.mooc.frontoffice.teacher.controllers;
+package com.tmoreno.mooc.frontoffice.teacher.infrastructure.controllers;
 
-import com.tmoreno.mooc.frontoffice.common.controllers.ErrorResponse;
+import com.tmoreno.mooc.frontoffice.common.infrastructure.controllers.ErrorResponse;
 import com.tmoreno.mooc.frontoffice.teacher.queries.FindTeacherQuery;
 import com.tmoreno.mooc.frontoffice.teacher.queries.FindTeacherQueryParams;
 import com.tmoreno.mooc.frontoffice.teacher.queries.FindTeacherQueryResponse;

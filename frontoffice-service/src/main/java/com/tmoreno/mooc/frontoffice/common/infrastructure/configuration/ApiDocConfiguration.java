@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.frontoffice.teacher.configuration;
+package com.tmoreno.mooc.frontoffice.common.infrastructure.configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

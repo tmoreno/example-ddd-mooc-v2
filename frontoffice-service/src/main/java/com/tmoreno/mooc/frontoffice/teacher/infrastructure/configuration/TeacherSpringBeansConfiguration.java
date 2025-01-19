@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.frontoffice.teacher.configuration;
+package com.tmoreno.mooc.frontoffice.teacher.infrastructure.configuration;
 
 import com.tmoreno.mooc.frontoffice.teacher.domain.TeacherRepository;
 import com.tmoreno.mooc.frontoffice.teacher.handlers.TeacherCreatedDomainEventHandler;
